@@ -3,7 +3,7 @@ Emory School of Medicine Hemodynamics Calculator
 
 # Emory School of Medicine Hemodynamics Calculator
 
-![Emory School of Medicine Logo](https://www.example.com/emory_logo.png)
+![Emory School of Medicine Logo](https://med.emory.edu/index.html)
 
 Welcome to the Emory School of Medicine Hemodynamics Calculator repository! This open-source project is designed to provide a powerful and user-friendly tool for medical professionals and researchers to calculate and analyze hemodynamic parameters. Whether you are a clinician, researcher, or student, this calculator will help you in understanding and managing hemodynamics.
 
