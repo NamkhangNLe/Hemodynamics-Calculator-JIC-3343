@@ -2,8 +2,6 @@
 
 Welcome to the Hemodynamics Calculator developed for Emory School of Medicine. This tool is designed to assist healthcare professionals, researchers, and students in the field of cardiology, specifically in the study of hemodynamics. It provides a user-friendly interface to calculate and analyze various hemodynamic parameters, aiding in the assessment and management of cardiovascular health.
 
-![Hemodynamics Calculator](https://example.com/hemodynamics-calculator-screenshot.png)
-
 ## Features
 
 ### Hemodynamic Parameters
