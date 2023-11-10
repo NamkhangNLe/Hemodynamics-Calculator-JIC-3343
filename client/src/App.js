@@ -6,6 +6,10 @@ import Navbar from "./components/navbar";
 import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create";
+/**
+ * Renders the main application component.
+ * @returns {JSX.Element} The App component
+ */
  const App = () => {
  return (
    <div>
