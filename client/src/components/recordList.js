@@ -17,58 +17,73 @@ const Record = (props) => (
    </td>
  </tr>
 );
+/**
+ * Renders a table of records fetched from the database and provides a method to delete a record.
+ * @returns {JSX.Element} The JSX element containing the record table.
+ */
 export default function RecordList() {
- const [records, setRecords] = useState([]);
+  const [records, setRecords] = useState([]);
+
   // This method fetches the records from the database.
- useEffect(() => {
-   async function getRecords() {
-     const response = await fetch(`http://localhost:5000/record/`);
+  useEffect(() => {
+    async function getRecords() {
+      const response = await fetch(`http://localhost:5000/record/`);
       if (!response.ok) {
-       const message = `An error occurred: ${response.statusText}`;
-       window.alert(message);
-       return;
-     }
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
       const records = await response.json();
-     setRecords(records);
-   }
+      setRecords(records);
+    }
     getRecords();
     return;
- }, [records.length]);
-  // This method will delete a record
- async function deleteRecord(id) {
-   await fetch(`http://localhost:5000/${id}`, {
-     method: "DELETE"
-   });
+  }, [records.length]);
+
+  /**
+   * Deletes a record from the database and updates the state of the records.
+   * @param {string} id - The ID of the record to be deleted.
+   * @returns {Promise<void>} A promise that resolves when the record is deleted.
+   */
+  async function deleteRecord(id) {
+    await fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE"
+    });
     const newRecords = records.filter((el) => el._id !== id);
-   setRecords(newRecords);
- }
-  // This method will map out the records on the table
- function recordList() {
-   return records.map((record) => {
-     return (
-       <Record
-         record={record}
-         deleteRecord={() => deleteRecord(record._id)}
-         key={record._id}
-       />
-     );
-   });
- }
+    setRecords(newRecords);
+  }
+
+  /**
+   * Maps out the records into a list of Record components.
+   * @returns {JSX.Element[]} An array of JSX elements representing the records.
+   */
+  function recordList() {
+    return records.map((record) => {
+      return (
+        <Record
+          record={record}
+          deleteRecord={() => deleteRecord(record._id)}
+          key={record._id}
+        />
+      );
+    });
+  }
+
   // This following section will display the table with the records of individuals.
- return (
-   <div>
-     <h3>Record List</h3>
-     <table className="table table-striped" style={{ marginTop: 20 }}>
-       <thead>
-         <tr>
-           <th>Name</th>
-           <th>Position</th>
-           <th>Level</th>
-           <th>Action</th>
-         </tr>
-       </thead>
-       <tbody>{recordList()}</tbody>
-     </table>
-   </div>
- );
+  return (
+    <div>
+      <h3>Record List</h3>
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Level</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>{recordList()}</tbody>
+      </table>
+    </div>
+  );
 }
