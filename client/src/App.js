@@ -10,6 +10,10 @@ import Create from "./components/create";
  * Renders the main application component.
  * @returns {JSX.Element} The App component
  */
+/**
+ * The main component of the application.
+ * @returns {JSX.Element} The JSX element representing the App component.
+ */
  const App = () => {
  return (
    <div>
