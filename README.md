@@ -29,30 +29,33 @@ Welcome to the Hemodynamics Calculator developed for Emory School of Medicine. T
 
 - Save patient data and calculations for future reference and analysis.
 
-### User-Friendly Interface
-
-- Intuitive design and easy-to-use input fields for efficient data entry.
-
-### Educational Resources
-
-- Access educational materials and resources related to hemodynamics and cardiovascular physiology.
-
-## Getting Started
+## Setup Instructions (Run Locally)
 
 To get started with the Hemodynamics Calculator, follow these steps:
 
-1. **Installation:** Clone this repository or download the application from [Emory School of Medicine's website](https://example.com/hemodynamics-calculator).
+1. First, make sure you have node and npm installed. You can do this by downloading node.js (https://nodejs.org/en/download), or using nvm to install node and npm. To check if you have node/npm installed, you can run the following command, which will output the version of node/npm you currently have.
+```bash
+npm -v
+```
+2. Next, make sure you install the MongoDB, Express, cors, and dotenv with npm:
+   
+```bash
+npm install mongodb express cors dotenv
+```
+3. We first start by running the local server. Open up a bash terminal, and navigate to the "server" directory in the repository. Then, run the following command to run the server:
 
-2. **Launch the Application:** Open the application on your preferred platform (Windows, macOS, or Linux).
+```bash
+node server.js
+```
+After a minute, you should see that the server is running on localhost:5000 (port 5000). Note that if you are using Mac, make sure to turn off Airdrop in order for this to work.
 
-3. **Input Data:** Enter patient-specific data, such as heart rate, blood pressure, oxygen saturation, and more, as prompted.
+4. Once the server is running, open up a separate bash terminal and navigate to the "client" directory in the repository. Then, run the following command to run the client side:
+```bash
+npm start
+```
+The application should now be running locally on localhost:3000. Open up your browser and go to this URL, and you should see the site!
 
-4. **Calculate:** Click the "Calculate" button to obtain hemodynamic parameter values.
 
-5. **Interpretation:** Review the calculated parameters and interpretation guidelines to assess the patient's cardiovascular status.
-
-6. **Data Logging:** Save patient data and calculations for future reference or research purposes.
-  
 ## Contributing
 
 We welcome contributions from the medical and scientific community to enhance and improve this Hemodynamics Calculator. If you have suggestions, bug reports, or feature requests, please [submit an issue](https://github.com/emorymed/hemodynamics-calculator/issues) on our GitHub repository.
