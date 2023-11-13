@@ -2,7 +2,12 @@
 
 Welcome to the Hemodynamics Calculator developed for Emory School of Medicine. This tool is designed to assist healthcare professionals, researchers, and students in the field of cardiology, specifically in the study of hemodynamics. It provides a user-friendly interface to calculate and analyze various hemodynamic parameters, aiding in the assessment and management of cardiovascular health.
 
-## Features
+## Tech Stack
+
+- **MongoDB:**  MongoDB's flexible and scalable document-oriented structure allows seamless storage and retrieval of real-time hemodynamic information, enabling the calculator to provide accurate and timely analyses for medical professionals in the assessment of cardiovascular health and function.
+- **Express.JS:** Express.js enables the creation of robust APIs, allowing the calculator to receive input parameters, process them using hemodynamic algorithms, and then send the calculated results back to the user interface in a seamless and responsive manner.
+- **React:** React's component-based architecture enables the seamless integration of interactive elements, ensuring a responsive and intuitive user experience as individuals input and modify variables, instantly visualizing the impact on hemodynamic parameters.
+- **Node.JS:** The asynchronous nature of Node.js allows the calculator to seamlessly manage dynamic inputs such as blood pressure, heart rate, and vascular resistance, ensuring responsive and accurate hemodynamic assessments for medical professionals.
 
 ### Hemodynamic Parameters
 
@@ -13,6 +18,8 @@ Welcome to the Hemodynamics Calculator developed for Emory School of Medicine. T
 - **Pulmonary Vascular Resistance (PVR):** Calculate PVR to evaluate pulmonary circulation.
 - **Mean Arterial Pressure (MAP):** Compute MAP from systolic and diastolic blood pressure.
 - **Pulmonary Artery Wedge Pressure (PAWP):** Estimate PAWP for left heart function assessment.
+
+### Features
 
 ### Interpretation
 
@@ -45,15 +52,7 @@ To get started with the Hemodynamics Calculator, follow these steps:
 5. **Interpretation:** Review the calculated parameters and interpretation guidelines to assess the patient's cardiovascular status.
 
 6. **Data Logging:** Save patient data and calculations for future reference or research purposes.
-
-## System Requirements
-
-- **Operating System:** Windows 10, macOS, or Linux.
-- **Processor:** Dual-core processor or higher.
-- **Memory:** 4 GB RAM or more.
-- **Storage:** 100 MB of free disk space.
-- **Web Browser:** For accessing educational resources.
-
+  
 ## Contributing
 
 We welcome contributions from the medical and scientific community to enhance and improve this Hemodynamics Calculator. If you have suggestions, bug reports, or feature requests, please [submit an issue](https://github.com/emorymed/hemodynamics-calculator/issues) on our GitHub repository.
