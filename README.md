@@ -42,39 +42,17 @@ npm -v
 ```bash
 npm install mongodb express cors dotenv
 ```
-3. We first start by running the local server. Open up a bash terminal, and navigate to the "server" directory in the repository. Then, run the following command to run the server:
+3. We first start by running the local server. Open up a bash terminal, and navigate to the "server" directory in the repository. Then, run the following command to run the server. After a minute, you should see that the server is running on localhost:5000 (port 5000). Note that if you are using Mac, make sure to turn off Airdrop in order for this to work.
 
 ```bash
 node server.js
 ```
-After a minute, you should see that the server is running on localhost:5000 (port 5000). Note that if you are using Mac, make sure to turn off Airdrop in order for this to work.
 
-4. Once the server is running, open up a separate bash terminal and navigate to the "client" directory in the repository. Then, run the following command to run the client side:
+4. Once the server is running, open up a separate bash terminal and navigate to the "client" directory in the repository. Then, run the following command to run the client side. The application should now be running locally on localhost:3000. Open up your browser and go to this URL, and you should see the site!
 ```bash
 npm start
 ```
-The application should now be running locally on localhost:3000. Open up your browser and go to this URL, and you should see the site!
-
-
-## Contributing
-
-We welcome contributions from the medical and scientific community to enhance and improve this Hemodynamics Calculator. If you have suggestions, bug reports, or feature requests, please [submit an issue](https://github.com/emorymed/hemodynamics-calculator/issues) on our GitHub repository.
 
 ## License
 
 This Hemodynamics Calculator is distributed under the [MIT License](https://example.com/hemodynamics-calculator-license), which allows for both personal and commercial use. Please review the license for more details.
-
-## Contact Information
-
-For inquiries, support, or collaboration opportunities, please contact:
-
-- Emory School of Medicine
-- Department of Cardiology
-- Email: cardiology@emorymed.edu
-- Website: [www.emorymed.edu/cardiology](https://www.emorymed.edu/cardiology)
-
-## Acknowledgments
-
-We would like to acknowledge the contributions of the Emory School of Medicine's Department of Cardiology and the dedicated team of developers and healthcare professionals who have made this Hemodynamics Calculator possible.
-
-Thank you for choosing the Hemodynamics Calculator from Emory School of Medicine. We hope this tool proves to be a valuable asset in your pursuit of excellence in cardiology and hemodynamics research and practice.
