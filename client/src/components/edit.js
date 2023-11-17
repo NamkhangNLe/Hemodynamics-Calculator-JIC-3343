@@ -119,7 +119,7 @@ export default function Edit() {
               name="sexOptions"
               id="male"
               value="M"
-              checked={form.level === "M"}
+              checked={form.sex === "M"}
               onChange={(e) => updateForm({ sex: e.target.value })}
             />
             <label htmlFor="male" className="form-check-label">M</label>
@@ -131,7 +131,7 @@ export default function Edit() {
               name="sexOptions"
               id="female"
               value="F"
-              checked={form.level === "F"}
+              checked={form.sex === "F"}
               onChange={(e) => updateForm({ sex: e.target.value })}
             />
             <label htmlFor="male" className="form-check-label">F</label>
@@ -164,7 +164,7 @@ export default function Edit() {
               name="medicationOptions"
               id="medicationA"
               value="A"
-              checked={form.level === "A"}
+              checked={form.medications === "A"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationA" className="form-check-label">
@@ -178,7 +178,7 @@ export default function Edit() {
               name="medicationOptions"
               id="medicationB"
               value="B"
-              checked={form.level === "B"}
+              checked={form.medications === "B"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationB" className="form-check-label">
@@ -192,7 +192,7 @@ export default function Edit() {
               name="medicationOptions"
               id="medicationC"
               value="C"
-              checked={form.level === "C"}
+              checked={form.medications === "C"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationC" className="form-check-label">
