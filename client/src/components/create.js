@@ -5,11 +5,14 @@ import { useNavigate } from "react-router";
  * @returns {JSX.Element} The create form component.
  */
 export default function Create() {
-  // Initialize the form state with empty values for name, position, and level.
+  // Initialize the form state with empty values for initials, dob, sex, height, and weight.
   const [form, setForm] = useState({
-    name: "",
-    position: "",
-    level: "",
+    initials: "",
+    dob: "",
+    sex: "",
+    height: "",
+    weight: "",
+    medications: ""
   });
 
   // Import the useNavigate hook from the React Router library.
@@ -53,7 +56,7 @@ export default function Create() {
       });
 
     // Reset the form state to empty values.
-    setForm({ name: "", position: "", level: "" });
+    setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
 
     // Navigate back to the home page.
     navigate("/");
@@ -62,26 +65,26 @@ export default function Create() {
   // Render the create form component.
   return (
     <div>
-      <h3>Create New Record</h3>
+      <h3>Create Patient</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="initials">Initials</label>
           <input
             type="text"
             className="form-control"
-            id="name"
+            id="initials"
             value={form.name}
-            onChange={(e) => updateForm({ name: e.target.value })}
+            onChange={(e) => updateForm({ initials: e.target.value })}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="position">Position</label>
+          <label htmlFor="dob">Date of Birth</label>
           <input
             type="text"
             className="form-control"
-            id="position"
+            id="dob"
             value={form.position}
-            onChange={(e) => updateForm({ position: e.target.value })}
+            onChange={(e) => updateForm({ dob: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -89,49 +92,99 @@ export default function Create() {
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionIntern"
-              value="Intern"
-              checked={form.level === "Intern"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="sexOptions"
+              id="male"
+              value="M"
+              checked={form.level === "M"}
+              onChange={(e) => updateForm({ sex: e.target.value })}
             />
-            <label htmlFor="positionIntern" className="form-check-label">
-              Intern
+            <label htmlFor="male" className="form-check-label">
+              M
             </label>
           </div>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionJunior"
-              value="Junior"
-              checked={form.level === "Junior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="sexOptions"
+              id="female"
+              value="F"
+              checked={form.level === "F"}
+              onChange={(e) => updateForm({ sex: e.target.value })}
             />
-            <label htmlFor="positionJunior" className="form-check-label">
-              Junior
+            <label htmlFor="female" className="form-check-label">
+              F
+            </label>
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="height">Height</label>
+          <input
+            type="number"
+            className="form-control"
+            id="height"
+            value={form.position}
+            onChange={(e) => updateForm({ height: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="weight">Weight</label>
+          <input
+            type="number"
+            className="form-control"
+            id="weight"
+            value={form.position}
+            onChange={(e) => updateForm({ weight: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="medicationOptions"
+              id="medicationA"
+              value="A"
+              checked={form.level === "A"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
+            />
+            <label htmlFor="medicationA" className="form-check-label">
+              Medication A
             </label>
           </div>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionSenior"
-              value="Senior"
-              checked={form.level === "Senior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="medicationOptions"
+              id="medicationB"
+              value="B"
+              checked={form.level === "B"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
             />
-            <label htmlFor="positionSenior" className="form-check-label">
-              Senior
+            <label htmlFor="medicationB" className="form-check-label">
+              Medication B
+            </label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="medicationOptions"
+              id="medicationC"
+              value="C"
+              checked={form.level === "C"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
+            />
+            <label htmlFor="medicationC" className="form-check-label">
+              Medication C
             </label>
           </div>
         </div>
         <div className="form-group">
           <input
             type="submit"
-            value="Create person"
+            value="Create Patient"
             className="btn btn-primary"
           />
         </div>

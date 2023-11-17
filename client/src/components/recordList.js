@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Record = (props) => (
  <tr>
-   <td>{props.record.name}</td>
-   <td>{props.record.position}</td>
-   <td>{props.record.level}</td>
+   <td>{props.record.initials}</td>
+   <td>{props.record.dob}</td>
+   <td>{props.record.sex}</td>
+   <td>{props.record.height}</td>
+   <td>{props.record.weight}</td>
+   <td>{props.record.medications}</td>
    <td>
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
@@ -76,14 +79,16 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h3>Record List</h3>
+      <h3>Patient List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Level</th>
-            <th>Action</th>
+            <th>Initials</th>
+            <th>Date of Birth</th>
+            <th>Sex</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Medications</th>
           </tr>
         </thead>
         <tbody>{recordList()}</tbody>

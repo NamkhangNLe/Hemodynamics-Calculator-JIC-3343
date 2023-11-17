@@ -6,9 +6,12 @@ import { useParams, useNavigate } from "react-router";
  */
 export default function Edit() {
   const [form, setForm] = useState({
-    name: "",
-    position: "",
-    level: "",
+    initials: "",
+    dob: "",
+    sex: "",
+    height: "",
+    weight: "",
+    medications: "",
     records: [],
   });
 
@@ -63,9 +66,12 @@ export default function Edit() {
     e.preventDefault();
 
     const editedPerson = {
-      name: form.name,
-      position: form.position,
-      level: form.level,
+      initials: form.initials,
+      dob: form.dob,
+      sex: form.sex,
+      height: form.height,
+      weight: form.weight,
+      medications: form.medications
     };
 
     // Sends a post request to update the data in the database.
@@ -83,26 +89,26 @@ export default function Edit() {
   // Displays the form that takes input from the user to update the data.
   return (
     <div>
-      <h3>Update Record</h3>
+      <h3>Update Patient</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="initials">Initials: </label>
           <input
             type="text"
             className="form-control"
-            id="name"
-            value={form.name}
-            onChange={(e) => updateForm({ name: e.target.value })}
+            id="initials"
+            value={form.intials}
+            onChange={(e) => updateForm({ initials: e.target.value })}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="position">Position: </label>
+          <label htmlFor="dob">Date of Birth: </label>
           <input
             type="text"
             className="form-control"
-            id="position"
-            value={form.position}
-            onChange={(e) => updateForm({ position: e.target.value })}
+            id="dob"
+            value={form.dob}
+            onChange={(e) => updateForm({ dob: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -110,37 +116,88 @@ export default function Edit() {
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionIntern"
-              value="Intern"
-              checked={form.level === "Intern"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="sexOptions"
+              id="male"
+              value="M"
+              checked={form.level === "M"}
+              onChange={(e) => updateForm({ sex: e.target.value })}
             />
-            <label htmlFor="positionIntern" className="form-check-label">Intern</label>
+            <label htmlFor="male" className="form-check-label">M</label>
           </div>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionJunior"
-              value="Junior"
-              checked={form.level === "Junior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="sexOptions"
+              id="female"
+              value="F"
+              checked={form.level === "F"}
+              onChange={(e) => updateForm({ sex: e.target.value })}
             />
-            <label htmlFor="positionJunior" className="form-check-label">Junior</label>
+            <label htmlFor="male" className="form-check-label">F</label>
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="height">Height: </label>
+          <input
+            type="number"
+            className="form-control"
+            id="height"
+            value={form.height}
+            onChange={(e) => updateForm({ height: e.target.value })}
+          />
+        </div><div className="form-group">
+          <label htmlFor="weight">Weight: </label>
+          <input
+            type="number"
+            className="form-control"
+            id="weight"
+            value={form.weight}
+            onChange={(e) => updateForm({ weight: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="medicationOptions"
+              id="medicationA"
+              value="A"
+              checked={form.level === "A"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
+            />
+            <label htmlFor="medicationA" className="form-check-label">
+              Medication A
+            </label>
           </div>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
-              name="positionOptions"
-              id="positionSenior"
-              value="Senior"
-              checked={form.level === "Senior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
+              name="medicationOptions"
+              id="medicationB"
+              value="B"
+              checked={form.level === "B"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
             />
-            <label htmlFor="positionSenior" className="form-check-label">Senior</label>
+            <label htmlFor="medicationB" className="form-check-label">
+              Medication B
+            </label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="medicationOptions"
+              id="medicationC"
+              value="C"
+              checked={form.level === "C"}
+              onChange={(e) => updateForm({ medications: e.target.value })}
+            />
+            <label htmlFor="medicationC" className="form-check-label">
+              Medication C
+            </label>
           </div>
         </div>
         <br />
