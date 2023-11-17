@@ -73,7 +73,7 @@ export default function Create() {
             type="text"
             className="form-control"
             id="initials"
-            value={form.name}
+            value={form.initials}
             onChange={(e) => updateForm({ initials: e.target.value })}
           />
         </div>
@@ -83,7 +83,7 @@ export default function Create() {
             type="text"
             className="form-control"
             id="dob"
-            value={form.position}
+            value={form.dob}
             onChange={(e) => updateForm({ dob: e.target.value })}
           />
         </div>
@@ -95,7 +95,7 @@ export default function Create() {
               name="sexOptions"
               id="male"
               value="M"
-              checked={form.level === "M"}
+              checked={form.sex === "M"}
               onChange={(e) => updateForm({ sex: e.target.value })}
             />
             <label htmlFor="male" className="form-check-label">
@@ -109,7 +109,7 @@ export default function Create() {
               name="sexOptions"
               id="female"
               value="F"
-              checked={form.level === "F"}
+              checked={form.sex === "F"}
               onChange={(e) => updateForm({ sex: e.target.value })}
             />
             <label htmlFor="female" className="form-check-label">
@@ -123,7 +123,7 @@ export default function Create() {
             type="number"
             className="form-control"
             id="height"
-            value={form.position}
+            value={form.height}
             onChange={(e) => updateForm({ height: e.target.value })}
           />
         </div>
@@ -133,7 +133,7 @@ export default function Create() {
             type="number"
             className="form-control"
             id="weight"
-            value={form.position}
+            value={form.weight}
             onChange={(e) => updateForm({ weight: e.target.value })}
           />
         </div>
@@ -145,7 +145,7 @@ export default function Create() {
               name="medicationOptions"
               id="medicationA"
               value="A"
-              checked={form.level === "A"}
+              checked={form.medications === "A"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationA" className="form-check-label">
@@ -159,7 +159,7 @@ export default function Create() {
               name="medicationOptions"
               id="medicationB"
               value="B"
-              checked={form.level === "B"}
+              checked={form.medications === "B"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationB" className="form-check-label">
@@ -173,7 +173,7 @@ export default function Create() {
               name="medicationOptions"
               id="medicationC"
               value="C"
-              checked={form.level === "C"}
+              checked={form.medications === "C"}
               onChange={(e) => updateForm({ medications: e.target.value })}
             />
             <label htmlFor="medicationC" className="form-check-label">
