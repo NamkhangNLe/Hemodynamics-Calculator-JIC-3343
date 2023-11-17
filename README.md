@@ -1,33 +1,30 @@
-# Hemodynamics Calculator - Emory School of Medicine
+# Hemodynamics Calculator - Emory School of Medicine (v0.1.0)
 
-Welcome to the Hemodynamics Calculator developed for Emory School of Medicine. This tool is designed to assist healthcare professionals, researchers, and students in the field of cardiology, specifically in the study of hemodynamics. It provides a user-friendly interface to calculate and analyze various hemodynamic parameters, aiding in the assessment and management of cardiovascular health.
+Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's Cardiac ICU, this tool is desgined to assist healthcare professionals and clinicians in the ICU, providing a streamlined, user-friendly interface to calculate, track, and analyze hemodynamic values and trends for patients.
 
-## Tech Stack
+## Platform Description and Tech Stack
 
-- **MongoDB:**  MongoDB's flexible and scalable document-oriented structure allows seamless storage and retrieval of real-time hemodynamic information, enabling the calculator to provide accurate and timely analyses for medical professionals in the assessment of cardiovascular health and function.
-- **Express.JS:** Express.js enables the creation of robust APIs, allowing the calculator to receive input parameters, process them using hemodynamic algorithms, and then send the calculated results back to the user interface in a seamless and responsive manner.
-- **React:** React's component-based architecture enables the seamless integration of interactive elements, ensuring a responsive and intuitive user experience as individuals input and modify variables, instantly visualizing the impact on hemodynamic parameters.
-- **Node.JS:** The asynchronous nature of Node.js allows the calculator to seamlessly manage dynamic inputs such as blood pressure, heart rate, and vascular resistance, ensuring responsive and accurate hemodynamic assessments for medical professionals.
+This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node). 
 
-### Hemodynamic Parameters
+- **MongoDB:**  MongoDB's document-oriented database allows efficient storage and retrieval of patient profiles, data, and trends. It provides the foundation for our patient database system, and is scalable so that should the application need to expand, we have the capacity to do so. 
+- **Express.JS:** Paired with Node, Express allows the creation of RESTful APIs, allowing for efficient and easy access from our backend MongoDB database to our front-end.
+- **React:** React's component-based architecture provides the application with a myriad of easy-to-implement, interactive elements. This provides a foundation for our intuitive UX and UI to be built off of.
+- **Node.JS:** Paired with Express, Node allows us to easily integrate our front-end components with our back-end database through its "JavaScript Everywhere" format.
 
-- **Cardiac Output (CO):** Calculate CO using the Fick or thermodilution method.
-- **Cardiac Index (CI):** Normalize CO for body surface area.
-- **Stroke Volume (SV):** Calculate SV using CO and heart rate.
-- **Systemic Vascular Resistance (SVR):** Determine SVR to assess systemic vascular health.
-- **Pulmonary Vascular Resistance (PVR):** Calculate PVR to evaluate pulmonary circulation.
-- **Mean Arterial Pressure (MAP):** Compute MAP from systolic and diastolic blood pressure.
-- **Pulmonary Artery Wedge Pressure (PAWP):** Estimate PAWP for left heart function assessment.
+This application is designed to be accessed from web browsers on MacOS, Windows, and Linux desktops and laptops. The application is primarily written in JavaScript due to its simplicity and ease of integration with Node.js. CSS, HTML, as well as React-specific components are also used to provide a visually appealing and easy-to-use front-end for users.
 
-### Features
+## Version 0.1.0 - Basic Patient Profile System
 
-### Interpretation
+For our current artifact implementation of this application, version 0.1.0, we have decided to implement the basic patient screen. The current application allows users to create patient profiles, with the following fields for patients:
 
-- Interpretation guidelines and ranges are provided for each parameter to aid in clinical decision-making.
+- Patient Initials/Identifier
+- Date of Birth
+- Sex
+- Height
+- Weight
+- Patient Medications
 
-### Data Logging
-
-- Save patient data and calculations for future reference and analysis.
+This basic patient system is the backbone of the application, as users must be able to save calculations and view trends for these patients. While specific data fields will be included in future updates, this version of our product provides the necessary foundation for us to expand further.
 
 ## Setup Instructions (Run Locally)
 
