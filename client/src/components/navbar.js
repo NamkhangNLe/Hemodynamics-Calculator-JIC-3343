@@ -21,7 +21,7 @@ export default function Navbar() {
    <div>
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
        <NavLink className="navbar-brand" to="/">
-       <img style={{"width" : 25 + '%', "height": 25 + '%'}} src="emory.png"></img>
+       <img style={{"width" : 25 + '%', "height": 25 + "%"}} src="emory.png"></img>
        </NavLink>
        <button
          className="navbar-toggler"
@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
          <ul className="navbar-nav ml-auto">
            <li className="nav-item">
-             <NavLink className="nav-link" to="/create">
+             <NavLink className="nav-link" style={{marginLeft: '450px'}} to="/create">
                Create Patient
              </NavLink>
            </li>
