@@ -13,6 +13,8 @@ const Record = (props) => (
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.record._id);
+         //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
+         sleep(500).then(() => {window.location.reload();});
        }}
      >
        Delete
@@ -95,4 +97,13 @@ export default function RecordList() {
       </table>
     </div>
   );
+}
+
+/**
+   * Waits an amount of time
+   * @param {int} ms - Time in milliseconds
+   * @returns 
+   */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
