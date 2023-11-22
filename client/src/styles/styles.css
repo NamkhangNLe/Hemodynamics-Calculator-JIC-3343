@@ -1,0 +1,18 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  /* Additional styles for the sidebar */
+}
+
+.main-content {
+  flex: 1;
+  /* Additional styles for the main content */
+}
