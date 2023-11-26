@@ -102,7 +102,7 @@ export default function RecordList() {
 /**
    * Waits an amount of time
    * @param {int} ms - Time in milliseconds
-   * @returns 
+   * @returns
    */
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

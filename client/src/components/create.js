@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 /**
  * Renders a form to create a new record in the database.
  * @returns {JSX.Element} The create form component.
@@ -41,25 +41,31 @@ export default function Create() {
     // Create a new object with the values from the form state.
     const newPerson = { ...form };
 
-    // Send a POST request to the server to create a new record.
-    await fetch("http://localhost:5000/record/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPerson),
-    })
-      .catch((error) => {
-        // If there's an error, display an alert with the error message.
-        window.alert(error);
-        return;
+    try {
+      // Send a POST request to the server to create a new record.
+      const response = await fetch("http://localhost:5000/record/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
       });
 
-    // Reset the form state to empty values.
-    setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
 
-    // Navigate back to the home page.
-    navigate("/");
+      // If the fetch request is successful, log the response (optional).
+      console.log('Record added successfully:', await response.json());
+
+      // Reset the form state to empty values.
+      setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
+
+      // Navigate back to the home page.
+      navigate("/");
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   }
 
   // Render the create form component.
