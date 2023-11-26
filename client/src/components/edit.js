@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
+import React, { Component, useState, useEffect } from "react";
+import { useParams } from "react-router";
+import {Route, useNavigate} from 'react-router-dom';
 /**
  * Edit component that allows the user to update a record in the database.
  * @returns {JSX.Element} The JSX element that displays the form to update the record.
@@ -73,7 +74,7 @@ export default function Edit() {
       weight: form.weight,
       medications: form.medications
     };
-
+    navigate("/");
     // Sends a post request to update the data in the database.
     await fetch(`http://localhost:5000/update/${params.id}`, {
       method: "POST",
@@ -82,8 +83,6 @@ export default function Edit() {
         'Content-Type': 'application/json'
       },
     });
-
-    navigate("/");
   }
 
   // Displays the form that takes input from the user to update the data.
