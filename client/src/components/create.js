@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/styles.css"
 /**
  * Renders a form to create a new record in the database.
  * @returns {JSX.Element} The create form component.
@@ -28,6 +29,33 @@ export default function Create() {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
+  }
+
+  /**
+   * Redirects to the record list page and displays the confirmation box.
+   * @returns {void}
+   */
+  function redirectConfirmation() {
+    // redirect back to the recordlist page
+    navigate("/")
+    // Create a div element with a fading animation
+    const divElement = document.createElement('div');
+    const textElement = document.createElement('span');
+    textElement.innerText = 'Patient Created Successfuly!';
+    divElement.className = "fading-div";
+    divElement.append(textElement);
+    divElement.style.opacity = 0; // Set initial opacity to 0
+    divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
+    document.body.appendChild(divElement); // Append the div to the body
+
+    // Animate the div to fade in and fade out
+    divElement.style.opacity = 1; // Fade in
+    setTimeout(() => {
+        divElement.style.opacity = 0; // Fade out
+        setTimeout(() => {
+            divElement.parentNode.removeChild(divElement); // Remove the div from the body
+        }, 1000); // Delay removal after animation
+    }, 2000); // Delay fade out after 2 seconds
   }
 
   /**
@@ -194,6 +222,9 @@ export default function Create() {
             className="btn btn-primary"
           />
         </div>
+        <button onClick={redirectConfirmation}>
+          Redirect Temporary
+        </button>
       </form>
     </div>
   );
