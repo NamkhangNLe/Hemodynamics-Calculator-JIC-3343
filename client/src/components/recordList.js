@@ -22,13 +22,10 @@ const Record = (props) => (
    </td>
  </tr>
 );
+
 /**
  * Renders a table of records fetched from the database and provides a method to delete a record.
  * @returns {JSX.Element} The JSX element containing the record table.
- */
-/**
- * A React component that displays a list of records fetched from a database.
- * @returns {JSX.Element} A React component representing the record list.
  */
 export default function RecordList() {
   const [records, setRecords] = useState([]);
@@ -102,7 +99,7 @@ export default function RecordList() {
 /**
    * Waits an amount of time
    * @param {int} ms - Time in milliseconds
-   * @returns 
+   * @returns
    */
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

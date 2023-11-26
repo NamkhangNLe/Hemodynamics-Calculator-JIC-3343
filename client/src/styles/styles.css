@@ -19,8 +19,88 @@
   /* Additional styles for the main content */
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.fading-div {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(135%, 0); /* Center the div horizontally */
+  width: 20%;
+  height: 15%;
+  background-color: rgb(75, 226, 34, 0.5);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  border-radius: 10px;
+}
+
+.fading-div span {
+  position: absolute; /* Position the span absolutely within the div */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the span horizontally and vertically */
+  font-size: 20px; /* Increase the font size */
+  text-align: center;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+form {
+  padding: 15px;
+  width: 100%;
+}
+
+.form-column-region {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 6px;
+}
+
+.field-label {
+  display: block;
+  width: 120px; /* Define label width */
+  margin-right: 10px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.form-div {
+  padding: 20px;
+}
+
+.submit-form-section {
+  margin: 0 auto;
+  padding: 10px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  margin: 10px; /* Add spacing between columns */
+  width: 40%; /* Define column width */
+}
+
+.form-region {
+  display: flex;
+  flex-direction: column;
+}
+
+.medication-section {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.form-long-answer {
+  display: flex;
+  flex-direction: column;
 }
