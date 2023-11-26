@@ -89,8 +89,7 @@ export default function Create() {
       // Reset the form state to empty values.
       setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
 
-      // Navigate back to the home page.
-      navigate("/");
+      redirectConfirmation();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -111,8 +110,8 @@ export default function Create() {
                 <label className="field-label" htmlFor="initials">Initials<span style = {{color: "red"}}>*</span>:</label>
                 <input
                   type="text"
-                  maxLength="2"
-                  required="true"
+                  maxLength={2}
+                  required={true}
                   className="form-control"
                   id="initials"
                   value={form.initials}
@@ -125,7 +124,7 @@ export default function Create() {
                 <input
                   type="date"
                   className="form-control"
-                  required="true"
+                  required={true}
                   id="dob"
                   value={form.dob}
                   onChange={(e) => updateForm({ dob: e.target.value })}
@@ -139,7 +138,7 @@ export default function Create() {
                     className="form-check-input"
                     type="radio"
                     name="sexOptions"
-                    required="true"
+                    required={true}
                     id="male"
                     value="M"
                     checked={form.sex === "M"}
@@ -155,7 +154,7 @@ export default function Create() {
                     type="radio"
                     name="sexOptions"
                     id="female"
-                    required="true"
+                    required={true}
                     value="F"
                     checked={form.sex === "F"}
                     onChange={(e) => updateForm({ sex: e.target.value })}
@@ -170,7 +169,7 @@ export default function Create() {
                 <input
                   type="number"
                   className="form-control"
-                  required="true"
+                  required={true}
                   id="height"
                   value={form.height}
                   onChange={(e) => updateForm({ height: e.target.value })}
@@ -183,7 +182,7 @@ export default function Create() {
                 <input
                   type="number"
                   className="form-control"
-                  required="true"
+                  required={true}
                   id="weight"
                   value={form.weight}
                   onChange={(e) => updateForm({ weight: e.target.value })}
