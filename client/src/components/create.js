@@ -40,7 +40,7 @@ export default function Create() {
 
     // Create a new object with the values from the form state.
     const newPerson = { ...form };
-
+    navigate("/");
     // Send a POST request to the server to create a new record.
     await fetch("http://localhost:5000/record/add", {
       method: "POST",
@@ -59,7 +59,6 @@ export default function Create() {
     setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
 
     // Navigate back to the home page.
-    navigate("/");
   }
 
   // Render the create form component.
