@@ -40,7 +40,7 @@ export default function Create() {
 
     // Create a new object with the values from the form state.
     const newPerson = { ...form };
-
+    navigate("/"); // Navigate back to the home page.
     // Send a POST request to the server to create a new record.
     await fetch("http://localhost:5000/record/add", {
       method: "POST",
@@ -49,16 +49,21 @@ export default function Create() {
       },
       body: JSON.stringify(newPerson),
     })
-      .catch((error) => {
-        // If there's an error, display an alert with the error message.
-        window.alert(error);
-        return;
-      });
+      .then((response) => {
+        // If the response is not ok, display an alert with the error message.
+        window.location.href = "/"; // Navigate back to the home page.
+      // .catch((error) => {
+      //   // If there's an error, display an alert with the error message.
+      //   window.alert(error);
+      //   return;
+      // });
+  });
 
     // Reset the form state to empty values.
     setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
 
     // Navigate back to the home page.
+    console.log("Navigating back to home page");
     navigate("/");
   }
 

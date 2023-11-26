@@ -74,7 +74,7 @@ export default function Edit() {
       weight: form.weight,
       medications: form.medications
     };
-    navigate("/");
+    navigate("/"); // Navigate back to the home page.
     // Sends a post request to update the data in the database.
     await fetch(`http://localhost:5000/update/${params.id}`, {
       method: "POST",
