@@ -36,8 +36,10 @@ export default function Create() {
    * @returns {void}
    */
   function redirectConfirmation() {
+    sleep()
     // redirect back to the recordlist page
     navigate("/")
+
     // Create a div element with a fading animation
     const divElement = document.createElement('div');
     const textElement = document.createElement('span');
@@ -77,7 +79,7 @@ export default function Create() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newPerson),
-      });
+      }).then(redirectConfirmation());
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -263,4 +265,13 @@ export default function Create() {
       </form>
     </div>
   );
+}
+
+/**
+   * Waits an amount of time
+   * @param {int} ms - Time in milliseconds
+   * @returns
+   */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
