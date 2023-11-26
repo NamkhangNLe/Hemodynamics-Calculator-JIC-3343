@@ -5,10 +5,12 @@
 
 .content-container {
   display: flex;
+  min-height: 85vh; /* vh stands for viewport height */
 }
 
 .sidebar {
   width: 200px;
+  height: 100%;
   /* Additional styles for the sidebar */
 }
 
