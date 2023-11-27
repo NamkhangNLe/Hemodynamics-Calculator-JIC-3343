@@ -16,8 +16,13 @@ export default function Create() {
     medications: ""
   });
 
+
+  
+
   // Import the useNavigate hook from the React Router library.
   const navigate = useNavigate();
+
+ 
 
   /**
    * Updates the form state with the provided values.
@@ -36,9 +41,9 @@ export default function Create() {
    * @returns {void}
    */
   function redirectConfirmation() {
-    sleep()
-    // redirect back to the recordlist page
-    navigate("/")
+
+
+    navigate("/");
 
     // Create a div element with a fading animation
     const divElement = document.createElement('div');
@@ -79,7 +84,7 @@ export default function Create() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newPerson),
-      }).then(redirectConfirmation());
+      }).then(sleep(100).then(redirectConfirmation));
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -91,7 +96,6 @@ export default function Create() {
       // Reset the form state to empty values.
       setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
 
-      redirectConfirmation();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
