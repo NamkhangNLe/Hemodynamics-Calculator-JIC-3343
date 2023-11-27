@@ -17,12 +17,12 @@ export default function Create() {
   });
 
 
-  
+
 
   // Import the useNavigate hook from the React Router library.
   const navigate = useNavigate();
 
- 
+
 
   /**
    * Updates the form state with the provided values.
@@ -257,11 +257,6 @@ export default function Create() {
             <input
               type="submit"
               value="Create Patient Profile"
-              className="btn btn-primary"
-            />
-            <input
-              onClick={redirectConfirmation}
-              value="Redirect Temporary"
               className="btn btn-primary"
             />
           </div>
