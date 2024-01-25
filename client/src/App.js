@@ -5,6 +5,8 @@ import {Routes, Route} from "react-router-dom";
 
 import Patients from "./pages/patients";
 import Calculator from "./pages/calculator";
+import Create from "./components/create";
+import Edit from "./components/edit";
 
 import './styles/styles.css';
 
@@ -21,6 +23,8 @@ import './styles/styles.css';
   <Routes>
     <Route exact path="/" element={<Patients />} />
     <Route path="/calculator" element={<Calculator />} />
+    <Route path="/create" element={<Create />} />
+    <Route path="/edit/:id" element={<Edit />} />
   </Routes>
 );
 };

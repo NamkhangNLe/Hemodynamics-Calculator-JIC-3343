@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import {Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 /**
  * Edit component that allows the user to update a record in the database.
  * @returns {JSX.Element} The JSX element that displays the form to update the record.
