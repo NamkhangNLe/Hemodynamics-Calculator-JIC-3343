@@ -28,7 +28,21 @@ const Calculator = () => {
             </Sidebar>
 
             <div className="main-content">
-                <h1>Calculator Goes Here</h1>
+                <h2>Calculate</h2>
+            <form>
+                <label>
+                    Value1:
+                    <input type="text" name="value1" />
+                </label>
+                <label>
+                    Value2:
+                    <input type="text" name="value2" />
+                </label>
+                <label>
+                    Output:
+                    <input type="text" name="output" />
+                </label>
+            </form>
             </div>
             </div>
         </div>
