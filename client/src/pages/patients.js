@@ -1,32 +1,16 @@
 import React from "react";
 
-import {Routes, Route} from "react-router-dom";
-
 import Navbar from "../components/navbar";
 import RecordList from "../components/recordList";
-import Edit from "../components/edit";
-import Create from "../components/create";
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import SidebarComp from "../components/sidebar";
+
  
 const Patients = () => {
     return (
         <div className="app-container">
             <Navbar />
             <div className="content-container">
-            <Sidebar>
-                <Menu>
-                <SubMenu label="Patients">
-                    <MenuItem component={<Link to="/" />}> Create and View Patients </MenuItem>
-                    <MenuItem> Medication Info </MenuItem>
-                </SubMenu>
-                <MenuItem component={<Link to="/calculator" />}> Calculate </MenuItem>
-                <MenuItem> Trends </MenuItem>
-                <MenuItem> Settings </MenuItem>
-                <MenuItem> Log Out </MenuItem>
-                </Menu>
-            </Sidebar>
-
+            <SidebarComp />
             <div className="main-content">
             <RecordList/>
             </div>
