@@ -17,7 +17,7 @@ const Patients = () => {
             <Sidebar>
                 <Menu>
                 <SubMenu label="Patients">
-                    <MenuItem component={<Link to="/patients" />}> Create and View Patients </MenuItem>
+                    <MenuItem component={<Link to="/" />}> Create and View Patients </MenuItem>
                     <MenuItem> Medication Info </MenuItem>
                 </SubMenu>
                 <MenuItem component={<Link to="/calculator" />}> Calculate </MenuItem>
@@ -28,11 +28,7 @@ const Patients = () => {
             </Sidebar>
 
             <div className="main-content">
-                <Routes>
-                    <Route exact path="/" element={<RecordList />} />
-                    <Route path="/edit/:id" element={<Edit />} />
-                    <Route path="/create" element={<Create />} />
-                </Routes>
+            <RecordList/>
             </div>
             </div>
         </div>
