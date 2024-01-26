@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import SidebarComp from "../components/sidebar";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
- 
+import Addition from "../components/addition";
+
 const Calculator = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
 
@@ -36,6 +37,9 @@ const Calculator = () => {
                 </label>
                 
             </form>
+
+            <Addition />
+
             </div>
             </div>
         </div>
