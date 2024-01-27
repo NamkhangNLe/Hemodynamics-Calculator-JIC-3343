@@ -51,18 +51,6 @@ const Calculator = () => {
                         Select Patient:
                         <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
                     </label>
-                    <label>
-                        Value1:
-                        <input type="text" name="value1" />
-                    </label>
-                    <label>
-                        Value2:
-                        <input type="text" name="value2" />
-                    </label>
-                    <label>
-                        Output:
-                        <input type="text" name="output" />
-                    </label>
                 </form>
 
                 <Addition />
