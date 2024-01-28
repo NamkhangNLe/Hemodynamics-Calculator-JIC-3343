@@ -7,6 +7,7 @@ import Patients from "./pages/patients";
 import Calculator from "./pages/calculator";
 import Create from "./components/create";
 import Edit from "./components/edit";
+import View from "./components/view";
 
 import './styles/styles.css';
 
@@ -25,6 +26,7 @@ import './styles/styles.css';
     <Route path="/calculator" element={<Calculator />} />
     <Route path="/create" element={<Create />} />
     <Route path="/edit/:id" element={<Edit />} />
+    <Route path="/view/:id" element={<View />} />
   </Routes>
 );
 };
