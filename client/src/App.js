@@ -5,8 +5,8 @@ import {Routes, Route} from "react-router-dom";
 
 import Patients from "./pages/patients";
 import Calculator from "./pages/calculator";
-import Create from "./components/create";
-import Edit from "./components/edit";
+import CreatePage from "./pages/create";
+import EditPage from "./pages/edit";
 
 import './styles/styles.css';
 
@@ -19,13 +19,13 @@ import './styles/styles.css';
  * @returns {JSX.Element} The JSX element representing the App component.
  */
  const App = () => {
- return (
-  <Routes>
-    <Route exact path="/" element={<Patients />} />
-    <Route path="/calculator" element={<Calculator />} />
-    <Route path="/create" element={<Create />} />
-    <Route path="/edit/:id" element={<Edit />} />
-  </Routes>
-);
+  return (
+    <Routes>
+      <Route exact path="/" element={<Patients />} />
+      <Route path="/calculator" element={<Calculator />} />
+      <Route path="/create" element={<CreatePage />} />
+      <Route path="/edit/:id" element={<EditPage />} />
+    </Routes>
+  );
 };
  export default App;

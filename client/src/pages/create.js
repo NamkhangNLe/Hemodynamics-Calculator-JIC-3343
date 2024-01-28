@@ -1,22 +1,22 @@
 import React from "react";
 
 import Navbar from "../components/navbar";
-import RecordList from "../components/recordList";
+import Create from "../components/create";
 import SidebarComp from "../components/sidebar";
 
 
-const Patients = () => {
+const CreatePage = () => {
     return (
         <div className="app-container">
             <Navbar />
             <div className="content-container">
             <SidebarComp />
             <div className="main-content">
-            <RecordList/>
+            <Create/>
             </div>
             </div>
         </div>
     );
 };
 
-export default Patients;
+export default CreatePage;
