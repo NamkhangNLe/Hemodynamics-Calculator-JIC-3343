@@ -26,23 +26,34 @@ export default function Edit() {
      */
     async function fetchData() {
       const id = params.id.toString();
-      const response = await fetch(`http://localhost:5000/record/${params.id.toString()}`);
+      console.log("Fetching record with id: " + id);
 
+      // TODO: Change to single route fetching instead of filtering.
+      const response = await fetch(`http://localhost:5000/record`);
+      console.log("Fetch done");
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
 
-      const record = await response.json();
+      const allPatients = await response.json();
 
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
+      if (!allPatients) {
+        window.alert(`Error querying patients.`);
+        navigate("/");
+        return;
+      }
+      const records = allPatients.filter(patient => patient._id === id);
+      if (records.length === 0) {
+        window.alert(`No patient with id ${id} found.`);
         navigate("/");
         return;
       }
 
-      setForm(record);
+      const patientRecord = records[0];
+      console.log(patientRecord);
+      setForm(patientRecord);
     }
 
     fetchData();
@@ -60,6 +71,35 @@ export default function Edit() {
   }
 
   /**
+   * Redirects to the record list page and displays the confirmation box.
+   * @returns {void}
+   */
+  function redirectConfirmation() {
+
+
+    navigate("/");
+
+    // Create a div element with a fading animation
+    const divElement = document.createElement('div');
+    const textElement = document.createElement('span');
+    textElement.innerText = 'Patient Updated Successfuly!';
+    divElement.className = "fading-div";
+    divElement.append(textElement);
+    divElement.style.opacity = 0; // Set initial opacity to 0
+    divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
+    document.body.appendChild(divElement); // Append the div to the body
+
+    // Animate the div to fade in and fade out
+    divElement.style.opacity = 1; // Fade in
+    setTimeout(() => {
+        divElement.style.opacity = 0; // Fade out
+        setTimeout(() => {
+            divElement.parentNode.removeChild(divElement); // Remove the div from the body
+        }, 1000); // Delay removal after animation
+    }, 2000); // Delay fade out after 2 seconds
+  }
+
+  /**
    * Submits the updated record to the database.
    * @param {Event} e - The form submit event.
    */
@@ -74,7 +114,7 @@ export default function Edit() {
       weight: form.weight,
       medications: form.medications
     };
-    navigate("/"); // Navigate back to the home page.
+    redirectConfirmation(); // Navigate back to the home page.
     // Sends a post request to update the data in the database.
     await fetch(`http://localhost:5000/update/${params.id}`, {
       method: "POST",
@@ -87,126 +127,163 @@ export default function Edit() {
 
   // Displays the form that takes input from the user to update the data.
   return (
-    <div>
-      <h3>Update Patient</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="initials">Initials: </label>
-          <input
-            type="text"
-            className="form-control"
-            id="initials"
-            value={form.intials}
-            onChange={(e) => updateForm({ initials: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="dob">Date of Birth: </label>
-          <input
-            type="text"
-            className="form-control"
-            id="dob"
-            value={form.dob}
-            onChange={(e) => updateForm({ dob: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="sexOptions"
-              id="male"
-              value="M"
-              checked={form.sex === "M"}
-              onChange={(e) => updateForm({ sex: e.target.value })}
-            />
-            <label htmlFor="male" className="form-check-label">M</label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="sexOptions"
-              id="female"
-              value="F"
-              checked={form.sex === "F"}
-              onChange={(e) => updateForm({ sex: e.target.value })}
-            />
-            <label htmlFor="male" className="form-check-label">F</label>
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="height">Height: </label>
-          <input
-            type="number"
-            className="form-control"
-            id="height"
-            value={form.height}
-            onChange={(e) => updateForm({ height: e.target.value })}
-          />
-        </div><div className="form-group">
-          <label htmlFor="weight">Weight: </label>
-          <input
-            type="number"
-            className="form-control"
-            id="weight"
-            value={form.weight}
-            onChange={(e) => updateForm({ weight: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="medicationOptions"
-              id="medicationA"
-              value="A"
-              checked={form.medications === "A"}
-              onChange={(e) => updateForm({ medications: e.target.value })}
-            />
-            <label htmlFor="medicationA" className="form-check-label">
-              Medication A
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="medicationOptions"
-              id="medicationB"
-              value="B"
-              checked={form.medications === "B"}
-              onChange={(e) => updateForm({ medications: e.target.value })}
-            />
-            <label htmlFor="medicationB" className="form-check-label">
-              Medication B
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="medicationOptions"
-              id="medicationC"
-              value="C"
-              checked={form.medications === "C"}
-              onChange={(e) => updateForm({ medications: e.target.value })}
-            />
-            <label htmlFor="medicationC" className="form-check-label">
-              Medication C
-            </label>
-          </div>
-        </div>
-        <br />
+    <div className="form-div">
+      <h3> Edit Patient Profile</h3>
+      <span style={{fontStyle: "italic", color: "gray"}}> <span style = {{color: "red"}}>*</span> = required field</span>
+      <form onSubmit={onSubmit} className = "form">
+        <div className="form-region">
+          <div className="form-column-region">
 
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Update Record"
-            className="btn btn-primary"
-          />
+            {/* Column 1 */}
+            <div className="form-column">
+              <div className="form-group">
+                <label className="field-label" htmlFor="initials">Initials<span style = {{color: "red"}}>*</span>:</label>
+                <input
+                  type="text"
+                  maxLength={2}
+                  required={true}
+                  className="form-control"
+                  id="initials"
+                  value={form.initials}
+                  onChange={(e) => {updateForm({ initials: e.target.value })}}
+                  style={{ width: '100px' }}
+                />
+              </div>
+              <div className="form-group">
+                <label className="field-label" htmlFor="dob">Date of Birth<span style = {{color: "red"}}>*</span>:</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  required={true}
+                  id="dob"
+                  value={form.dob}
+                  onChange={(e) => updateForm({ dob: e.target.value })}
+                  style={{ width: '200px' }}
+                />
+              </div>
+              <div className="form-group">
+                <label className="field-label" htmlFor="sex">Sex<span style = {{color: "red"}}>*</span>:</label>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="sexOptions"
+                    required={true}
+                    id="male"
+                    value="M"
+                    checked={form.sex === "M"}
+                    onChange={(e) => updateForm({ sex: e.target.value })}
+                  />
+                  <label htmlFor="male" className="form-check-label">
+                    M
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="sexOptions"
+                    id="female"
+                    required={true}
+                    value="F"
+                    checked={form.sex === "F"}
+                    onChange={(e) => updateForm({ sex: e.target.value })}
+                  />
+                  <label htmlFor="female" className="form-check-label">
+                    F
+                  </label>
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="field-label" htmlFor="height">Height<span style = {{color: "red"}}>*</span>:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  required={true}
+                  id="height"
+                  value={form.height}
+                  onChange={(e) => updateForm({ height: e.target.value })}
+                  style={{ width: '100px' }}
+                />
+                <span style={{paddingLeft:5 + "px"}}>cm</span>
+              </div>
+              <div className="form-group">
+                <label className="field-label" htmlFor="weight">Weight<span style = {{color: "red"}}>*</span>:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  required={true}
+                  id="weight"
+                  value={form.weight}
+                  onChange={(e) => updateForm({ weight: e.target.value })}
+                  style={{ width: '100px' }}
+                />
+                <span style={{paddingLeft:5 + "px"}}>kg</span>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="form-column">
+              <h6>Current Medications:</h6>
+              {/* TODO: Make this section into checkboxes */}
+              <div className="medication-section">
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="medicationA"
+                    value="A"
+                    checked={form.medications === "A"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="medicationA" className="form-check-label">
+                    Medication A
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="medicationB"
+                    value="B"
+                    checked={form.medications === "B"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="medicationB" className="form-check-label">
+                    Medication B
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="medicationC"
+                    value="C"
+                    checked={form.medications === "C"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="medicationC" className="form-check-label">
+                    Medication C
+                  </label>
+                </div>
+              </div>
+              <div className="form-long-answer">
+                {/* TODO: add patient notes to the database*/}
+                <h6>Other Notes:</h6>
+                <textarea id="message" name="message" rows="5" cols="30"></textarea>
+              </div>
+            </div>
+          </div>
+          <div className="submit-form-section">
+            <input
+              type="submit"
+              value="Save Profile"
+              className="btn btn-primary"
+            />
+          </div>
         </div>
       </form>
     </div>

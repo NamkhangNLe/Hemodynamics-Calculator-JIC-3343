@@ -3,10 +3,11 @@ import React from "react";
 import {Routes, Route} from "react-router-dom";
  // We import all the components we need in our app
 
-import Patients from "./pages/patients";
 import Calculator from "./pages/calculator";
-import Create from "./components/create";
 import Edit from "./components/edit";
+import Create from "./components/create";
+import PageFramework from "./pages/framework";
+import RecordList from "./components/recordList";
 
 import './styles/styles.css';
 
@@ -19,13 +20,13 @@ import './styles/styles.css';
  * @returns {JSX.Element} The JSX element representing the App component.
  */
  const App = () => {
- return (
-  <Routes>
-    <Route exact path="/" element={<Patients />} />
-    <Route path="/calculator" element={<Calculator />} />
-    <Route path="/create" element={<Create />} />
-    <Route path="/edit/:id" element={<Edit />} />
-  </Routes>
-);
+  return (
+    <Routes>
+      <Route exact path="/" element={<PageFramework component={<RecordList/>} />} />
+      <Route path="/calculator" element={<PageFramework component={<Calculator/>} />} />
+      <Route path="/create" element={<PageFramework component={<Create/>} />} />
+      <Route path="/edit/:id" element={<PageFramework component={<Edit/>} />} />
+    </Routes>
+  );
 };
  export default App;
