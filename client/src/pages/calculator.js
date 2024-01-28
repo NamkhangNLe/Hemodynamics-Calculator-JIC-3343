@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar";
-import SidebarComp from "../components/sidebar";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
 
