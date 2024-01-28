@@ -25,7 +25,7 @@ calcuationRoutes.route("/calculation").get(async function (req, response) {
 
 });
 
-// This section will help you get a single record by id
+// Does not work
 calcuationRoutes.route("/caclulation/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
@@ -46,7 +46,7 @@ calcuationRoutes.route("/calculation/add").post(function (req, response) {
     let myobj = {
         patient_id: result._id,
         date: new Date(),
-        valueType: req.body.valueType, 
+        valueType: req.body.valueType,
         calculatedValue: req.body.calculatedValue,
       };
       db_connect.collection("calculations").insertOne(myobj, function (err, res) {
