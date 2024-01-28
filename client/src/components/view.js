@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import {useNavigate} from 'react-router-dom';
 
-export default function View() {
+export default function PatientHistoryView() {
 
     const params = useParams();
     const navigate = useNavigate();
@@ -44,6 +44,68 @@ export default function View() {
       return;
     }, [params.id, navigate]);
 
+    /**
+     * Formats a Date object to a String
+     * @param {Date} date the Date object
+     * @returns formatted date string
+     */
+    function parseDate(date) {
+      return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    }
+
+    /**
+     * Formats a Date object to get it's time as a String
+     * @param {Date} date
+     * @returns formatted time string
+     */
+    function parseTime(date) {
+      let minutes = date.getMinutes().toString();
+      if (minutes.length === 1) {
+        minutes = "0" + minutes;
+      }
+      return date.getHours() + ':' + minutes;
+    }
+
+    /**
+     * Parses calculations into table rows.
+     * @returns formatted Table
+     */
+    function parseCalculations() {
+      return patientCalculations.map(calculation => {
+        var data = {
+          date: parseDate(new Date(calculation.date)),
+          time: parseTime(new Date(calculation.date)),
+          formula: calculation.valueType,
+          value: calculation.calculatedValue
+        }
+        return (
+          <tr>
+            <td>{data.date}</td>
+            <td>{data.time}</td>
+            <td>{data.formula}</td>
+            <td>{data.value}</td>
+          </tr>
+        );
+      });
+    }
+
+    function calculationsTable() {
+      return (
+        <table className="table table-striped" style={{ marginTop: 20 }}>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Formula</th>
+              <th>Calculated Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {parseCalculations()}
+          </tbody>
+        </table>
+      );
+    }
 
     // For front-end team: patientCalculations is a JSON. You can parse it however you want to display it.
     return (
@@ -51,15 +113,7 @@ export default function View() {
         <h3>View Patient</h3>
         <div>
           <h4>Calculation History</h4>
-
-          <ul>
-            {patientCalculations.map(calculation => (
-              <li key={calculation._id}>
-                Date: {calculation.date}, Formula: {calculation.valueType}, Calculated Value: {calculation.calculatedValue}
-              </li>
-            ))}
-          </ul>
-
+          {calculationsTable()}
         </div>
     </div>
     );

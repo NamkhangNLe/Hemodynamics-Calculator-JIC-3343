@@ -38,10 +38,10 @@ const Calculator = () => {
 
     return (
         <div className="app-container">
-            
+
 
             <div className="content-container">
-            
+
             <div className="main-content">
                 <h2>Calculate</h2>
 
