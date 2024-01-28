@@ -71,6 +71,35 @@ export default function Edit() {
   }
 
   /**
+   * Redirects to the record list page and displays the confirmation box.
+   * @returns {void}
+   */
+  function redirectConfirmation() {
+
+
+    navigate("/");
+
+    // Create a div element with a fading animation
+    const divElement = document.createElement('div');
+    const textElement = document.createElement('span');
+    textElement.innerText = 'Patient Updated Successfuly!';
+    divElement.className = "fading-div";
+    divElement.append(textElement);
+    divElement.style.opacity = 0; // Set initial opacity to 0
+    divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
+    document.body.appendChild(divElement); // Append the div to the body
+
+    // Animate the div to fade in and fade out
+    divElement.style.opacity = 1; // Fade in
+    setTimeout(() => {
+        divElement.style.opacity = 0; // Fade out
+        setTimeout(() => {
+            divElement.parentNode.removeChild(divElement); // Remove the div from the body
+        }, 1000); // Delay removal after animation
+    }, 2000); // Delay fade out after 2 seconds
+  }
+
+  /**
    * Submits the updated record to the database.
    * @param {Event} e - The form submit event.
    */
@@ -85,7 +114,7 @@ export default function Edit() {
       weight: form.weight,
       medications: form.medications
     };
-    navigate("/"); // Navigate back to the home page.
+    redirectConfirmation(); // Navigate back to the home page.
     // Sends a post request to update the data in the database.
     await fetch(`http://localhost:5000/update/${params.id}`, {
       method: "POST",
