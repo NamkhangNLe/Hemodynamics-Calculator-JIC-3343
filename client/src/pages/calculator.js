@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar";
-import SidebarComp from "../components/sidebar";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
 
 const Calculator = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
-
+    const [selectedPatientID, setSelectedPatientID] = useState();
+    
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
     useEffect(() => {
@@ -26,7 +25,10 @@ const Calculator = () => {
 
     // DropdownOption object; updates selected patient using initials when clicked
     const DropdownOption = (props) => (
-        <Dropdown.Item onClick={() => setSelectedPatient(props.record.initials)}>{props.record.initials}</Dropdown.Item>
+        <Dropdown.Item onClick={() => {
+            setSelectedPatient(props.record.initials)
+            setSelectedPatientID(props.record._id)
+        }}>{props.record.initials}</Dropdown.Item>
     )
 
     function patientList() {
@@ -52,7 +54,7 @@ const Calculator = () => {
                     </label>
                 </form>
 
-                <Addition />
+                <Addition selectedPatientID={selectedPatientID}/>
             </div>
             </div>
         </div>

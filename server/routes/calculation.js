@@ -40,20 +40,18 @@ calcuationRoutes.route("/caclulation/:id").get(function (req, res) {
 // This section will help you create a new record.
 // TODO: Add functionality for selected patient -- right now defaults to first in recordlist
 calcuationRoutes.route("/calculation/add").post(function (req, response) {
+  console.log("back", req.body)
  let db_connect = dbo.getDb();
- db_connect.collection("records").findOne() // To be changed
- .then(result=> {
-    let myobj = {
-        patient_id: result._id,
-        date: new Date(),
-        valueType: req.body.valueType, 
-        calculatedValue: req.body.calculatedValue,
-      };
-      db_connect.collection("calculations").insertOne(myobj, function (err, res) {
-        if (err) throw err;
-        response.json(res);
-      });
- })
+ let myobj = {
+    patient_id: req.body.selectedPatientID,
+    date: new Date(),
+    valueType: req.body.valueType, 
+    calculatedValue: req.body.calculatedValue,
+  };
+  db_connect.collection("calculations").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
 });
 
 // This section will help you update a record by id.
