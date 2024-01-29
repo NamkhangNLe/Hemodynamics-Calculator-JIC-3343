@@ -70,6 +70,87 @@ export default function View() {
     };
 
     /**
+     * Formats a Date object to a String
+     * @param {Date} date the Date object
+     * @returns formatted date string
+     */
+    function parseDate(date) {
+      return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    }
+
+    /**
+     * Formats a Date object to get it's time as a String
+     * @param {Date} date
+     * @returns formatted time string
+     */
+    function parseTime(date) {
+      let minutes = date.getMinutes().toString();
+      if (minutes.length === 1) {
+        minutes = "0" + minutes;
+      }
+      return date.getHours() + ':' + minutes;
+    }
+
+    /**
+     * Parses calculations into table rows.
+     * @returns formatted Table
+     */
+    function parseCalculations() {
+      return patientCalculations.map(calculation => {
+        var data = {
+          date: parseDate(new Date(calculation.date)),
+          time: parseTime(new Date(calculation.date)),
+          formula: calculation.valueType,
+          value: calculation.calculatedValue
+        }
+        return (
+          <tr>
+
+            {editingID === calculation._id ? (
+                <>
+                  <td>Date & Time: <input type="text" value={editedDate} onChange={(e) => setEditedDate(e.target.value)} /></td>
+
+                  <td>Formula: <input type="text" value={editedValueType} onChange={(e) => setEditedValueType(e.target.value)} /></td>
+
+                  <td>Calculated Value: <input type="text" value={editedCalculatedValue} onChange={(e) => setEditedCalculatedValue(e.target.value)} /></td>
+
+                  <td><button onClick={handleSave}>Save</button></td>
+                </>
+              ) : (
+                <>
+                  <td>{data.date}</td>
+                  <td>{data.time}</td>
+                  <td>{data.formula}</td>
+                  <td>{data.value}</td>
+                  <td><button onClick={() => handleEdit(calculation._id)}>Edit</button></td>
+                </>
+            )}
+
+          </tr>
+        );
+      });
+    }
+
+    function calculationsTable() {
+      return (
+        <table className="table table-striped" style={{ marginTop: 20 }}>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Formula</th>
+              <th>Calculated Value</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {parseCalculations()}
+          </tbody>
+        </table>
+      );
+    }
+
+    /**
      * Saves the data/values currently in the text fields to the database.
      */
     async function handleSave(e) {
@@ -104,30 +185,7 @@ export default function View() {
         <div>
           <h4>Calculation History</h4>
 
-          <ul>
-          {patientCalculations.map(calculation => (
-            <li key={calculation._id}>
-
-              {editingID === calculation._id ? (
-                <>
-                  Date: <input type="text" value={editedDate} onChange={(e) => setEditedDate(e.target.value)} />
-
-                  Formula: <input type="text" value={editedValueType} onChange={(e) => setEditedValueType(e.target.value)} />
-
-                  Calculated Value: <input type="text" value={editedCalculatedValue} onChange={(e) => setEditedCalculatedValue(e.target.value)} />
-
-                  <button onClick={handleSave}>Save</button>
-                </>
-              ) : (
-                <>
-                  Date: {calculation.date}, Formula: {calculation.valueType}, Calculated Value: {calculation.calculatedValue}
-                  <button onClick={() => handleEdit(calculation._id)}>Edit</button>
-                </>
-              )}
-
-            </li>
-          ))}
-        </ul>
+          {calculationsTable()}
 
         </div>
     </div>
