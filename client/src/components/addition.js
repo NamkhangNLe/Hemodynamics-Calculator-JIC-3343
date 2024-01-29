@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function Addition() {
+export default function Addition({selectedPatientID}) {
+    console.log("from", selectedPatientID)
     const [val1, setVal1] = useState();
     const [val2, setVal2] = useState();
     const [form, setForm] = useState({
@@ -26,9 +27,9 @@ export default function Addition() {
     async function onSubmit(e) {
         e.preventDefault();
         
-        console.log("TEST");
         // Create a new object with the values from the form state.
-        const newCalculation = {...form};
+        const newCalculation = {selectedPatientID: selectedPatientID, ...form};
+        console.log("from front", newCalculation)
         try {
         // Send a POST request to the server to create a new record.
         const response = await fetch("http://localhost:5000/calculation/add", {
