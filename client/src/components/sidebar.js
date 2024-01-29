@@ -2,6 +2,9 @@ import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 
+import "bootstrap/dist/css/bootstrap.css";
+import '../styles/styles.css';
+
 /**
  * Renders the Sidebar component.
  * @returns {JSX.Element} The Navbar component.
@@ -9,16 +12,16 @@ import { Link } from 'react-router-dom';
 
 export default function SidebarComp() {
     return (
-        <Sidebar>
-            <Menu>
+        <Sidebar className="sidebar">
+            <Menu className="sidebar">
             <SubMenu label="Patients">
-                <MenuItem component={<Link to="/" />}> Create and View Patients </MenuItem>
-                <MenuItem> Medication Info </MenuItem>
+                <MenuItem className="sidebar" component={<Link className="sidebar" to="/" />}> Create and View Patients </MenuItem>
+                <MenuItem className="sidebar"> Medication Info </MenuItem>
             </SubMenu>
-            <MenuItem component={<Link to="/calculator" />}> Calculate </MenuItem>
-            <MenuItem> Trends </MenuItem>
-            <MenuItem> Settings </MenuItem>
-            <MenuItem> Log Out </MenuItem>
+            <MenuItem className="sidebar" component={<Link className="sidebar" to="/calculator" />}> Calculate </MenuItem>
+            <MenuItem className="sidebar"> Trends </MenuItem>
+            <MenuItem className="sidebar"> Settings </MenuItem>
+            <MenuItem className="sidebar"> Log Out </MenuItem>
             </Menu>
         </Sidebar>
     );
