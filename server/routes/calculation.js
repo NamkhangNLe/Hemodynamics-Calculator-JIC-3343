@@ -54,13 +54,15 @@ calcuationRoutes.route("/calculation/add").post(function (req, response) {
   });
 });
 
-// This section will help you update a record by id.
-calcuationRoutes.route("/update/:id").post(function (req, response) {
+// Updates the date, valuetype/formula, and value for a calculation. Does NOT update associated patient_id.
+calcuationRoutes.route("/updatecalc/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
  let newvalues = {
-   $set: {
-    value: req.body.calculatedValue,
+  $set: {
+    date: req.body.date,
+    valueType: req.body.valueType,
+    calculatedValue: req.body.calculatedValue
    },
  };
  db_connect
