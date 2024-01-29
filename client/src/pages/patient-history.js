@@ -10,7 +10,7 @@ const Patients = () => {
         <div className="app-container">
             <Navbar />
             <div className="content-container">
-            <SidebarComp />
+            <SidebarComp className="sidebar"/>
             <div className="main-content">
             <RecordList/>
             </div>
