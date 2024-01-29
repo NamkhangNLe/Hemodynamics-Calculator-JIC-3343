@@ -1,19 +1,39 @@
-# Hemodynamics Calculator - Emory School of Medicine (v0.1.0)
+# Hemodynamics Calculator - Emory School of Medicine
 
 Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's Cardiac ICU, this tool is desgined to assist healthcare professionals and clinicians in the ICU, providing a streamlined, user-friendly interface to calculate, track, and analyze hemodynamic values and trends for patients.
 
-## Platform Description and Tech Stack
+# Release Notes
 
-This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node). 
+## Version 0.1.0
 
-- **MongoDB:**  MongoDB's document-oriented database allows efficient storage and retrieval of patient profiles, data, and trends. It provides the foundation for our patient database system, and is scalable so that should the application need to expand, we have the capacity to do so. 
-- **Express.JS:** Paired with Node, Express allows the creation of RESTful APIs, allowing for efficient and easy access from our backend MongoDB database to our front-end.
-- **React:** React's component-based architecture provides the application with a myriad of easy-to-implement, interactive elements. This provides a foundation for our intuitive UX and UI to be built off of.
-- **Node.JS:** Paired with Express, Node allows us to easily integrate our front-end components with our back-end database through its "JavaScript Everywhere" format.
+### Features
 
-This application is designed to be accessed from web browsers on MacOS, Windows, and Linux desktops and laptops. The application is primarily written in JavaScript due to its simplicity and ease of integration with Node.js. CSS, HTML, as well as React-specific components are also used to provide a visually appealing and easy-to-use front-end for users.
+* Edit patient screen updated to match create patient screen.
+* Calculator page added.
+* Added "selected patient" functionality using dropdown on Calculator page.
+* Added funcitonality for saving calculated values to database with unique patient id.
+* Sidebar color changed to blue.
+* Patient history page added.
+* Added functionality for editing calculated values and associated fields on patient history screen.
+* Added functionality to view calculated values of a specific patient.
 
-## Version 0.1.0 - Basic Patient Profile System
+### Bug Fixes
+
+* Fixed an issue where sidebar and navbar were not rendering on every page.
+* Fixed an issue where sidebar and navbar were doubling on every page.
+* Removed Herobrine.
+
+### Known Issues
+
+* Getting patient records by record/:id endpoint does not return any records.
+* DateTime for patient calculations is an unparsed string when editing.
+* Saving a calculated value does not refresh the page, thus the form does not update.
+* Month on patient history table is indexed (January shows as 0).
+* Sidebar text shows as black when hovering over any part.
+* Edit patient screen does not auto-fill values.
+* Sometimes, when saving an edited value, the Emory logo will disappear.
+
+## Version 0.0.0 - Basic Patient Profile System
 
 For our current artifact implementation of this application, version 0.1.0, we have decided to implement the basic patient screen. The current application allows users to create patient profiles, with the following fields for patients:
 
@@ -25,6 +45,17 @@ For our current artifact implementation of this application, version 0.1.0, we h
 - Patient Medications
 
 This basic patient system is the backbone of the application, as users must be able to save calculations and view trends for these patients. While specific data fields will be included in future updates, this version of our product provides the necessary foundation for us to expand further.
+
+## Platform Description and Tech Stack
+
+This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node). 
+
+- **MongoDB:**  MongoDB's document-oriented database allows efficient storage and retrieval of patient profiles, data, and trends. It provides the foundation for our patient database system, and is scalable so that should the application need to expand, we have the capacity to do so. 
+- **Express.JS:** Paired with Node, Express allows the creation of RESTful APIs, allowing for efficient and easy access from our backend MongoDB database to our front-end.
+- **React:** React's component-based architecture provides the application with a myriad of easy-to-implement, interactive elements. This provides a foundation for our intuitive UX and UI to be built off of.
+- **Node.JS:** Paired with Express, Node allows us to easily integrate our front-end components with our back-end database through its "JavaScript Everywhere" format.
+
+This application is designed to be accessed from web browsers on MacOS, Windows, and Linux desktops and laptops. The application is primarily written in JavaScript due to its simplicity and ease of integration with Node.js. CSS, HTML, as well as React-specific components are also used to provide a visually appealing and easy-to-use front-end for users.
 
 ## Setup Instructions (Run Locally)
 
