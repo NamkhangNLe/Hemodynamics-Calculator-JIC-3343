@@ -8,6 +8,7 @@ import Edit from "./components/edit";
 import Create from "./components/create";
 import PageFramework from "./pages/framework";
 import RecordList from "./components/recordList";
+import View from "./components/view";
 
 import './styles/styles.css';
 
@@ -20,13 +21,17 @@ import './styles/styles.css';
  * @returns {JSX.Element} The JSX element representing the App component.
  */
  const App = () => {
+
+
   return (
     <Routes>
       <Route exact path="/" element={<PageFramework component={<RecordList/>} />} />
       <Route path="/calculator" element={<PageFramework component={<Calculator/>} />} />
       <Route path="/create" element={<PageFramework component={<Create/>} />} />
       <Route path="/edit/:id" element={<PageFramework component={<Edit/>} />} />
+      <Route path="/view/:id" element={<PageFramework component={<View/>} />} />
     </Routes>
   );
+
 };
  export default App;

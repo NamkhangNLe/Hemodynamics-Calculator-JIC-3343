@@ -9,6 +9,7 @@ const Record = (props) => (
    <td>{props.record.weight}</td>
    <td>{props.record.medications}</td>
    <td>
+     <Link className="btn btn-link" to={`/view/${props.record._id}`}>View</Link> |
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
        onClick={() => {

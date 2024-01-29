@@ -27,7 +27,7 @@ recordRoutes.route("/record").get(async function (req, response) {
 
 });
 
-// This section will help you get a single record by id
+// Does not work
 recordRoutes.route("/record/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
