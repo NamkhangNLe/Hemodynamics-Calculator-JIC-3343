@@ -109,3 +109,8 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+#calc-framework-top-bar {
+  display: flex;
+  flex-direction: horizontal;
+}

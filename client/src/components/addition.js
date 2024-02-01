@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../styles/styles.css"
+
 
 export default function Addition({selectedPatientID}) {
     console.log("from", selectedPatientID)
@@ -26,7 +28,7 @@ export default function Addition({selectedPatientID}) {
      */
     async function onSubmit(e) {
         e.preventDefault();
-        
+
         // Create a new object with the values from the form state.
         const newCalculation = {selectedPatientID: selectedPatientID, ...form};
         console.log("from front", newCalculation)
