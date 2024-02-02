@@ -75,7 +75,7 @@ export default function View() {
      * @returns formatted date string
      */
     function parseDate(date) {
-      return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     }
 
     /**
