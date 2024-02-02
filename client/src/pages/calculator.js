@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
+import "../styles/styles.css"
 
-const Calculator = () => {
+
+const CalculatorFramework = () => {
+    // TODO: Populate this list with the calculations
+    const availableCalculations = [
+        {name: "Addition", component: <Addition/>,},
+    ];
+
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
-    
+    const [selectedCalculation, setSelectedCalculation] = useState(availableCalculations[0]);
+
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
     useEffect(() => {
@@ -24,7 +32,7 @@ const Calculator = () => {
     }, [records.length]);
 
     // DropdownOption object; updates selected patient using initials when clicked
-    const DropdownOption = (props) => (
+    const PatientDropdownOption = (props) => (
         <Dropdown.Item onClick={() => {
             setSelectedPatient(props.record.initials)
             setSelectedPatientID(props.record._id)
@@ -33,7 +41,24 @@ const Calculator = () => {
 
     function patientList() {
         return records.map((record) => {
-                return <DropdownOption record = {record}/>
+                return <PatientDropdownOption record = {record}/>
+            }
+        );
+    }
+
+    // DropdownOption object; updates selected patient using initials when clicked
+    const CalculationDropdownOption = (props) => (
+        <Dropdown.Item onClick={() => {
+            setSelectedCalculation({
+                name: props.calculation.name,
+                calculation: props.calculation.calculation,
+            })
+        }}>{props.calculation.name}</Dropdown.Item>
+    )
+
+    function calculationList() {
+        return availableCalculations.map((calculation) => {
+                return <CalculationDropdownOption calculation = {calculation}/>
             }
         );
     }
@@ -45,14 +70,23 @@ const Calculator = () => {
             <div className="content-container">
 
             <div className="main-content">
-                <h2>Calculate</h2>
+                <h3>Calculate</h3>
+                <div id="calc-framework-top-bar">
 
-                <form>
-                    <label>
-                        Select Patient:
-                        <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                    </label>
-                </form>
+                    <form>
+                        <label>
+                            Select Patient:
+                            <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+                        </label>
+                    </form>
+
+                    <form>
+                        <label>
+                            Select Calculation:
+                            <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
+                        </label>
+                    </form>
+                </div>
 
                 <Addition selectedPatientID={selectedPatientID}/>
             </div>
@@ -61,4 +95,4 @@ const Calculator = () => {
     );
 };
 
-export default Calculator;
+export default CalculatorFramework;
