@@ -3,7 +3,9 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
 import Svr from "../components/svr";
 import Pvr from "../components/pvr";
+import TranspulGradient from "../components/transpulGradient";
 import "../styles/styles.css"
+
 
 
 const CalculatorFramework = () => {
@@ -12,6 +14,7 @@ const CalculatorFramework = () => {
         {name: "Addition", component: <Addition/>},
         {name: "Systemic Vasuclar Resistance", component: <Svr/>},
         {name: "Pulmonary Vascular Resistance", component: <Pvr/>},
+        {name: "Transpulmonary Gradient", component: <TranspulGradient/>}
     ];
 
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
@@ -22,6 +25,7 @@ const CalculatorFramework = () => {
     const [additionVisible, setAdditionVisible] = useState(false);
     const [svrVisible, setSvrVisible] = useState(false);
     const [pvrVisible, setPvrVisible] = useState(false);
+    const [transpulGradientVisible, setTranspulGradientVisible] = useState(false);
 
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
@@ -68,16 +72,25 @@ const CalculatorFramework = () => {
                 setAdditionVisible(true);
                 setSvrVisible(false);
                 setPvrVisible(false);
+                setTranspulGradientVisible(false);
             }
             if (props.calculation.name == "Systemic Vasuclar Resistance") {
                 setAdditionVisible(false);
                 setSvrVisible(true);
                 setPvrVisible(false);
+                setTranspulGradientVisible(false);
             }
             if (props.calculation.name == "Pulmonary Vascular Resistance") {
                 setAdditionVisible(false);
                 setSvrVisible(false);
                 setPvrVisible(true);
+                setTranspulGradientVisible(false);
+            }
+            if (props.calculation.name == "Transpulmonary Gradient") {
+                setAdditionVisible(false);
+                setSvrVisible(false);
+                setPvrVisible(false);
+                setTranspulGradientVisible(true);
             }
 
 
@@ -118,6 +131,7 @@ const CalculatorFramework = () => {
                 {additionVisible && <Addition/>}
                 {svrVisible && <Svr/>}
                 {pvrVisible && <Pvr/>}
+                {transpulGradientVisible && <TranspulGradient/>}
             </div>
             </div>
         </div>
