@@ -48,7 +48,8 @@ recordRoutes.route("/record/add").post(function (req, response) {
    sex: req.body.sex,
    height: req.body.height,
    weight: req.body.weight,
-   medications: req.body.medications
+   medications: req.body.medications,
+   notes: req.body.notes
  };
  db_connect.collection("records").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -67,7 +68,8 @@ recordRoutes.route("/update/:id").post(function (req, response) {
     sex: req.body.sex,
     height: req.body.height,
     weight: req.body.weight,
-    medications: req.body.medications
+    medications: req.body.medications,
+    notes: req.body.notes
    },
  };
  db_connect

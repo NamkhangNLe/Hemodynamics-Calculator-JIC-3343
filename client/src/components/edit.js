@@ -15,6 +15,7 @@ export default function Edit() {
     height: "",
     weight: "",
     medications: "",
+    notes: "",
     records: [],
   });
 
@@ -114,7 +115,8 @@ export default function Edit() {
       sex: form.sex,
       height: form.height,
       weight: form.weight,
-      medications: form.medications
+      medications: form.medications,
+      notes: form.notes
     };
     redirectConfirmation(); // Navigate back to the home page.
     // Sends a post request to update the data in the database.
