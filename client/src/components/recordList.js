@@ -8,7 +8,6 @@ const Record = (props) => (
    <td>{props.record.height}</td>
    <td>{props.record.weight}</td>
    <td>{props.record.medications}</td>
-   <td>{props.record.notes}</td>
    <td>
      <Link className="btn btn-link" to={`/view/${props.record._id}`}>View</Link> |
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
@@ -90,7 +89,6 @@ export default function RecordList() {
             <th>Height</th>
             <th>Weight</th>
             <th>Medications</th>
-            <th>Notes</th>
           </tr>
         </thead>
         <tbody>{recordList()}</tbody>
