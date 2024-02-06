@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
 import Svr from "../components/svr";
 import Pvr from "../components/pvr";
 import TranspulGradient from "../components/transpulGradient";
+import Papi from "../components/papi";
+import CardiacIndex from "../components/ci";
+import Fick from "../components/fick";
 import "../styles/styles.css"
+import Weight from "../components/weight";
+import Bsa from "../components/bsa";
+import LaFarge from "../components/lafarge";
 
 
 
@@ -14,18 +20,18 @@ const CalculatorFramework = () => {
         {name: "Addition", component: <Addition/>},
         {name: "Systemic Vasuclar Resistance", component: <Svr/>},
         {name: "Pulmonary Vascular Resistance", component: <Pvr/>},
-        {name: "Transpulmonary Gradient", component: <TranspulGradient/>}
+        {name: "Transpulmonary Gradient", component: <TranspulGradient/>},
+        {name: "Pulmonary Artery Pulsatility Index", component: <Papi/>},
+        {name: "Cardiac Index", component: <CardiacIndex/>},
+        {name: "Fick Cardiac Output", component: <Fick/>},
+        {name: "VO2 by Weight", component: <Weight/>},
+        {name: "VO2 by BSA", component: <Bsa/>},
+        {name: "VO2 by LaFarge Equation", component: <LaFarge/>}
     ];
 
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [selectedCalculation, setSelectedCalculation] = useState(availableCalculations[0]);
-    
-    // Booleans for component visibility - Maybe a better way to do this?
-    const [additionVisible, setAdditionVisible] = useState(false);
-    const [svrVisible, setSvrVisible] = useState(false);
-    const [pvrVisible, setPvrVisible] = useState(false);
-    const [transpulGradientVisible, setTranspulGradientVisible] = useState(false);
 
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
@@ -64,36 +70,8 @@ const CalculatorFramework = () => {
         <Dropdown.Item onClick={() => {
             setSelectedCalculation({
                 name: props.calculation.name,
-                calculation: props.calculation.calculation,
+                component: props.calculation.component,
             })
-
-            // Set components active / inactive
-            if (props.calculation.name == "Addition") {
-                setAdditionVisible(true);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-            }
-            if (props.calculation.name == "Systemic Vasuclar Resistance") {
-                setAdditionVisible(false);
-                setSvrVisible(true);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-            }
-            if (props.calculation.name == "Pulmonary Vascular Resistance") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(true);
-                setTranspulGradientVisible(false);
-            }
-            if (props.calculation.name == "Transpulmonary Gradient") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(true);
-            }
-
-
         }}>{props.calculation.name}</Dropdown.Item>
     )
 
@@ -106,10 +84,7 @@ const CalculatorFramework = () => {
 
     return (
         <div className="app-container">
-
-
             <div className="content-container">
-
             <div className="main-content">
                 <h3>Calculate</h3>
                 <div id="calc-framework-top-bar">
@@ -127,11 +102,9 @@ const CalculatorFramework = () => {
                             <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
                         </label>
                     </form>
+
                 </div>
-                {additionVisible && <Addition/>}
-                {svrVisible && <Svr/>}
-                {pvrVisible && <Pvr/>}
-                {transpulGradientVisible && <TranspulGradient/>}
+                {selectedCalculation.component}
             </div>
             </div>
         </div>
