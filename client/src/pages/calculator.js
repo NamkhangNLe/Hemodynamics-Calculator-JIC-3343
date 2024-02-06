@@ -104,7 +104,7 @@ const CalculatorFramework = () => {
                     </form>
 
                 </div>
-                {selectedCalculation.component};
+                {selectedCalculation.component}
             </div>
             </div>
         </div>
