@@ -32,18 +32,6 @@ const CalculatorFramework = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [selectedCalculation, setSelectedCalculation] = useState(availableCalculations[0]);
-    
-    // Booleans for component visibility - Maybe a better way to do this?
-    const [additionVisible, setAdditionVisible] = useState(true);
-    const [svrVisible, setSvrVisible] = useState(false);
-    const [pvrVisible, setPvrVisible] = useState(false);
-    const [transpulGradientVisible, setTranspulGradientVisible] = useState(false);
-    const [papiVisible, setPapiVisible] = useState(false);
-    const [ciVisible, setCardiacIndexVisible] = useState(false);
-    const [fickVisible, setfickVisible] = useState(false);
-    const [weightVisible, setWeightVisible] = useState(false);
-    const [bsaVisible, setBsaVisible] = useState(false);
-    const [lafargeVisible, setLaFargeVisible] = useState(false);
 
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
@@ -82,132 +70,8 @@ const CalculatorFramework = () => {
         <Dropdown.Item onClick={() => {
             setSelectedCalculation({
                 name: props.calculation.name,
-                calculation: props.calculation.calculation,
+                component: props.calculation.component,
             })
-
-            // Set components active / inactive
-            if (props.calculation.name == "Addition") {
-                setAdditionVisible(true);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Systemic Vasuclar Resistance") {
-                setAdditionVisible(false);
-                setSvrVisible(true);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Pulmonary Vascular Resistance") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(true);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Transpulmonary Gradient") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(true);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Pulmonary Artery Pulsatility Index") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(true);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Cardiac Index") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(true);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "Fick Cardiac Output") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(true);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "VO2 by Weight") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(true);
-                setBsaVisible(false);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "VO2 by BSA") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(true);
-                setLaFargeVisible(false);
-            }
-            if (props.calculation.name == "VO2 by LaFarge Equation") {
-                setAdditionVisible(false);
-                setSvrVisible(false);
-                setPvrVisible(false);
-                setTranspulGradientVisible(false);
-                setPapiVisible(false);
-                setCardiacIndexVisible(false);
-                setfickVisible(false);
-                setWeightVisible(false);
-                setBsaVisible(false);
-                setLaFargeVisible(true);
-            }
-
-
         }}>{props.calculation.name}</Dropdown.Item>
     )
 
@@ -220,10 +84,7 @@ const CalculatorFramework = () => {
 
     return (
         <div className="app-container">
-
-
             <div className="content-container">
-
             <div className="main-content">
                 <h3>Calculate</h3>
                 <div id="calc-framework-top-bar">
@@ -241,17 +102,9 @@ const CalculatorFramework = () => {
                             <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
                         </label>
                     </form>
+
                 </div>
-                {additionVisible && <Addition/>}
-                {svrVisible && <Svr/>}
-                {pvrVisible && <Pvr/>}
-                {transpulGradientVisible && <TranspulGradient/>}
-                {papiVisible && <Papi/>}
-                {ciVisible && <CardiacIndex/>}
-                {fickVisible && <Fick/>}
-                {weightVisible && <Weight/>}
-                {bsaVisible && <Bsa/>}
-                {lafargeVisible && <LaFarge/>}
+                {selectedCalculation.component};
             </div>
             </div>
         </div>
