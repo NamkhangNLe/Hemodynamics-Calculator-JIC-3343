@@ -49,7 +49,7 @@ export default function Create() {
     // Create a div element with a fading animation
     const divElement = document.createElement('div');
     const textElement = document.createElement('span');
-    textElement.innerText = 'Patient Created Successfuly!';
+    textElement.innerText = 'Patient created successfully!';
     divElement.className = "fading-div";
     divElement.append(textElement);
     divElement.style.opacity = 0; // Set initial opacity to 0
