@@ -4,7 +4,7 @@ import React from "react";
  * Form component to edit/create patient fields.
  * @returns {JSX.Element} The form component.
  */
-export default function PatientForm({form, onSubmit, updateForm}) {
+export default function PatientForm({form, onSubmit, updateForm, mode}) {
     return (
         <form onSubmit={onSubmit} className = "form">
         <div className="form-region">
@@ -156,7 +156,7 @@ export default function PatientForm({form, onSubmit, updateForm}) {
           <div className="submit-form-section">
             <input
               type="submit"
-              value="Create Patient Profile"
+              value={mode + " Patient Profile"}
               className="btn btn-primary"
             />
           </div>
