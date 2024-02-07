@@ -14,7 +14,8 @@ export default function Create() {
     sex: "",
     height: "",
     weight: "",
-    medications: ""
+    medications: "",
+    notes: ""
   });
 
 
@@ -95,7 +96,7 @@ export default function Create() {
       console.log('Record added successfully:', await response.json());
 
       // Reset the form state to empty values.
-      setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: ""});
+      setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: "", notes: ""});
 
     } catch (error) {
       console.error('Error submitting form:', error);

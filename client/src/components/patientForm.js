@@ -149,7 +149,16 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
               <div className="form-long-answer">
                 {/* TODO: add patient notes to the database*/}
                 <h6>Other Notes:</h6>
-                <textarea id="message" name="message" rows="5" cols="30"></textarea>
+                <textarea
+                    className="form-control"
+                    name="message"
+                    id="message"
+                    rows="5"
+                    cols="10"
+                    value={form.notes}
+                    onChange={(e) => updateForm({ notes: e.target.value })}
+                >
+                </textarea>
               </div>
             </div>
           </div>
