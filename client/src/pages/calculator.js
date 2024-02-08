@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Addition from "../components/addition";
 import Svr from "../components/svr";
 import Pvr from "../components/pvr";
@@ -17,16 +17,16 @@ import LaFarge from "../components/lafarge";
 const CalculatorFramework = () => {
     // TODO: Populate this list with the calculations
     const availableCalculations = [
-        {name: "Addition", component: <Addition/>},
-        {name: "Systemic Vasuclar Resistance", component: <Svr/>},
-        {name: "Pulmonary Vascular Resistance", component: <Pvr/>},
-        {name: "Transpulmonary Gradient", component: <TranspulGradient/>},
-        {name: "Pulmonary Artery Pulsatility Index", component: <Papi/>},
-        {name: "Cardiac Index", component: <CardiacIndex/>},
-        {name: "Fick Cardiac Output", component: <Fick/>},
-        {name: "VO2 by Weight", component: <Weight/>},
-        {name: "VO2 by BSA", component: <Bsa/>},
-        {name: "VO2 by LaFarge Equation", component: <LaFarge/>}
+        {name: "Addition", component: Addition},
+        {name: "Systemic Vasuclar Resistance", component: Svr},
+        {name: "Pulmonary Vascular Resistance", component: Pvr},
+        {name: "Transpulmonary Gradient", component: TranspulGradient},
+        {name: "Pulmonary Artery Pulsatility Index", component: Papi},
+        {name: "Cardiac Index", component: CardiacIndex},
+        {name: "Fick Cardiac Output", component: Fick},
+        {name: "VO2 by Weight", component: Weight},
+        {name: "VO2 by BSA", component: Bsa},
+        {name: "VO2 by LaFarge Equation", component: LaFarge}
     ];
 
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
@@ -104,7 +104,7 @@ const CalculatorFramework = () => {
                     </form>
 
                 </div>
-                {selectedCalculation.component}
+                {<selectedCalculation.component selectedPatientID={selectedPatientID}/>}
             </div>
             </div>
         </div>
