@@ -29,6 +29,7 @@ export default function Addition({selectedPatientID}) {
         e.preventDefault();
 
         if (selectedPatientID === undefined) {
+            messageAnimation("Calculation not saved.\nPatient was not selected.", "lightpink");
             return;
         }
         // Create a new object with the values from the form state.
@@ -42,7 +43,7 @@ export default function Addition({selectedPatientID}) {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(newCalculation),
-        });
+        }).then(messageAnimation("Calculation saved!"));
 
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -78,4 +79,26 @@ export default function Addition({selectedPatientID}) {
             </form>
         </div>
     );
+}
+
+function messageAnimation(text, color) {
+    // Create a div element with a fading animation
+    const divElement = document.createElement('div');
+    const textElement = document.createElement('span');
+    textElement.innerText = text;
+    divElement.className = "fading-div";
+    divElement.style = color === undefined ? divElement.style : `background-color: ${color}`;
+    divElement.append(textElement);
+    divElement.style.opacity = 0; // Set initial opacity to 0
+    divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
+    document.body.appendChild(divElement); // Append the div to the body
+
+    // Animate the div to fade in and fade out
+    divElement.style.opacity = 1; // Fade in
+    setTimeout(() => {
+        divElement.style.opacity = 0; // Fade out
+        setTimeout(() => {
+            divElement.parentNode.removeChild(divElement); // Remove the div from the body
+        }, 1000); // Delay removal after animation
+    }, 2000); // Delay fade out after 2 seconds
 }
