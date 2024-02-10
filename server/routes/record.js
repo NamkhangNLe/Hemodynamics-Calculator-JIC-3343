@@ -21,22 +21,26 @@ recordRoutes.route("/record").get(async function (req, response) {
     .find({})
     .toArray()
     .then((data) => {
-      console.log(data);
+    //   console.log(data);
       response.json(data);
     });
 
 });
 
-// Does not work
-recordRoutes.route("/record/:id").get(function (req, res) {
+// This section will help you get a record for a specific patient by patient_id.
+recordRoutes.route("/record/:id").get(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
  db_connect
    .collection("records")
    .findOne(myquery, function (err, result) {
      if (err) throw err;
-     res.json(result);
-   });
+     response.json(result);
+   })
+   .then((data) => {
+    // console.log(data);
+    response.json(data);
+  });
 });
 
 // This section will help you create a new record.
@@ -81,7 +85,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
    });
 });
 
-// This section will help you delete a record
+// This section will help you delete a record.
 recordRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
