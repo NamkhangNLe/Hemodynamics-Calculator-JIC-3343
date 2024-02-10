@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import {useNavigate} from 'react-router-dom';
 
 export default function View() {
-
     const params = useParams();
     const navigate = useNavigate();
     const [patientCalculations, setPatientCalculations] = useState([]);
@@ -17,15 +16,13 @@ export default function View() {
     const [editedCalculatedValue, setEditedCalculatedValue] = useState("");
 
     useEffect(() => {
-
       /**
        * Fetches all the calculations from the DB, then
        * filters them by patient ID.
        */
       async function fetchPatientCalculation() {
         const id = params.id.toString();
-        const response = await fetch('http://localhost:5000/calculation/');
-
+        const response = await fetch(`http://localhost:5000/calculation/${id}`);
         if (!response.ok) {
             const message = `An error has occurred: ${response.statusText}`;
             window.alert(message);
@@ -48,7 +45,6 @@ export default function View() {
       }
 
       fetchPatientCalculation();
-      return;
     }, [params.id, navigate]);
 
     /**
@@ -56,7 +52,6 @@ export default function View() {
      * @param {String} calculationId The ID of the calculation that we are currently editing
      */
     const handleEdit = (calculationId) => {
-
       const calculationToEdit = patientCalculations.find(calculation => calculation._id === calculationId);
 
       // Default the EditingID to whatever the current value of the calculation is.
@@ -66,7 +61,6 @@ export default function View() {
         setEditedValueType(calculationToEdit.valueType);
         setEditedCalculatedValue(calculationToEdit.calculatedValue);
       }
-
     };
 
     /**
@@ -105,7 +99,6 @@ export default function View() {
         }
         return (
           <tr>
-
             {editingID === calculation._id ? (
                 <>
                   <td>Date & Time: <input type="text" value={editedDate} onChange={(e) => setEditedDate(e.target.value)} /></td>
@@ -125,7 +118,6 @@ export default function View() {
                   <td><button onClick={() => handleEdit(calculation._id)}>Edit</button></td>
                 </>
             )}
-
           </tr>
         );
       });
@@ -170,7 +162,7 @@ export default function View() {
         },
       });
 
-      // Clear te EditingID, EditedDate, EditedValueType, and EditedCalculatedValue once saved.
+      // Clear the EditingID, EditedDate, EditedValueType, and EditedCalculatedValue once saved.
       setEditingID(null);
       setEditedDate("");
       setEditedValueType("");
@@ -184,10 +176,8 @@ export default function View() {
         <h3>View Patient</h3>
         <div>
           <h4>Calculation History</h4>
-
           {calculationsTable()}
-
         </div>
     </div>
     );
-  }
+}
