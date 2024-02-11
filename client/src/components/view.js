@@ -59,25 +59,25 @@ export default function View() {
     };
 
     /**
-     * Formats a Date object to a String
-     * @param {Date} date the Date object
+     * Formats a Date object to get its date as a String
+     * @param {Date} date the Date object to parse the date out of
      * @returns formatted date string
      */
     function parseDate(date) {
-        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        let month = (date.getMonth() + 1).toString();
+        let dotm = date.getDate().toString();
+        return date.getFullYear() + '-' + (month.length === 1 ? '0' + month : month) + '-' + (dotm.length === 1 ? '0' + dotm : dotm);
     }
 
     /**
-     * Formats a Date object to get it's time as a String
-     * @param {Date} date
+     * Formats a Date object to get its time as a String
+     * @param {Date} date the Date object to parse the time out of
      * @returns formatted time string
      */
     function parseTime(date) {
+        let hours = date.getHours().toString();
         let minutes = date.getMinutes().toString();
-        if (minutes.length === 1) {
-            minutes = "0" + minutes;
-        }
-        return date.getHours() + ':' + minutes;
+        return (hours.length === 1 ? '0' + hours : hours) + ':' + (minutes.length === 1 ? '0' + minutes : minutes);
     }
 
     /**
@@ -86,22 +86,20 @@ export default function View() {
      */
     function parseCalculations() {
         return patientCalculations.map(calculation => {
-            var data = {
+            let data = {
                 date: parseDate(new Date(calculation.date)),
                 time: parseTime(new Date(calculation.date)),
                 formula: calculation.valueType,
                 value: calculation.calculatedValue
             }
+
             return (
                 <tr>
                     {editingID === calculation._id ? (
                         <>
                             <td>Date & Time: <input type="text" value={editedDate} onChange={(e) => setEditedDate(e.target.value)} /></td>
-
                             <td>Formula: <input type="text" value={editedValueType} onChange={(e) => setEditedValueType(e.target.value)} /></td>
-
                             <td>Calculated Value: <input type="text" value={editedCalculatedValue} onChange={(e) => setEditedCalculatedValue(e.target.value)} /></td>
-
                             <td><button onClick={handleSave}>Save</button></td>
                         </>
                     ) : (
@@ -157,7 +155,7 @@ export default function View() {
             },
         });
 
-        // Clear the EditingID, EditedDate, EditedValueType, and EditedCalculatedValue once saved.
+        // Clear the editingID, editedDate, editedValueType, and editedCalculatedValue once saved.
         setEditingID(null);
         setEditedDate("");
         setEditedValueType("");
