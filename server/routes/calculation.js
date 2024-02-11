@@ -61,7 +61,7 @@ calcuationRoutes.route("/updatecalc/:id").post(function (req, response) {
  let myquery = { _id: new ObjectId(req.params.id) };
  let newvalues = {
   $set: {
-    date: req.body.date,
+    date: new Date(req.body.date),
     valueType: req.body.valueType,
     calculatedValue: req.body.calculatedValue
    },
