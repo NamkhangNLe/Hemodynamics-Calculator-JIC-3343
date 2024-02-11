@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 export default function View() {
     const params = useParams();
     const navigate = useNavigate();
+
     const [patientCalculations, setPatientCalculations] = useState([]);
 
-    /** EditingID keeps track of which Calculation we are currently editing */
+    /** EditingID keeps track of which calculation we are currently editing */
     const [editingID, setEditingID] = useState(null);
 
     /** The following hooks track the updates to each field (Date, ValueType/Formula, and Calculated Value) */
@@ -16,12 +17,17 @@ export default function View() {
     const [editedCalculatedValue, setEditedCalculatedValue] = useState("");
 
     useEffect(() => {
-        /**
-         * Fetches all the calculations from the DB, then
-         * filters them by patient ID.
-         */
-        async function fetchPatientCalculation() {
-            const id = params.id.toString();
+        async function fetchPatientCalculations() {
+            const id = params.id;
+
+            // Check if a patient with the specified id is found; alerts if query returned null.
+            const patient = await fetch(`http://localhost:5000/record/${id}`);
+            if (await patient.json() == null) {
+                window.alert(`Record with id ${id} not found`);
+                navigate("/");
+                return;
+            }
+
             const response = await fetch(`http://localhost:5000/calculation/${id}`);
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`;
@@ -29,21 +35,11 @@ export default function View() {
                 return;
             }
 
-            // Parse server response as JSON. Server grabs all calculations in the DB
-            const calculations = await response.json();
-
-            if (!calculations) {
-                window.alert(`Record with id ${id} not found`);
-                navigate("/");
-                return;
-            }
-
-            //Filter the calculations by patient id.
-            const patientCalculations = calculations.filter(calculation => calculation.patient_id === id);
-            setPatientCalculations(patientCalculations);
+            // Parse server response as JSON, which are the calculations for the patient with specified id.
+            setPatientCalculations(await response.json());
         }
 
-        fetchPatientCalculation();
+        fetchPatientCalculations();
     }, [params.id, navigate]);
 
     /**
