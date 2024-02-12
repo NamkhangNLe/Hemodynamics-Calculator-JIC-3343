@@ -8,6 +8,9 @@ import PatientForm from "./patientForm";
  * @returns {JSX.Element} The JSX element that displays the form to update the record.
  */
 export default function Edit() {
+  const params = useParams();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     initials: "",
     dob: "",
@@ -16,11 +19,7 @@ export default function Edit() {
     weight: "",
     medications: "",
     notes: "",
-    records: [],
   });
-
-  const params = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     /**
@@ -28,39 +27,27 @@ export default function Edit() {
      * If the record is not found, redirects the user to the home page.
      */
     async function fetchData() {
-      const id = params.id.toString();
-      console.log("Fetching record with id: " + id);
+      const id = params.id;
+      // console.log("Fetching record with id: " + id);
 
-      // TODO: Change to single route fetching instead of filtering.
-      const response = await fetch(`http://localhost:5000/record`);
-      console.log("Fetch done");
+      const response = await fetch(`http://localhost:5000/record/${id}`);
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
 
-      const allPatients = await response.json();
-
-      if (!allPatients) {
-        window.alert(`Error querying patients.`);
-        navigate("/");
-        return;
-      }
-      const records = allPatients.filter(patient => patient._id === id);
-      if (records.length === 0) {
+      const patientRecord = await response.json();
+      if (patientRecord == null) {
         window.alert(`No patient with id ${id} found.`);
         navigate("/");
         return;
       }
 
-      const patientRecord = records[0];
-      console.log(patientRecord);
       setForm(patientRecord);
     }
 
     fetchData();
-    return;
   }, [params.id, navigate]);
 
   /**
@@ -78,8 +65,6 @@ export default function Edit() {
    * @returns {void}
    */
   function redirectConfirmation() {
-
-
     navigate("/");
 
     // Create a div element with a fading animation
@@ -118,9 +103,11 @@ export default function Edit() {
       medications: form.medications,
       notes: form.notes
     };
+
     redirectConfirmation(); // Navigate back to the home page.
     // Sends a post request to update the data in the database.
-    await fetch(`http://localhost:5000/update/${params.id}`, {
+
+    fetch(`http://localhost:5000/update/${params.id}`, {
       method: "POST",
       body: JSON.stringify(editedPerson),
       headers: {
