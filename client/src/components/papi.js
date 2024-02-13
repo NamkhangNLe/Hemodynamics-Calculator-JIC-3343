@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
-import "../styles/styles.css"
+import "../styles/styles.css";
 
-export default function Papi({selectedPatientID}) {
+export default function Papi({ selectedPatientID }) {
     const [pasp, setPasp] = useState("");
     const [padp, setPadp] = useState("");
     const [ra, setRa] = useState("");
@@ -14,29 +14,29 @@ export default function Papi({selectedPatientID}) {
 
     useEffect(() => {
         setPlaceholderText((pasp === "" && padp === "" && ra === "") ? "Enter calculation inputs" : "Missing inputs");
-        setForm({valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : ""});
+        setForm({ valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : "" });
     }, [pasp, padp, ra]);
 
     return (
         <div>
-                <h1>Pulmonary Artery Pulsatility Index</h1>
-                <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
-                    <div>
-                        PASP: <input name="PASP" type="number" value={pasp} onChange={e => setPasp(e.target.value)}/>
-                    </div>
-                    <div>
-                        PADP: <input name="PADP" type="number" value={padp} onChange={e => setPadp(e.target.value)}/>
-                    </div>
-                    <div>
-                        RA: <input name="RA" type="number" value={ra} onChange={e => setRa(e.target.value)}/>
-                    </div>
-                    <div>
-                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
-                    </div>
-                    <div>
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
+            <h1>Pulmonary Artery Pulsatility Index</h1>
+            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+                <div>
+                    PASP: <input name="PASP" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
+                </div>
+                <div>
+                    PADP: <input name="PADP" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+                </div>
+                <div>
+                    RA: <input name="RA" type="number" value={ra} onChange={e => setRa(e.target.value)} />
+                </div>
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
         </div>
     );
-   }
+}
