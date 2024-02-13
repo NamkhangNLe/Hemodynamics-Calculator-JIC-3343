@@ -17,14 +17,6 @@ export default function Pvr({selectedPatientID}) {
         setForm({valueType: "Pulmonary Vascular Resistance", calculatedValue: (pap !== "" && wedge !== "" && co !== "") ? ((+pap - +wedge) / +co).toFixed(3) : ""});
     }, [pap, wedge, co]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Pulmonary Vascular Resistance", calculatedValue: (Number(pap) - Number(wedge)) / Number(co)});
-    }
-
     return (
         <div>
                 <h1>Pulmonary Vasuclar Resistance</h1>
@@ -42,7 +34,6 @@ export default function Pvr({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

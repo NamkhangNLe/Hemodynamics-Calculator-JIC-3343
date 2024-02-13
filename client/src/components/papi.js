@@ -17,14 +17,6 @@ export default function Papi({selectedPatientID}) {
         setForm({valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : ""});
     }, [pasp, padp, ra]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (Number(pasp) - Number(padp)) / Number(ra)});
-    }
-
     return (
         <div>
                 <h1>Pulmonary Artery Pulsatility Index</h1>
@@ -42,7 +34,6 @@ export default function Papi({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

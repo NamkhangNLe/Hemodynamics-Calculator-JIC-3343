@@ -17,14 +17,6 @@ export default function Svr({selectedPatientID}) {
         setForm({valueType: "Systemic Vascular Resistance", calculatedValue: (map !== "" && cvp !== "" && co !== "") ? ((+map - +cvp) / +co).toFixed(3) : ""});
     }, [map, cvp, co]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Systemic Vascular Resistance", calculatedValue: (Number(map) - Number(cvp)) / Number(co)});
-    }
-
     return (
         <div>
                 <h1>Systemic Vasuclar Resistance</h1>
@@ -42,7 +34,6 @@ export default function Svr({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

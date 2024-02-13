@@ -15,14 +15,6 @@ export default function Weight({selectedPatientID}) {
         setForm({valueType: "Weight", calculatedValue: (weight !== "") ? (+weight * 3).toFixed(3) : ""});
     }, [weight]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Fick Cardiac Output", calculatedValue: Number(weight) * 3 });
-    }
-
     return (
         <div>
                 <h1>VO2 by Weight</h1>
@@ -34,7 +26,6 @@ export default function Weight({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

@@ -16,14 +16,6 @@ export default function LaFarge({selectedPatientID}) {
         setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (11.49 * +logeage) + (0.378 * +hr)).toFixed(3) : ""});
     }, [logeage, hr]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // LaFarge for Male
-        setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: 138.1 - (11.49 * Number(logeage)) + (0.378 * Number(hr))});
-    }
-
     return (
         <div>
                 <h1>VO2 by LaFarge Equation</h1>
@@ -38,7 +30,6 @@ export default function LaFarge({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

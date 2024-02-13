@@ -15,14 +15,6 @@ export default function Bsa({selectedPatientID}) {
         setForm({valueType: "VO2 by BSA", calculatedValue: (bsa !== "") ? (+bsa * 125).toFixed(3) : ""});
     }, [bsa]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "VO2 by BSA", calculatedValue: Number(bsa) * 125 });
-    }
-
     return (
         <div>
                 <h1>VO2 by BSA</h1>
@@ -34,7 +26,6 @@ export default function Bsa({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

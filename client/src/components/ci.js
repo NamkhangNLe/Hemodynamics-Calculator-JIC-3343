@@ -16,14 +16,6 @@ export default function CardiacIndex({selectedPatientID}) {
         setForm({valueType: "Cardiac Index", calculatedValue: (co !== "" && bsa !== "") ? (+co / +bsa).toFixed(3) : ""});
     }, [co, bsa]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Cardiac Index", calculatedValue: Number(co) / Number(bsa)});
-    }
-
     return (
         <div>
                 <h1>Cardiac Index</h1>
@@ -38,7 +30,6 @@ export default function CardiacIndex({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

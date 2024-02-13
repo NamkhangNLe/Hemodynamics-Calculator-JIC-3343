@@ -16,14 +16,6 @@ export default function TranspulGradient({selectedPatientID}) {
         setForm({valueType: "Transpulmonary Gradient", calculatedValue: (map !== "" && pcwp !== "") ? (+map - +pcwp).toFixed(3) : ""});
     }, [map, pcwp]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Transpulmonary Gradient", calculatedValue: Number(map) - Number(pcwp)});
-    }
-
     return (
         <div>
                 <h1>Transpulmonary Gradient</h1>
@@ -38,7 +30,6 @@ export default function TranspulGradient({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>

@@ -18,14 +18,6 @@ export default function Fick({selectedPatientID}) {
         setForm({valueType: "Fick Cardiac Output", calculatedValue: (vo2 !== "" && hb !== "" && satA !== "" && satMV !== "") ? (+vo2 / (+hb * 13.6 * (+satA - +satMV))).toFixed(3) : ""});
     }, [vo2, hb, satA, satMV]);
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Fick Cardiac Output", calculatedValue: Number(vo2) / (Number(hb) * 13.6 * (Number(satA) - Number(satMV)))});
-    }
-
     return (
         <div>
                 <h1>Fick Cardiac Output</h1>
@@ -46,7 +38,6 @@ export default function Fick({selectedPatientID}) {
                         Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
-                        <button onClick={handleClick}>Calculate</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>
