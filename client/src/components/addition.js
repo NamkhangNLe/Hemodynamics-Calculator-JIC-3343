@@ -5,18 +5,15 @@ import "../styles/styles.css"
 export default function Addition({selectedPatientID}) {
     const [val1, setVal1] = useState("");
     const [val2, setVal2] = useState("");
-    // const [calculatedValue, setCalculatedValue] = useState("");
-    const [placeholderText, setPlaceholderText] = useState("Enter calculation inputs");
     const [form, setForm] = useState({
         valueType: "Addition",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
         setPlaceholderText((val1 === "" && val2 === "") ? "Enter calculation inputs" : "Missing inputs");
-        let output = (val1 !== "" && val2 !== "") ? +val1 + +val2 : "";
-        // setCalculatedValue(output);
-        setForm({valueType: "Addition", calculatedValue: output});
+        setForm({valueType: "Addition", calculatedValue: (val1 !== "" && val2 !== "") ? (+val1 + +val2).toFixed(3) : ""});
     }, [val1, val2]);
 
     return (

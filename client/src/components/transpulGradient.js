@@ -3,12 +3,18 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css"
 
 export default function TranspulGradient({selectedPatientID}) {
-    const [map, setMap] = useState();
-    const [pcwp, setPcwp] = useState();
+    const [map, setMap] = useState("");
+    const [pcwp, setPcwp] = useState("");
     const [form, setForm] = useState({
         valueType: "Transpulmonary Gradient",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
+
+    useEffect(() => {
+        setPlaceholderText((map === "" && pcwp === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({valueType: "Transpulmonary Gradient", calculatedValue: (map !== "" && pcwp !== "") ? (+map - +pcwp).toFixed(3) : ""});
+    }, [map, pcwp]);
 
     function handleClick(e) {
         // This prevents the form from being submitted when the calculate button is pressed.
@@ -29,7 +35,7 @@ export default function TranspulGradient({selectedPatientID}) {
                         PCWP: <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)}/>
                     </div>
                     <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
+                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
                         <button onClick={handleClick}>Calculate</button>

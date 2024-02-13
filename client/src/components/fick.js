@@ -3,14 +3,20 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css"
 
 export default function Fick({selectedPatientID}) {
-    const [vo2, setVo2] = useState();
-    const [hb, setHb] = useState();
-    const [satA, setSatA] = useState();
-    const [satMV, setSatMV] = useState();
+    const [vo2, setVo2] = useState("");
+    const [hb, setHb] = useState("");
+    const [satA, setSatA] = useState("");
+    const [satMV, setSatMV] = useState("");
     const [form, setForm] = useState({
         valueType: "Fick Cardiac Output",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
+
+    useEffect(() => {
+        setPlaceholderText((vo2 === "" && hb === "" && satA === "" && satMV === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({valueType: "Fick Cardiac Output", calculatedValue: (vo2 !== "" && hb !== "" && satA !== "" && satMV !== "") ? (+vo2 / (+hb * 13.6 * (+satA - +satMV))).toFixed(3) : ""});
+    }, [vo2, hb, satA, satMV]);
 
     function handleClick(e) {
         // This prevents the form from being submitted when the calculate button is pressed.
@@ -37,7 +43,7 @@ export default function Fick({selectedPatientID}) {
                         Sat MV: <input name="Sat MV" type="number" value={satMV} onChange={e => setSatMV(e.target.value)}/>
                     </div>
                     <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
+                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
                         <button onClick={handleClick}>Calculate</button>

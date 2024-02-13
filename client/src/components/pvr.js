@@ -3,13 +3,19 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css"
 
 export default function Pvr({selectedPatientID}) {
-    const [pap, setPap] = useState();
-    const [wedge, setWedge] = useState();
-    const [co, setCo] = useState();
+    const [pap, setPap] = useState("");
+    const [wedge, setWedge] = useState("");
+    const [co, setCo] = useState("");
     const [form, setForm] = useState({
         valueType: "Pulmonary Vascular Resistance",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
+
+    useEffect(() => {
+        setPlaceholderText((pap === "" && wedge === "" && co === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({valueType: "Pulmonary Vascular Resistance", calculatedValue: (pap !== "" && wedge !== "" && co !== "") ? ((+pap - +wedge) / +co).toFixed(3) : ""});
+    }, [pap, wedge, co]);
 
     function handleClick(e) {
         // This prevents the form from being submitted when the calculate button is pressed.
@@ -33,7 +39,7 @@ export default function Pvr({selectedPatientID}) {
                         CO: <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)}/>
                     </div>
                     <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
+                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
                         <button onClick={handleClick}>Calculate</button>

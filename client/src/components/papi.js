@@ -3,13 +3,19 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css"
 
 export default function Papi({selectedPatientID}) {
-    const [pasp, setPasp] = useState();
-    const [padp, setPadp] = useState();
-    const [ra, setRa] = useState();
+    const [pasp, setPasp] = useState("");
+    const [padp, setPadp] = useState("");
+    const [ra, setRa] = useState("");
     const [form, setForm] = useState({
         valueType: "Pulmonary Artery Pulsatility Index",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
+
+    useEffect(() => {
+        setPlaceholderText((pasp === "" && padp === "" && ra === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : ""});
+    }, [pasp, padp, ra]);
 
     function handleClick(e) {
         // This prevents the form from being submitted when the calculate button is pressed.
@@ -33,7 +39,7 @@ export default function Papi({selectedPatientID}) {
                         RA: <input name="RA" type="number" value={ra} onChange={e => setRa(e.target.value)}/>
                     </div>
                     <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
+                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
                         <button onClick={handleClick}>Calculate</button>

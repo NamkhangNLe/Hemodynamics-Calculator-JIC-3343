@@ -3,12 +3,18 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css"
 
 export default function LaFarge({selectedPatientID}) {
-    const [logeage, setLogeage] = useState();
-    const [hr, setHr] = useState();
+    const [logeage, setLogeage] = useState("");
+    const [hr, setHr] = useState("");
     const [form, setForm] = useState({
         valueType: "VO2 by LaFarge Equation",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
+
+    useEffect(() => {
+        setPlaceholderText((logeage === "" && hr === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (11.49 * +logeage) + (0.378 * +hr)).toFixed(3) : ""});
+    }, [logeage, hr]);
 
     function handleClick(e) {
         // This prevents the form from being submitted when the calculate button is pressed.
@@ -29,7 +35,7 @@ export default function LaFarge({selectedPatientID}) {
                         Heart Rate: <input name="hr" type="number" value={hr} onChange={e => setHr(e.target.value)}/>
                     </div>
                     <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
+                        Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly/>
                     </div>
                     <div>
                         <button onClick={handleClick}>Calculate</button>
