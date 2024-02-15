@@ -12,7 +12,9 @@ export default function View() {
     const [editingID, setEditingID] = useState(null);
 
     /** The following hooks track the updates to each field (Date, ValueType/Formula, and Calculated Value) */
+    // const [editedDateTime, setEditedDateTime] = useState("");
     const [editedDate, setEditedDate] = useState("");
+    const [editedTime, setEditedTime] = useState("");
     const [editedValueType, setEditedValueType] = useState("");
     const [editedCalculatedValue, setEditedCalculatedValue] = useState("");
 
@@ -40,7 +42,7 @@ export default function View() {
         }
 
         fetchPatientCalculations();
-    }, [params.id, navigate]);
+    }, [params.id, navigate, editingID]);
 
     /**
      * Handles the edit button being pushed by setting the hooks to whatever is entered. Default is whatever is currently in there
@@ -52,7 +54,9 @@ export default function View() {
         // Default the EditingID to whatever the current value of the calculation is.
         if (calculationToEdit) {
             setEditingID(calculationId);
-            setEditedDate(calculationToEdit.date);
+            // setEditedDateTime(calculationToEdit.date);
+            setEditedDate(parseDate(new Date(calculationToEdit.date)));
+            setEditedTime(parseTime(new Date(calculationToEdit.date)));
             setEditedValueType(calculationToEdit.valueType);
             setEditedCalculatedValue(calculationToEdit.calculatedValue);
         }
@@ -97,9 +101,42 @@ export default function View() {
                 <tr>
                     {editingID === calculation._id ? (
                         <>
-                            <td>Date & Time: <input type="text" value={editedDate} onChange={(e) => setEditedDate(e.target.value)} /></td>
-                            <td>Formula: <input type="text" value={editedValueType} onChange={(e) => setEditedValueType(e.target.value)} /></td>
-                            <td>Calculated Value: <input type="text" value={editedCalculatedValue} onChange={(e) => setEditedCalculatedValue(e.target.value)} /></td>
+                            <td>
+                                Date:
+                                <input
+                                    type="text"
+                                    value={editedDate}
+                                    onChange={(e) => {
+                                        setEditedDate(e.target.value);
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                Time:
+                                <input
+                                    type="text"
+                                    value={editedTime}
+                                    onChange={(e) => {
+                                        setEditedTime(e.target.value);
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                Formula:
+                                <input
+                                    type="text"
+                                    value={editedValueType}
+                                    onChange={(e) => setEditedValueType(e.target.value)}
+                                />
+                            </td>
+                            <td>
+                                Calculated Value:
+                                <input
+                                    type="text"
+                                    value={editedCalculatedValue}
+                                    onChange={(e) => setEditedCalculatedValue(e.target.value)}
+                                    />
+                            </td>
                             <td><button onClick={handleSave}>Save</button></td>
                         </>
                     ) : (
@@ -142,12 +179,12 @@ export default function View() {
         e.preventDefault();
 
         const editedCalculation = {
-            date: editedDate,
+            date: new Date(`${editedDate}T${editedTime}:00.000`),
             valueType: editedValueType,
             calculatedValue: editedCalculatedValue
         };
 
-        await fetch(`http://localhost:5000/updatecalc/${editingID}`, {
+        fetch(`http://localhost:5000/updatecalc/${editingID}`, {
             method: "POST",
             body: JSON.stringify(editedCalculation),
             headers: {
@@ -155,9 +192,11 @@ export default function View() {
             },
         });
 
-        // Clear the editingID, editedDate, editedValueType, and editedCalculatedValue once saved.
+        // Clear the editingID, editedDateTime, editedValueType, and editedCalculatedValue once saved.
         setEditingID(null);
+        // setEditedDateTime("");
         setEditedDate("");
+        setEditedTime("");
         setEditedValueType("");
         setEditedCalculatedValue("");
     };
