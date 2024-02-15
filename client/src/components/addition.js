@@ -13,12 +13,16 @@ export default function Addition({selectedPatientID}) {
     //const [calculatedValue, setCalculatedValue] = useState();
 
     function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
         e.preventDefault();
-
+    
+        // Check if the input values are numbers
+        if (isNaN(val1) || isNaN(val2)) {
+            console.error('Error: Input values must be numbers');
+            return;
+        }
+    
         // Define formula logic
         setForm({valueType: "Addition", calculatedValue: Number(val1) + Number(val2)});
-        console.log("HERE");
     }
 
     /**
@@ -28,6 +32,11 @@ export default function Addition({selectedPatientID}) {
      */
     async function onSubmit(e) {
         e.preventDefault();
+
+        if (isNaN(form.calculatedValue)) {
+            console.error('Error: Calculated value must be a number');
+            return;
+        }
 
         // Create a new object with the values from the form state.
         const newCalculation = {selectedPatientID: selectedPatientID, ...form};
@@ -43,7 +52,7 @@ export default function Addition({selectedPatientID}) {
         });
 
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         // If the fetch request is successful, log the response (optional).

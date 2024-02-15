@@ -37,16 +37,17 @@ const CalculatorFramework = () => {
     // This method fetches the records from the database.
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5000/record/`);
-            if (!response.ok) {
-                const message = `An error occurred: ${response.statusText}`;
-                window.alert(message);
-                return;
+            try {
+                const response = await fetch("http://localhost:5000/record/");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setRecords(data);
+            } catch (error) {
+                console.error(`Failed to fetch records: ${error}`);
             }
-            const records = await response.json();
-            setRecords(records);
         }
-
         getRecords();
     }, [records.length]);
 
