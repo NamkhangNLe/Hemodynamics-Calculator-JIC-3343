@@ -10,11 +10,28 @@ export default function Addition({ selectedPatientID }) {
         calculatedValue: ""
     });
     const [placeholderText, setPlaceholderText] = useState("");
+    const [error, setError] = useState(null); // Add an error state
 
     useEffect(() => {
-        setPlaceholderText((val1 === "" && val2 === "") ? "Enter calculation inputs" : "Missing inputs");
-        setForm({ valueType: "Addition", calculatedValue: (val1 !== "" && val2 !== "") ? (+val1 + +val2).toFixed(3) : "" });
+        try {
+            setPlaceholderText((val1 === "" && val2 === "") ? "Enter calculation inputs" : "Missing inputs");
+            if (val1 !== "" && val2 !== "") {
+                const result = (+val1 + +val2).toFixed(3);
+                if (isNaN(result)) {
+                    throw new Error("Invalid inputs for addition");
+                }
+                setForm({ valueType: "Addition", calculatedValue: result });
+            } else {
+                setForm({ valueType: "Addition", calculatedValue: "" });
+            }
+        } catch (err) {
+            setError(err.message);
+        }
     }, [val1, val2]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
