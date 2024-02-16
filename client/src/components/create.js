@@ -74,9 +74,8 @@ export default function Create() {
    */
   async function onSubmit(e) {
     e.preventDefault();
-
     // Create a new object with the values from the form state.
-    const newPerson = { ...form };
+    const newPerson = { ...form};
 
     try {
       // Send a POST request to the server to create a new record.

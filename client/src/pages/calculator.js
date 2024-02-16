@@ -11,6 +11,7 @@ import "../styles/styles.css"
 import Weight from "../components/weight";
 import Bsa from "../components/bsa";
 import LaFarge from "../components/lafarge";
+import Dpg from "../components/dpg";
 
 
 
@@ -21,6 +22,7 @@ const CalculatorFramework = () => {
         {name: "Systemic Vasuclar Resistance", component: Svr},
         {name: "Pulmonary Vascular Resistance", component: Pvr},
         {name: "Transpulmonary Gradient", component: TranspulGradient},
+        {name: "Diastolic Pulmonary Gradient", component: Dpg},
         {name: "Pulmonary Artery Pulsatility Index", component: Papi},
         {name: "Cardiac Index", component: CardiacIndex},
         {name: "Fick Cardiac Output", component: Fick},
@@ -32,6 +34,8 @@ const CalculatorFramework = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [selectedCalculation, setSelectedCalculation] = useState(availableCalculations[0]);
+
+    const [patientObj, setPatientObj] = useState();
 
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
@@ -49,6 +53,23 @@ const CalculatorFramework = () => {
 
         getRecords();
     }, [records.length]);
+
+    useEffect(() => {
+        async function getPatientObj() {
+            const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const patient = await response.json();
+            setPatientObj(patient);
+        }
+        if (selectedPatientID != undefined) {
+            getPatientObj();
+        }
+        
+    }, [selectedPatientID]);
 
     // DropdownOption object; updates selected patient using initials when clicked
     const PatientDropdownOption = (props) => (
@@ -104,7 +125,7 @@ const CalculatorFramework = () => {
                     </form>
 
                 </div>
-                {<selectedCalculation.component selectedPatientID={selectedPatientID}/>}
+                {<selectedCalculation.component patientObj={patientObj}/>}
             </div>
             </div>
         </div>

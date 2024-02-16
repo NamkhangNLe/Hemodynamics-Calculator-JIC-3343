@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Weight({ selectedPatientID }) {
-    const [weight, setWeight] = useState("");
+export default function Weight({ patientObj }) {
+    const [weight, setWeight] = useState(patientObj.weight);
     const [form, setForm] = useState({
         valueType: "Weight",
         calculatedValue: ""
@@ -18,12 +18,12 @@ export default function Weight({ selectedPatientID }) {
     return (
         <div>
             <h1>VO2 by Weight</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Weight: <input name="weight" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
+                    Weight (kg): <input name="weight" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> ml/min/m<sup>2</sup>
                 </div>
                 <div>
                     <button type="submit">Save</button>

@@ -1,77 +1,39 @@
-import React, { useState } from "react";
-import "../styles/styles.css"
+import React, { useState, useEffect } from "react";
+import { onSubmit } from "../utils/calculationUtils";
+import "../styles/styles.css";
 
-
-export default function TranspulGradient({selectedPatientID}) {
-    console.log("from", selectedPatientID)
-    const [map, setMap] = useState();
-    const [pcwp, setPcwp] = useState();
+export default function Dpg({ patientObj }) {
+    const [padp, setPadp] = useState("");
+    const [pcwp, setPcwp] = useState("");
     const [form, setForm] = useState({
-        valueType: "Transpulmonary Gradient",
+        valueType: "Diastolic Pulmonary Gradient",
         calculatedValue: ""
-      });
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
-        e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Transpulmonary Gradient", calculatedValue: Number(map) - Number(pcwp)});
-    }
-
-    /**
-     * Handles the form submission by sending a POST request to the server to create a new calculation.
-     * @param {Event} e - The form submission event.
-     * @returns {void}
-     */
-    async function onSubmit(e) {
-        e.preventDefault();
-
-        // Create a new object with the values from the form state.
-        const newCalculation = {selectedPatientID: selectedPatientID, ...form};
-        try {
-        // Send a POST request to the server to create a new record.
-        const response = await fetch("http://localhost:5000/calculation/add", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newCalculation),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-
-        // If the fetch request is successful, log the response (optional).
-        console.log('Record added successfully:', await response.json());
-
-        // Reset the form state to empty values.
-        setForm({valueType: "", calculatedValue: ""});
-
-        } catch (error) {
-        console.error('Error submitting form:', error);
-        }
-    }
+    useEffect(() => {
+        setPlaceholderText((padp === "" && pcwp === "") ? "Enter calculation inputs" : "Missing inputs");
+        setForm({ valueType: "Transpulmonary Gradient", calculatedValue: (padp !== "" && pcwp !== "") ? (+padp - +pcwp).toFixed(3) : "" });
+    }, [padp, pcwp]);
 
     return (
         <div>
-                <h1>Transpulmonary Gradient</h1>
-                <form onSubmit={onSubmit}>
-                    <div>
-                        MAP: <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)}/>
-                    </div>
-                    <div>
-                        PCWP: <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)}/>
-                    </div>
-                    <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
-                    </div>
-                    <div>
-                        <button onClick={handleClick}>Calculate</button>
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
+            <h1>Transpulmonary Gradient</h1>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
+                <div>
+                    Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+                    
+                </div>
+                <div>
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="pcwp" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                </div>
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> mmHg
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
         </div>
     );
-   }
+}

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function CardiacIndex({ selectedPatientID }) {
+export default function CardiacIndex({ patientObj }) {
     const [co, setco] = useState("");
-    const [bsa, setbsa] = useState("");
+    const [bsa, setbsa] = useState(patientObj.bsa);
     const [form, setForm] = useState({
         valueType: "Cardiac Index",
         calculatedValue: ""
@@ -19,12 +19,12 @@ export default function CardiacIndex({ selectedPatientID }) {
     return (
         <div>
             <h1>Cardiac Index</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    CO: <input name="CO" type="number" value={co} onChange={e => setco(e.target.value)} />
+                    Cardiac Output (L/min): <input name="CO" type="number" value={co} onChange={e => setco(e.target.value)} />
                 </div>
                 <div>
-                    BSA: <input name="BSA" type="number" value={bsa} onChange={e => setbsa(e.target.value)} />
+                    Body Surface Area (m<sup>2</sup>): <input name="BSA" type="number" value={bsa} onChange={e => setbsa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
