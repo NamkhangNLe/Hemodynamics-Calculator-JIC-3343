@@ -12,13 +12,14 @@ export default function Papi({selectedPatientID}) {
         calculatedValue: ""
       });
 
-    function handleClick(e) {
-        // This prevents the form from being submitted when the calculate button is pressed.
+      function handleClick(e) {
         e.preventDefault();
-
-        // Define formula logic
-        setForm({valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (Number(pasp) - Number(padp)) / Number(ra)});
-    }
+    
+        // Check if the input values are numbers
+        if (isNaN(pasp) || isNaN(padp) || isNaN(ra)) {
+            console.error('Error: Input values must be numbers');
+            return;
+        }
 
     /**
      * Handles the form submission by sending a POST request to the server to create a new calculation.
