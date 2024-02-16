@@ -8,7 +8,7 @@
 export async function onSubmit(event, selectedPatientID, form) {
     event.preventDefault();
 
-    if (form.calculatedValue === "") {
+    if (form.calculatedValue === "" || form.calculatedValue === undefined || form.calculatedValue === null || form.calculatedValue === "NaN" || form.calculatedValue === "Infinity" || form.calculatedValue === "-Infinity") {
         messageAnimation("Input(s) are missing.\nCalculation not saved.", "lightpink");
         return;
     }

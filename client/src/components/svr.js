@@ -11,11 +11,22 @@ export default function Svr({ selectedPatientID }) {
         calculatedValue: ""
     });
     const [placeholderText, setPlaceholderText] = useState("");
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (co === 0) {
+            setError('CO cannot be zero');
+            setForm({ valueType: "Systemic Vascular Resistance", calculatedValue: "" });
+            return;
+        }
+        
         setPlaceholderText((map === "" && cvp === "" && co === "") ? "Enter calculation inputs" : "Missing inputs");
         setForm({ valueType: "Systemic Vascular Resistance", calculatedValue: (map !== "" && cvp !== "" && co !== "") ? ((+map - +cvp) / +co).toFixed(3) : "" });
     }, [map, cvp, co]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
