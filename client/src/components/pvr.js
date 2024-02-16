@@ -11,11 +11,21 @@ export default function Pvr({ selectedPatientID }) {
         calculatedValue: ""
     });
     const [placeholderText, setPlaceholderText] = useState("");
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (co === 0) {
+            setError('CO cannot be zero');
+            setForm({ valueType: "Pulmonary Vascular Resistance", calculatedValue: "" });
+            return;
+        }
         setPlaceholderText((pap === "" && wedge === "" && co === "") ? "Enter calculation inputs" : "Missing inputs");
         setForm({ valueType: "Pulmonary Vascular Resistance", calculatedValue: (pap !== "" && wedge !== "" && co !== "") ? ((+pap - +wedge) / +co).toFixed(3) : "" });
     }, [pap, wedge, co]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
