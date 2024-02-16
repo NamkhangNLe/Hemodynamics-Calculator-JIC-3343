@@ -11,11 +11,22 @@ export default function Papi({ selectedPatientID }) {
         calculatedValue: ""
     });
     const [placeholderText, setPlaceholderText] = useState("");
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (ra === 0) {
+            setError('RA cannot be zero');
+            setForm({ valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: "" });
+            return;
+        }
+        
         setPlaceholderText((pasp === "" && padp === "" && ra === "") ? "Enter calculation inputs" : "Missing inputs");
         setForm({ valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : "" });
     }, [pasp, padp, ra]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
