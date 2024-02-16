@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import "../styles/styles.css"
+import React, { useState, useEffect } from "react";
+import { onSubmit } from "../utils/calculationUtils";
+import "../styles/styles.css";
 
-
-export default function Addition({selectedPatientID}) {
-    console.log("from", selectedPatientID)
-    const [val1, setVal1] = useState();
-    const [val2, setVal2] = useState();
+export default function Addition({ selectedPatientID }) {
+    const [val1, setVal1] = useState("");
+    const [val2, setVal2] = useState("");
     const [form, setForm] = useState({
         valueType: "Addition",
         calculatedValue: ""
-      });
-    //const [calculatedValue, setCalculatedValue] = useState();
+    });
+    const [placeholderText, setPlaceholderText] = useState("");
 
     function handleClick(e) {
         e.preventDefault();
@@ -68,22 +67,21 @@ export default function Addition({selectedPatientID}) {
 
     return (
         <div>
-                <h1>Addition of Values</h1>
-                <form onSubmit={onSubmit}>
-                    <div>
-                        Value 1: <input name="value1" type="number" value={val1} onChange={e => setVal1(e.target.value)}></input>
-                    </div>
-                    <div>
-                        Value 2: <input name="value2" type="number" value={val2} onChange={e => setVal2(e.target.value)}/>
-                    </div>
-                    <div>
-                        Output: <input type="text" value={form.calculatedValue} readOnly/>
-                    </div>
-                    <div>
-                        <button onClick={handleClick}>Calculate</button>
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
+            <h1>Addition of Values</h1>
+            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+                <div>
+                    Value 1: <input name="value1" type="number" step="1.0" value={val1} onChange={e => setVal1(e.target.value)} />
+                </div>
+                <div>
+                    Value 2: <input name="value2" type="number" value={val2} onChange={e => setVal2(e.target.value)} />
+                </div>
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
         </div>
     );
-   }
+}
