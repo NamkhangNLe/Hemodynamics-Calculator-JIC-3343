@@ -93,6 +93,15 @@ export default function RecordList() {
         </thead>
         <tbody>{recordList()}</tbody>
       </table>
+      <div>
+         <ul className="navbar-nav ml-auto">
+           <li className="nav-item">
+             <Link style={{paddingLeft: '20px', position: 'fixed'}} to="/create">
+               Create New Patient
+             </Link>
+           </li>
+         </ul>
+       </div>
     </div>
   );
 }
