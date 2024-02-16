@@ -20,7 +20,7 @@ export default function Weight({ selectedPatientID }) {
             <h1>VO2 by Weight</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    Weight: <input name="weight" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
+                    Weight: <input name="weight" placeholder="Ex: 120 lbs" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

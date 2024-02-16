@@ -21,10 +21,10 @@ export default function CardiacIndex({ selectedPatientID }) {
             <h1>Cardiac Index</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    CO: <input name="CO" type="number" value={co} onChange={e => setco(e.target.value)} />
+                    CO: <input name="CO" placeholder="Ex: 4.3 L/min" type="number" value={co} onChange={e => setco(e.target.value)} />
                 </div>
                 <div>
-                    BSA: <input name="BSA" type="number" value={bsa} onChange={e => setbsa(e.target.value)} />
+                    BSA: <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setbsa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

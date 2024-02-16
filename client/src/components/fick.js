@@ -23,16 +23,16 @@ export default function Fick({ selectedPatientID }) {
             <h1>Fick Cardiac Output</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    VO2: <input name="VO2" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
+                    VO2: <input name="VO2" placeholder="Ex: 40 mL/kg/min" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
                 </div>
                 <div>
-                    Hb: <input name="Hb" type="number" value={hb} onChange={e => setHb(e.target.value)} />
+                    Hb: <input name="Hb" placeholder="Ex: 18 g/dl" type="number" value={hb} onChange={e => setHb(e.target.value)} />
                 </div>
                 <div>
-                    Sat A: <input name="Sat A" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
+                    Sat A: <input name="Sat A" placeholder="Ex: ?" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
                 </div>
                 <div>
-                    Sat MV: <input name="Sat MV" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
+                    Sat MV: <input name="Sat MV" placeholder="Ex: ?" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

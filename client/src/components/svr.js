@@ -22,13 +22,13 @@ export default function Svr({ selectedPatientID }) {
             <h1>Systemic Vasuclar Resistance</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    MAP: <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    MAP: <input name="MPA" placeholder="Ex: 68 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    CVP: <input name="CVP" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
+                    CVP: <input name="CVP" placeholder="Ex: 12 mmHg" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
                 </div>
                 <div>
-                    CO: <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                    CO: <input name="CO" placeholder="Ex: 4.3 L/min" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

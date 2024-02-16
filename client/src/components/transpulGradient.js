@@ -21,10 +21,10 @@ export default function TranspulGradient({ selectedPatientID }) {
             <h1>Transpulmonary Gradient</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    MAP: <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    MAP: <input name="MPA" placeholder="Ex: 72 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    PCWP: <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                    PCWP: <input name="CVP" placeholder="Ex: 8 mmHg"type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

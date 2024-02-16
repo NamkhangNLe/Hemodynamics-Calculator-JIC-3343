@@ -20,7 +20,7 @@ export default function Bsa({ selectedPatientID }) {
             <h1>VO2 by BSA</h1>
             <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
                 <div>
-                    BSA: <input name="BSA" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
+                    BSA: <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
