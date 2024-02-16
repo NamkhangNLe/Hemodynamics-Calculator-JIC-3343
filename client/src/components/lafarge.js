@@ -3,7 +3,7 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
 export default function LaFarge({ patientObj }) {
-    const [logeage, setLogeage] = useState("");
+    const [age, setAge] = useState("");
     const [hr, setHr] = useState("");
     const [form, setForm] = useState({
         valueType: "VO2 by LaFarge Equation",
@@ -12,11 +12,11 @@ export default function LaFarge({ patientObj }) {
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
-        setPlaceholderText((logeage === "" && hr === "") ? "Enter calculation inputs" : "Missing inputs");
+        setPlaceholderText((age === "" && hr === "") ? "Enter calculation inputs" : "Missing inputs");
         if (patientObj.sex == "Male") {
-            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (11.49 * +logeage) + (0.378 * +hr)).toFixed(3) : "" });
+            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (11.49 * Math.log(+patientObj.age)) + (0.378 * +hr)).toFixed(3) : "" });
         } else {
-            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (17.04 * +logeage) + (0.378 * +hr)).toFixed(3) : "" })
+            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (17.04 * Math.log(+patientObj.age)) + (0.378 * +hr)).toFixed(3) : "" })
         }
         
     }, [logeage, hr]);
@@ -26,7 +26,7 @@ export default function LaFarge({ patientObj }) {
             <h1>VO2 by LaFarge Equation</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Logeage: <input name="logeage" type="number" value={logeage} onChange={e => setLogeage(e.target.value)} />
+                    Age: <input name="age" type="number" value={age} onChange={e => setAge(e.target.value)} />
                 </div>
                 <div>
                     Heart Rate (bpm): <input name="hr" type="number" value={hr} onChange={e => setHr(e.target.value)} />
