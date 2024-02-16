@@ -65,7 +65,7 @@ const CalculatorFramework = () => {
             const patient = await response.json();
             setPatientObj(patient);
         }
-        if (selectedPatientID != undefined) {
+        if (selectedPatientID !== undefined) {
             getPatientObj();
         }
         

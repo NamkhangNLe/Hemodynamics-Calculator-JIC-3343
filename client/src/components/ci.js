@@ -4,7 +4,7 @@ import "../styles/styles.css";
 
 export default function CardiacIndex({ patientObj }) {
     const [co, setco] = useState("");
-    const [bsa, setbsa] = useState(patientObj.bsa);
+    const [bsa, setbsa] = useState("");
     const [form, setForm] = useState({
         valueType: "Cardiac Index",
         calculatedValue: ""
@@ -13,6 +13,7 @@ export default function CardiacIndex({ patientObj }) {
 
     useEffect(() => {
         setPlaceholderText((co === "" && bsa === "") ? "Enter calculation inputs" : "Missing inputs");
+        setbsa((patientObj !== undefined) ? patientObj.bsa : bsa)
         setForm({ valueType: "Cardiac Index", calculatedValue: (co !== "" && bsa !== "") ? (+co / +bsa).toFixed(3) : "" });
     }, [co, bsa]);
 

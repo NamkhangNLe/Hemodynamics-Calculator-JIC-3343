@@ -113,7 +113,7 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     checked={form.medications === "Milrinone"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="medicationA" className="form-check-label">
+                  <label htmlFor="milrinone" className="form-check-label">
                     Milrinone
                   </label>
                 </div>
@@ -122,12 +122,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Dobutamine"
+                    id="dobutamine"
                     value="Dobutamine"
                     checked={form.medications === "Dobutamine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Dobutamine" className="form-check-label">
+                  <label htmlFor="dobutamine" className="form-check-label">
                     Dobutamine
                   </label>
                 </div>
@@ -136,12 +136,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Lasix"
+                    id="lasix"
                     value="Lasix"
                     checked={form.medications === "Lasix"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Lasix" className="form-check-label">
+                  <label htmlFor="lasix" className="form-check-label">
                     Lasix
                   </label>
                 </div>
@@ -150,12 +150,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Bumex"
+                    id="bumex"
                     value="Bumex"
                     checked={form.medications === "Bumex"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Bumex" className="form-check-label">
+                  <label htmlFor="bumex" className="form-check-label">
                     Bumex
                   </label>
                 </div>
@@ -164,12 +164,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Diuril"
+                    id="diuril"
                     value="Diuril"
                     checked={form.medications === "Diuril"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Diuril" className="form-check-label">
+                  <label htmlFor="diuril" className="form-check-label">
                     Diuril
                   </label>
                 </div>
@@ -178,12 +178,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Hydralazine"
+                    id="hydralazine"
                     value="Hydralazine"
                     checked={form.medications === "Hydralazine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Hydralazine" className="form-check-label">
+                  <label htmlFor="hydralazine" className="form-check-label">
                     Hydralazine
                   </label>
                 </div>
@@ -192,12 +192,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Epinephrine"
+                    id="epinephrine"
                     value="Epinephrine"
                     checked={form.medications === "Epinephrine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Epinephrine" className="form-check-label">
+                  <label htmlFor="epinephrine" className="form-check-label">
                     Epinephrine
                   </label>
                 </div>
@@ -206,12 +206,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Norepinephrine"
+                    id="norepinephrine"
                     value="Norepinephrine"
                     checked={form.medications === "Norepinephrine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Norepinephrine" className="form-check-label">
+                  <label htmlFor="norepinephrine" className="form-check-label">
                     Norepinephrine
                   </label>
                 </div>
@@ -220,12 +220,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Dopamine"
+                    id="dopamine"
                     value="Dopamine"
                     checked={form.medications === "Dopamine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Dopamine" className="form-check-label">
+                  <label htmlFor="dopamine" className="form-check-label">
                     Dopamine
                   </label>
                 </div>
@@ -234,12 +234,12 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="Vasopressin"
+                    id="vasopressin"
                     value="Vasopressin"
                     checked={form.medications === "Vasopressin"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="Vasopressin" className="form-check-label">
+                  <label htmlFor="vasopressin" className="form-check-label">
                     Vasopressin
                   </label>
                 </div>

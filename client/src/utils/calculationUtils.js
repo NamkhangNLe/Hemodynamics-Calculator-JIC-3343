@@ -1,7 +1,7 @@
 /**
  * Handles the form submission by sending a POST request to the server to create a new calculation.
  * @param {Event} event The form submission event.
- * @param {String} selectedPatientID The patient_id that the calculation should be saved to.
+ * @param {String} patientObj The patient object containing the patient_id that the calculation should be saved to.
  * @param {Object} form The form data, which contains the valueType and calculatedValue.
  * @returns {void}
  */
@@ -13,7 +13,7 @@ export async function onSubmit(event, patientObj, form) {
         return;
     }
 
-    if (patientObj._id === undefined) {
+    if (patientObj === undefined) {
         messageAnimation("Patient was not selected.\nCalculation not saved.", "lightpink");
         return;
     }

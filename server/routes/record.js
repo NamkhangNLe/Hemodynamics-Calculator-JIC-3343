@@ -45,34 +45,45 @@ recordRoutes.route("/record/:id").get(function (req, response) {
 
 // This section will help you create a new record.
 recordRoutes.route("/record/add").post(function (req, response) {
- let db_connect = dbo.getDb();
- let myobj = {
-   initials: req.body.initials,
-   dob: req.body.dob,
-   sex: req.body.sex,
-   height: req.body.height,
-   weight: req.body.weight,
-   bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
-   medications: req.body.medications,
-   notes: req.body.notes
- };
- db_connect.collection("records").insertOne(myobj, function (err, res) {
-   if (err) throw err;
-   response.json(res);
+  let db_connect = dbo.getDb();
+  let dob = new Date(req.body.dob); // Convert string to Date object
+  let ageDiffMs = Date.now() - dob.getTime(); // Get the difference in milliseconds
+  let ageDate = new Date(ageDiffMs); // Convert the age difference to a Date object
+  let age = Math.abs(ageDate.getUTCFullYear() - 1970); // Calculate the age
+  let myobj = {
+    initials: req.body.initials,
+    dob: req.body.dob,
+    age: age,
+    sex: req.body.sex,
+    height: req.body.height,
+    weight: req.body.weight,
+    bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
+    medications: req.body.medications,
+    notes: req.body.notes
+  };
+  db_connect.collection("records").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
  });
-});
 
 // This section will help you update a record by id.
 recordRoutes.route("/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
+ let dob = new Date(req.body.dob); // Convert string to Date object
+  let ageDiffMs = Date.now() - dob.getTime(); // Get the difference in milliseconds
+  let ageDate = new Date(ageDiffMs); // Convert the age difference to a Date object
+  let age = Math.abs(ageDate.getUTCFullYear() - 1970); // Calculate the age
  let newvalues = {
    $set: {
     initials: req.body.initials,
     dob: req.body.dob,
+    age: age,
     sex: req.body.sex,
     height: req.body.height,
     weight: req.body.weight,
+    bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
     medications: req.body.medications,
     notes: req.body.notes
    },

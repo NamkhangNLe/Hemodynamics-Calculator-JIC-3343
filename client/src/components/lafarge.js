@@ -13,13 +13,18 @@ export default function LaFarge({ patientObj }) {
 
     useEffect(() => {
         setPlaceholderText((age === "" && hr === "") ? "Enter calculation inputs" : "Missing inputs");
-        if (patientObj.sex == "Male") {
-            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (11.49 * Math.log(+patientObj.age)) + (0.378 * +hr)).toFixed(3) : "" });
-        } else {
-            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (logeage !== "" && hr !== "") ? (138.1 - (17.04 * Math.log(+patientObj.age)) + (0.378 * +hr)).toFixed(3) : "" })
+        setAge((patientObj !== undefined) ? patientObj.age : age);
+    
+        function calculateLafarge() {
+            let factor = patientObj.sex === "M" ? 11.49 : 17.04;
+            setForm({valueType: "VO2 by LaFarge Equation", calculatedValue: (age !== "" && hr !== "") ? (138.1 - (factor * +age) + (0.378 * +hr)).toFixed(3) : "" });
         }
-        
-    }, [logeage, hr]);
+    
+        if (patientObj !== undefined) {
+            calculateLafarge();
+        }
+    
+    }, [age, hr, patientObj]);
 
     return (
         <div>

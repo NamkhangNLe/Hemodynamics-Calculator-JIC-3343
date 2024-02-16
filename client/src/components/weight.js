@@ -3,7 +3,7 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
 export default function Weight({ patientObj }) {
-    const [weight, setWeight] = useState(patientObj.weight);
+    const [weight, setWeight] = useState("");
     const [form, setForm] = useState({
         valueType: "Weight",
         calculatedValue: ""
@@ -12,8 +12,9 @@ export default function Weight({ patientObj }) {
 
     useEffect(() => {
         setPlaceholderText((weight === "") ? "Enter calculation inputs" : "Missing inputs");
+        setWeight((patientObj !== undefined) ? patientObj.weight : weight);
         setForm({ valueType: "Weight", calculatedValue: (weight !== "") ? (+weight * 3).toFixed(3) : "" });
-    }, [weight]);
+    }, [weight, patientObj]);
 
     return (
         <div>

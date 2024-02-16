@@ -3,7 +3,7 @@ import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
 export default function Bsa({ patientObj }) {
-    const [bsa, setBsa] = useState(patientObj.bsa);
+    const [bsa, setBsa] = useState("");
     const [form, setForm] = useState({
         valueType: "VO2 by BSA",
         calculatedValue: ""
@@ -12,8 +12,9 @@ export default function Bsa({ patientObj }) {
 
     useEffect(() => {
         setPlaceholderText((bsa === "") ? "Enter calculation inputs" : "Missing inputs");
+        setBsa((patientObj !== undefined) ? patientObj.bsa : bsa)
         setForm({ valueType: "VO2 by BSA", calculatedValue: (bsa !== "") ? (+bsa * 125).toFixed(3) : "" });
-    }, [bsa]);
+    }, [bsa, patientObj]);
 
     return (
         <div>
