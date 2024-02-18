@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Fick({ selectedPatientID }) {
+export default function Fick({ patientObj }) {
     const [vo2, setVo2] = useState("");
     const [hb, setHb] = useState("");
     const [satA, setSatA] = useState("");
@@ -21,21 +21,21 @@ export default function Fick({ selectedPatientID }) {
     return (
         <div>
             <h1>Fick Cardiac Output</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    VO2: <input name="VO2" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
+                    VO<sub>2</sub> (ml/min/m<sup>2</sup>): <input name="VO2" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
                 </div>
                 <div>
-                    Hb: <input name="Hb" type="number" value={hb} onChange={e => setHb(e.target.value)} />
+                    Hemoglobin (g/dl): <input name="Hb" type="number" value={hb} onChange={e => setHb(e.target.value)} />
                 </div>
                 <div>
-                    Sat A: <input name="Sat A" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
+                    Arterial O<sub>2</sub> Saturation: <input name="Sat A" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
                 </div>
                 <div>
-                    Sat MV: <input name="Sat MV" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
+                    Mixed Venous Saturation: <input name="Sat MV" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> L/min
                 </div>
                 <div>
                     <button type="submit">Save</button>

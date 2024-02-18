@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Pvr({ selectedPatientID }) {
+export default function Pvr({ patientObj }) {
     const [pap, setPap] = useState("");
     const [wedge, setWedge] = useState("");
     const [co, setCo] = useState("");
@@ -20,18 +20,18 @@ export default function Pvr({ selectedPatientID }) {
     return (
         <div>
             <h1>Pulmonary Vasuclar Resistance</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    PAP: <input name="PAP" type="number" value={pap} onChange={e => setPap(e.target.value)} />
+                    Pulmonary Arterial Pressure (mmHg): <input name="PAP" type="number" value={pap} onChange={e => setPap(e.target.value)} />
                 </div>
                 <div>
                     Wedge: <input name="wedge" type="number" value={wedge} onChange={e => setWedge(e.target.value)} />
                 </div>
                 <div>
-                    CO: <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                    Cardiac Output (L/min): <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
                 </div>
                 <div>
                     <button type="submit">Save</button>

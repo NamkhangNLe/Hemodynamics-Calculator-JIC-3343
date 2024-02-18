@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function TranspulGradient({ selectedPatientID }) {
+export default function TranspulGradient({ patientObj }) {
     const [map, setMap] = useState("");
     const [pcwp, setPcwp] = useState("");
     const [form, setForm] = useState({
@@ -19,15 +19,15 @@ export default function TranspulGradient({ selectedPatientID }) {
     return (
         <div>
             <h1>Transpulmonary Gradient</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    MAP: <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    Mean Arterial Pressure (mmHg): <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    PCWP: <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> mmHg
                 </div>
                 <div>
                     <button type="submit">Save</button>

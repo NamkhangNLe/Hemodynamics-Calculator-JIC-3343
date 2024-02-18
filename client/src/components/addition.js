@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Addition({ selectedPatientID }) {
+export default function Addition({ patientObj }) {
     const [val1, setVal1] = useState("");
     const [val2, setVal2] = useState("");
     const [form, setForm] = useState({
@@ -36,7 +36,7 @@ export default function Addition({ selectedPatientID }) {
     return (
         <div>
             <h1>Addition of Values</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
                     Value 1: <input name="value1" type="number" step="1.0" value={val1} onChange={e => setVal1(e.target.value)} />
                 </div>

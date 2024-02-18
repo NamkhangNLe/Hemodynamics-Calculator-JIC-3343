@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Svr({ selectedPatientID }) {
+export default function Svr({ patientObj }) {
     const [map, setMap] = useState("");
     const [cvp, setCvp] = useState("");
     const [co, setCo] = useState("");
@@ -20,18 +20,18 @@ export default function Svr({ selectedPatientID }) {
     return (
         <div>
             <h1>Systemic Vasuclar Resistance</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    MAP: <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    Mean Arterial Pressure (mmHg): <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    CVP: <input name="CVP" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
+                    Central Venous Pressure (mmHg): <input name="CVP" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
                 </div>
                 <div>
-                    CO: <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                    Cardiac Output (L/min): <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
                 </div>
                 <div>
                     <button type="submit">Save</button>

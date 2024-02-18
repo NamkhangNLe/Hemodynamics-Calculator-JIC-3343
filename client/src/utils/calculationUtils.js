@@ -1,11 +1,11 @@
 /**
  * Handles the form submission by sending a POST request to the server to create a new calculation.
  * @param {Event} event The form submission event.
- * @param {String} selectedPatientID The patient_id that the calculation should be saved to.
+ * @param {String} patientObj The patient object containing the patient_id that the calculation should be saved to.
  * @param {Object} form The form data, which contains the valueType and calculatedValue.
  * @returns {void}
  */
-export async function onSubmit(event, selectedPatientID, form) {
+export async function onSubmit(event, patientObj, form) {
     event.preventDefault();
 
     if (form.calculatedValue === "") {
@@ -13,13 +13,13 @@ export async function onSubmit(event, selectedPatientID, form) {
         return;
     }
 
-    if (selectedPatientID === undefined) {
+    if (patientObj === undefined) {
         messageAnimation("Patient was not selected.\nCalculation not saved.", "lightpink");
         return;
     }
 
     // Create a new object with patient_id and the values from the form state using the spread operator.
-    const newCalculation = { selectedPatientID: selectedPatientID, ...form };
+    const newCalculation = { selectedPatientID: patientObj._id.toString(), ...form };
 
     // Send a POST request to the server to create a new calculation record.
     fetch("http://localhost:5000/calculation/add", {
