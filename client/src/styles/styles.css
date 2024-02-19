@@ -8,14 +8,38 @@
   min-height: 85vh; /* vh stands for viewport height */
 }
 
-.sidebar {
+.menu {
+  width: 250px;
+  min-height: 100%;
+  background-color: #012169;
+  color: #ffffff;
+}
+
+.submenu {
   width: 250px;
   min-height: 100%;
   background-color: #012169;
   color: #ffffff;
   &:hover {
     background-color: #012169;
-    color: #000000;
+    color: #29a6cf;
+  }
+}
+
+.submenu-item {
+  color: #ffffff;
+  background-color: #012169;
+  &:hover {
+    background-color: #012169;
+    color: #012169;
+  }
+}
+
+.menu-item {
+  background-color: #012169;
+  &:hover {
+    background-color: #012169;
+    color: #012169;
   }
 }
 

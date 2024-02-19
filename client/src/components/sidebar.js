@@ -13,15 +13,15 @@ import '../styles/styles.css';
 export default function SidebarComp() {
     return (
         <Sidebar className="sidebar">
-            <Menu className="sidebar">
-            <SubMenu label="Patients">
-                <MenuItem className="sidebar" component={<Link className="sidebar" to="/" />}> Create and View Patients </MenuItem>
-                <MenuItem className="sidebar"> Medication Info </MenuItem>
+            <Menu className="menu">
+            <SubMenu className="submenu" label="Patients">
+                <MenuItem className="submenu-item" component={<Link to="/" />}> Create and View Patients </MenuItem>
+                <MenuItem className="submenu-item"> Medication Info </MenuItem>
             </SubMenu>
-            <MenuItem className="sidebar" component={<Link className="sidebar" to="/calculator" />}> Calculate </MenuItem>
-            <MenuItem className="sidebar"> Trends </MenuItem>
-            <MenuItem className="sidebar"> Settings </MenuItem>
-            <MenuItem className="sidebar"> Log Out </MenuItem>
+            <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
+            <MenuItem className="menu-item"> Trends </MenuItem>
+            <MenuItem className="menu-item"> Settings </MenuItem>
+            <MenuItem className="menu-item"> Log Out </MenuItem>
             </Menu>
         </Sidebar>
     );
