@@ -6,21 +6,26 @@ export default function Papi({ patientObj }) {
     const [pasp, setPasp] = useState("");
     const [padp, setPadp] = useState("");
     const [ra, setRa] = useState("");
-    const [form, setForm] = useState({
-        valueType: "Pulmonary Artery Pulsatility Index",
-        calculatedValue: ""
-    });
+    const valueType = "Pulmonary Artery Pulsatility Index";
+    const [calculatedValue, setCalculatedValue] = useState("");
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
         setPlaceholderText((pasp === "" && padp === "" && ra === "") ? "Enter calculation inputs" : "Missing inputs");
-        setForm({ valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: (pasp !== "" && padp !== "" && ra !== "") ? ((+pasp - +padp) / +ra).toFixed(3) : "" });
+
+        if (pasp === "" || padp === "" || ra === "") {
+            setCalculatedValue("");
+            return;
+        }
+
+        const result = +((+pasp - +padp) / +ra).toFixed(3);
+        setCalculatedValue(result);
     }, [pasp, padp, ra]);
 
     return (
         <div>
-            <h1>Pulmonary Artery Pulsatility Index</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, form)}>
+            <h1>{valueType}</h1>
+            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
                 <div>
                     Pulmonary Artery Systolic Pressure (mmHg): <input name="PASP" placeholder="Ex: 21 mmHg" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
                 </div>
@@ -31,7 +36,7 @@ export default function Papi({ patientObj }) {
                     Right Atrial Pressure (mmHg): <input name="RA" type="number" placeholder="Ex: 9 IU/mL" value={ra} onChange={e => setRa(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
                 </div>
                 <div>
                     <button type="submit">Save</button>
