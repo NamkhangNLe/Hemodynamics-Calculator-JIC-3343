@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Papi({ selectedPatientID }) {
+export default function Papi({ patientObj }) {
     const [pasp, setPasp] = useState("");
     const [padp, setPadp] = useState("");
     const [ra, setRa] = useState("");
@@ -20,15 +20,15 @@ export default function Papi({ selectedPatientID }) {
     return (
         <div>
             <h1>Pulmonary Artery Pulsatility Index</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    PASP: <input name="PASP" placeholder="Ex: 21 mmHg" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
+                    Pulmonary Artery Systolic Pressure (mmHg): <input name="PASP" placeholder="Ex: 21 mmHg" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
                 </div>
                 <div>
-                    PADP: <input name="PADP" placeholder="Ex: 10 mmHg" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+                    Pulmonary Artery Diastolic Pressure (mmHg): <input name="PADP" placeholder="Ex: 10 mmHg" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
                 </div>
                 <div>
-                    RA: <input name="RA" type="number" placeholder="Ex: 9 IU/mL" value={ra} onChange={e => setRa(e.target.value)} />
+                    Right Atrial Pressure (mmHg): <input name="RA" type="number" placeholder="Ex: 9 IU/mL" value={ra} onChange={e => setRa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

@@ -108,13 +108,13 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="medicationA"
-                    value="A"
-                    checked={form.medications === "A"}
+                    id="milrinone"
+                    value="Milrinone"
+                    checked={form.medications === "Milrinone"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="medicationA" className="form-check-label">
-                    Medication A
+                  <label htmlFor="milrinone" className="form-check-label">
+                    Milrinone
                   </label>
                 </div>
                 <div className="form-check form-check-inline">
@@ -122,13 +122,13 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="medicationB"
-                    value="B"
-                    checked={form.medications === "B"}
+                    id="dobutamine"
+                    value="Dobutamine"
+                    checked={form.medications === "Dobutamine"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="medicationB" className="form-check-label">
-                    Medication B
+                  <label htmlFor="dobutamine" className="form-check-label">
+                    Dobutamine
                   </label>
                 </div>
                 <div className="form-check form-check-inline">
@@ -136,13 +136,111 @@ export default function PatientForm({form, onSubmit, updateForm, mode}) {
                     className="form-check-input"
                     type="radio"
                     name="medicationOptions"
-                    id="medicationC"
-                    value="C"
-                    checked={form.medications === "C"}
+                    id="lasix"
+                    value="Lasix"
+                    checked={form.medications === "Lasix"}
                     onChange={(e) => updateForm({ medications: e.target.value })}
                   />
-                  <label htmlFor="medicationC" className="form-check-label">
-                    Medication C
+                  <label htmlFor="lasix" className="form-check-label">
+                    Lasix
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="bumex"
+                    value="Bumex"
+                    checked={form.medications === "Bumex"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="bumex" className="form-check-label">
+                    Bumex
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="diuril"
+                    value="Diuril"
+                    checked={form.medications === "Diuril"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="diuril" className="form-check-label">
+                    Diuril
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="hydralazine"
+                    value="Hydralazine"
+                    checked={form.medications === "Hydralazine"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="hydralazine" className="form-check-label">
+                    Hydralazine
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="epinephrine"
+                    value="Epinephrine"
+                    checked={form.medications === "Epinephrine"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="epinephrine" className="form-check-label">
+                    Epinephrine
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="norepinephrine"
+                    value="Norepinephrine"
+                    checked={form.medications === "Norepinephrine"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="norepinephrine" className="form-check-label">
+                    Norepinephrine
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="dopamine"
+                    value="Dopamine"
+                    checked={form.medications === "Dopamine"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="dopamine" className="form-check-label">
+                    Dopamine
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="medicationOptions"
+                    id="vasopressin"
+                    value="Vasopressin"
+                    checked={form.medications === "Vasopressin"}
+                    onChange={(e) => updateForm({ medications: e.target.value })}
+                  />
+                  <label htmlFor="vasopressin" className="form-check-label">
+                    Vasopressin
                   </label>
                 </div>
               </div>

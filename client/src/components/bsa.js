@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onSubmit } from "../utils/calculationUtils";
 import "../styles/styles.css";
 
-export default function Bsa({ selectedPatientID }) {
+export default function Bsa({ patientObj }) {
     const [bsa, setBsa] = useState("");
     const [form, setForm] = useState({
         valueType: "VO2 by BSA",
@@ -12,18 +12,19 @@ export default function Bsa({ selectedPatientID }) {
 
     useEffect(() => {
         setPlaceholderText((bsa === "") ? "Enter calculation inputs" : "Missing inputs");
+        setBsa((patientObj !== undefined) ? patientObj.bsa : bsa)
         setForm({ valueType: "VO2 by BSA", calculatedValue: (bsa !== "") ? (+bsa * 125).toFixed(3) : "" });
-    }, [bsa]);
+    }, [bsa, patientObj]);
 
     return (
         <div>
             <h1>VO2 by BSA</h1>
-            <form onSubmit={e => onSubmit(e, selectedPatientID, form)}>
+            <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    BSA: <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
+                    Body Surface Area (m<sup>2</sup>): <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />
+                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> ml/min/m<sup>2</sup>
                 </div>
                 <div>
                     <button type="submit">Save</button>
