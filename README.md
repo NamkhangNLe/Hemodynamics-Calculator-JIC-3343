@@ -34,6 +34,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 ### Known Issues
 * Emory logo still disappears unpredictably
+* Patient notes don't display anywhere
 
 ## Version 0.1.0
 
