@@ -22,13 +22,13 @@ export default function Svr({ patientObj }) {
             <h1>Systemic Vasuclar Resistance</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Mean Arterial Pressure (mmHg): <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 68 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    Central Venous Pressure (mmHg): <input name="CVP" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
+                    Central Venous Pressure (mmHg): <input name="CVP" placeholder="Ex: 12 mmHg" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
                 </div>
                 <div>
-                    Cardiac Output (L/min): <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                    Cardiac Output (L/min): <input name="CO" placeholder="Ex: 4.3 L/min" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>

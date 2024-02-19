@@ -21,7 +21,7 @@ export default function Bsa({ patientObj }) {
             <h1>VO2 by BSA</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Body Surface Area (m<sup>2</sup>): <input name="BSA" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
+                    Body Surface Area (m<sup>2</sup>): <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> ml/min/m<sup>2</sup>

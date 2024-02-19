@@ -31,10 +31,10 @@ export default function LaFarge({ patientObj }) {
             <h1>VO2 by LaFarge Equation</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Age: <input name="age" type="number" value={age} onChange={e => setAge(e.target.value)} />
+                    Age: <input name="logeage" placeholder="Ex: ?" type="number" value={logeage} onChange={e => setLogeage(e.target.value)} />
                 </div>
                 <div>
-                    Heart Rate (bpm): <input name="hr" type="number" value={hr} onChange={e => setHr(e.target.value)} />
+                    Heart Rate (bpm): <input name="hr" placeholder="Ex: ?" type="number" value={hr} onChange={e => setHr(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> ml/min/m<sup>2</sup>

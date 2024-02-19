@@ -38,10 +38,10 @@ export default function Addition({ patientObj }) {
             <h1>Addition of Values</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Value 1: <input name="value1" type="number" step="1.0" value={val1} onChange={e => setVal1(e.target.value)} />
+                    Value 1: <input name="value1" placeholder="Ex: 9.0" type="number" step="1.0" value={val1} onChange={e => setVal1(e.target.value)} />
                 </div>
                 <div>
-                    Value 2: <input name="value2" type="number" value={val2} onChange={e => setVal2(e.target.value)} />
+                    Value 2: <input name="value2" placeholder="Ex: 10.0" type="number" value={val2} onChange={e => setVal2(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly />

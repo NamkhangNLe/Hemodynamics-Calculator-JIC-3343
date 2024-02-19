@@ -21,10 +21,10 @@ export default function TranspulGradient({ patientObj }) {
             <h1>Transpulmonary Gradient</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Mean Arterial Pressure (mmHg): <input name="MPA" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 72 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
                 <div>
-                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="CVP" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="CVP" placeholder="Ex: 8 mmHg"type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> mmHg

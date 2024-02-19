@@ -22,13 +22,13 @@ export default function Pvr({ patientObj }) {
             <h1>Pulmonary Vasuclar Resistance</h1>
             <form onSubmit={e => onSubmit(e, patientObj, form)}>
                 <div>
-                    Pulmonary Arterial Pressure (mmHg): <input name="PAP" type="number" value={pap} onChange={e => setPap(e.target.value)} />
+                    Pulmonary Arterial Pressure (mmHg): <input name="PAP" placeholder="Ex: 16 mmHg" type="number" value={pap} onChange={e => setPap(e.target.value)} />
                 </div>
                 <div>
-                    Wedge: <input name="wedge" type="number" value={wedge} onChange={e => setWedge(e.target.value)} />
+                    Wedge: <input name="wedge" placeholder="Ex: 6 mmHg" type="number" value={wedge} onChange={e => setWedge(e.target.value)} />
                 </div>
                 <div>
-                    Cardiac Output (L/min): <input name="CO" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                    Cardiac Output (L/min): <input name="CO" placeholder="Ex: 4.1 L/min" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
