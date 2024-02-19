@@ -4,6 +4,37 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 # Release Notes
 
+## Version 0.2.0
+
+### Features
+* All hemodynamics formulas added as frontend components:
+   * VO2 by LeFarge Equation
+   * VO2 by body surface area
+   * VO2 by weight
+   * FICK Cardiac Output
+   * Cardiac Index
+   * Systemic Vascular Resistance
+   * Pulminary Vascular Resistance
+   * Transpulminary gradient
+   * Diastolic Pulmonary Gradient
+   * Pulminary Artery Pulsatilic Index
+* Fleshed out calculator page with dropdown menu for patient and calculator values.
+* Calculator components update the calculated value in real time with proper error handling.
+* Added functionality to save particular calculations to a selected patient.
+
+### Bug Fixes
+* Added refresh on editing patient's past calculations.
+* Moved create patient out of navbar.
+* Fixed issue with sidebar color where the highlighted element does not properly highlight.
+* Fixed edit patient screen bug where fields would not populate.
+* Fixed bug where getting patient records by patient id did not return any records.
+* DateTime for patient calculation is now a correctly formatted object.
+* Fixed month indexing in edit calculations page.
+* Removed Herobrine. 
+
+### Known Issues
+* Emory logo still disappears unpredictably
+
 ## Version 0.1.0
 
 ### Features
