@@ -6,21 +6,26 @@ export default function Svr({ patientObj }) {
     const [map, setMap] = useState("");
     const [cvp, setCvp] = useState("");
     const [co, setCo] = useState("");
-    const [form, setForm] = useState({
-        valueType: "Systemic Vascular Resistance",
-        calculatedValue: ""
-    });
+    const valueType = "Systemic Vascular Resistance";
+    const [calculatedValue, setCalculatedValue] = useState("");
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
         setPlaceholderText((map === "" && cvp === "" && co === "") ? "Enter calculation inputs" : "Missing inputs");
-        setForm({ valueType: "Systemic Vascular Resistance", calculatedValue: (map !== "" && cvp !== "" && co !== "") ? ((+map - +cvp) / +co).toFixed(3) : "" });
+
+        if (map === "" || cvp === "" || co === "") {
+            setCalculatedValue("");
+            return;
+        }
+
+        const result = +((+map - +cvp) / +co).toFixed(3);
+        setCalculatedValue(result);
     }, [map, cvp, co]);
 
     return (
         <div>
-            <h1>Systemic Vasuclar Resistance</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, form)}>
+            <h1>{valueType}</h1>
+            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
                 <div>
                     Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 68 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
@@ -31,7 +36,7 @@ export default function Svr({ patientObj }) {
                     Cardiac Output (L/min): <input name="CO" placeholder="Ex: 4.3 L/min" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
                 </div>
                 <div>
                     <button type="submit">Save</button>

@@ -8,8 +8,15 @@
 export async function onSubmit(event, patientObj, form) {
     event.preventDefault();
 
-    if (form.calculatedValue === "") {
+    const value = form.calculatedValue;
+
+    if (value === "") {
         messageAnimation("Input(s) are missing.\nCalculation not saved.", "lightpink");
+        return;
+    }
+
+    if (isNaN(value) || value === +Infinity || value === -Infinity) {
+        messageAnimation("Bad output: NaN or \u00B1\u221E.\nCalculation not saved.", "lightpink");
         return;
     }
 

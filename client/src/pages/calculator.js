@@ -18,17 +18,17 @@ import Dpg from "../components/dpg";
 const CalculatorFramework = () => {
     // TODO: Populate this list with the calculations
     const availableCalculations = [
-        {name: "Addition", component: Addition},
-        {name: "Systemic Vasuclar Resistance", component: Svr},
-        {name: "Pulmonary Vascular Resistance", component: Pvr},
-        {name: "Transpulmonary Gradient", component: TranspulGradient},
-        {name: "Diastolic Pulmonary Gradient", component: Dpg},
-        {name: "Pulmonary Artery Pulsatility Index", component: Papi},
-        {name: "Cardiac Index", component: CardiacIndex},
-        {name: "Fick Cardiac Output", component: Fick},
-        {name: "VO2 by Weight", component: Weight},
-        {name: "VO2 by BSA", component: Bsa},
-        {name: "VO2 by LaFarge Equation", component: LaFarge}
+        { name: "Addition", component: Addition },
+        { name: "Systemic Vasuclar Resistance", component: Svr },
+        { name: "Pulmonary Vascular Resistance", component: Pvr },
+        { name: "Transpulmonary Gradient", component: TranspulGradient },
+        { name: "Diastolic Pulmonary Gradient", component: Dpg },
+        { name: "Pulmonary Artery Pulsatility Index", component: Papi },
+        { name: "Cardiac Index", component: CardiacIndex },
+        { name: "Fick Cardiac Output", component: Fick },
+        { name: "VO2 by Weight", component: Weight },
+        { name: "VO2 by BSA", component: Bsa },
+        { name: "VO2 by LaFarge Equation", component: LaFarge }
     ];
 
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
@@ -68,7 +68,7 @@ const CalculatorFramework = () => {
         if (selectedPatientID !== undefined) {
             getPatientObj();
         }
-        
+
     }, [selectedPatientID]);
 
     // DropdownOption object; updates selected patient using initials when clicked
@@ -81,8 +81,8 @@ const CalculatorFramework = () => {
 
     function patientList() {
         return records.map((record) => {
-                return <PatientDropdownOption record = {record}/>
-            }
+            return <PatientDropdownOption record={record} />
+        }
         );
     }
 
@@ -98,35 +98,35 @@ const CalculatorFramework = () => {
 
     function calculationList() {
         return availableCalculations.map((calculation) => {
-                return <CalculationDropdownOption calculation = {calculation}/>
-            }
+            return <CalculationDropdownOption calculation={calculation} />
+        }
         );
     }
 
     return (
         <div className="app-container">
             <div className="content-container">
-            <div className="main-content">
-                <h3>Calculate</h3>
-                <div id="calc-framework-top-bar">
+                <div className="main-content">
+                    <h3>Calculate</h3>
+                    <div id="calc-framework-top-bar">
 
-                    <form>
-                        <label>
-                            Select Patient:
-                            <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                        </label>
-                    </form>
+                        <form>
+                            <label>
+                                Select Patient:
+                                <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+                            </label>
+                        </form>
 
-                    <form>
-                        <label>
-                            Select Calculation:
-                            <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
-                        </label>
-                    </form>
+                        <form>
+                            <label>
+                                Select Calculation:
+                                <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
+                            </label>
+                        </form>
 
+                    </div>
+                    {<selectedCalculation.component patientObj={patientObj} />}
                 </div>
-                {<selectedCalculation.component patientObj={patientObj}/>}
-            </div>
             </div>
         </div>
     );

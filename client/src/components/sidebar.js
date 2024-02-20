@@ -14,14 +14,14 @@ export default function SidebarComp() {
     return (
         <Sidebar className="sidebar">
             <Menu className="menu">
-            <SubMenu className="submenu" label="Patients">
-                <MenuItem className="submenu-item" component={<Link to="/" />}> Create and View Patients </MenuItem>
-                <MenuItem className="submenu-item"> Medication Info </MenuItem>
-            </SubMenu>
-            <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
-            <MenuItem className="menu-item"> Trends </MenuItem>
-            <MenuItem className="menu-item"> Settings </MenuItem>
-            <MenuItem className="menu-item"> Log Out </MenuItem>
+                <SubMenu className="submenu" label="Patients">
+                    <MenuItem className="submenu-item" component={<Link to="/" />}> Create and View Patients </MenuItem>
+                    <MenuItem className="submenu-item"> Medication Info </MenuItem>
+                </SubMenu>
+                <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
+                <MenuItem className="menu-item"> Trends </MenuItem>
+                <MenuItem className="menu-item"> Settings </MenuItem>
+                <MenuItem className="menu-item"> Log Out </MenuItem>
             </Menu>
         </Sidebar>
     );

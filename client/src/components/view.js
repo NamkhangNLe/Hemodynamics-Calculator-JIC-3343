@@ -135,7 +135,7 @@ export default function View() {
                                     type="text"
                                     value={editedCalculatedValue}
                                     onChange={(e) => setEditedCalculatedValue(e.target.value)}
-                                    />
+                                />
                             </td>
                             <td><button onClick={handleSave}>Save</button></td>
                         </>

@@ -7,21 +7,26 @@ export default function Fick({ patientObj }) {
     const [hb, setHb] = useState("");
     const [satA, setSatA] = useState("");
     const [satMV, setSatMV] = useState("");
-    const [form, setForm] = useState({
-        valueType: "Fick Cardiac Output",
-        calculatedValue: ""
-    });
+    const valueType = "Fick Cardiac Output";
+    const [calculatedValue, setCalculatedValue] = useState("");
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
         setPlaceholderText((vo2 === "" && hb === "" && satA === "" && satMV === "") ? "Enter calculation inputs" : "Missing inputs");
-        setForm({ valueType: "Fick Cardiac Output", calculatedValue: (vo2 !== "" && hb !== "" && satA !== "" && satMV !== "") ? (+vo2 / (+hb * 13.6 * (+satA - +satMV))).toFixed(3) : "" });
+
+        if (vo2 === "" || hb === "" || satA === "" || satMV === "") {
+            setCalculatedValue("");
+            return;
+        }
+
+        const result = +(+vo2 / (+hb * 13.6 * (+satA - +satMV))).toFixed(3);
+        setCalculatedValue(result);
     }, [vo2, hb, satA, satMV]);
 
     return (
         <div>
-            <h1>Fick Cardiac Output</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, form)}>
+            <h1>{valueType}</h1>
+            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
                 <div>
                     VO<sub>2</sub> (ml/min/m<sup>2</sup>): <input name="VO2" placeholder="Ex: 40 mL/kg/min" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
                 </div>
@@ -35,7 +40,7 @@ export default function Fick({ patientObj }) {
                     Mixed Venous Saturation: <input name="Sat MV" placeholder="Ex: ?" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
                 </div>
                 <div>
-                    Output: <input type="text" placeholder={placeholderText} value={form.calculatedValue} readOnly /> L/min
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> L/min
                 </div>
                 <div>
                     <button type="submit">Save</button>
