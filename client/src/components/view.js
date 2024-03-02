@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function View() {
     const params = useParams();
@@ -201,12 +201,18 @@ export default function View() {
         setEditedCalculatedValue("");
     };
 
+    // Used to set the link to the trends page using the params.id
+    const trendsLink = `/trends/${params.id}`;
+
     // For front-end team: patientCalculations is a JSON. You can parse it however you want to display it.
     return (
         <div>
             <h3>View Patient</h3>
             <div>
                 <h4>Calculation History</h4>
+
+                <Link to={trendsLink}> <button> Inspect Trends </button></Link>
+
                 {calculationsTable()}
             </div>
         </div>

@@ -19,7 +19,7 @@ export default function SidebarComp() {
                     <MenuItem className="submenu-item"> Medication Info </MenuItem>
                 </SubMenu>
                 <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
-                <MenuItem className="menu-item"> Trends </MenuItem>
+                <MenuItem className="menu-item" component={<Link to="/trends" />}> Trends </MenuItem>
                 <MenuItem className="menu-item"> Settings </MenuItem>
                 <MenuItem className="menu-item"> Log Out </MenuItem>
             </Menu>
