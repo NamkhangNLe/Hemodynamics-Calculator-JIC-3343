@@ -1,10 +1,13 @@
 import { Link , useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
-import React from "react";
+import React, { useRef } from "react";
+import { Button } from 'react-bootstrap';
+import html2canvas from 'html2canvas';
 
 
 const IndividualTrends = () => {
     const { id } = useParams();
+    const graphRef = useRef();
 
     /**
      * Renders the charts as a table, where each "table row" allows user to select
@@ -33,6 +36,15 @@ const IndividualTrends = () => {
         );
     }
 
+    const saveAsImage = () => {
+        html2canvas(graphRef.current).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'trends.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    };
+
     const viewLink = `/view/${id}`;
 
     return(
@@ -40,9 +52,13 @@ const IndividualTrends = () => {
             <div>
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
                 <Link to="/trends"> <button> View Other Patient Trends </button></Link>
+                <Button onClick={saveAsImage}>Save Trends</Button>
             </div>
 
-            {trendsTable()}
+            <div ref={graphRef}>
+                {trendsTable()}
+            </div>
+
 
         </div>
     )
