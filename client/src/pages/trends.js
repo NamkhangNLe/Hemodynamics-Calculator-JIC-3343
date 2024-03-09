@@ -53,19 +53,14 @@ const Trends = () => {
     return (
         <div>
             <h3>Patient Trends</h3>
-
             <form>
                 <label>
                     Select Patient:
                     <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
                 </label>
             </form>
-
-
-
         </div>
     );
-
 }
 
 
