@@ -7,8 +7,18 @@ const TrendTableEntry = ({id}) => {
     // Set the selected calculation, for filtering
     const [selectedCalculation, setSelectedCalculation] = useState("");
 
-    // Filer used for charts that filters them by patient ID and the valueType (aka Formula)
-    const filter = {"patient_id" : id , "valueType" : selectedCalculation.name}
+    // Default start date
+    const defaultStartDate = "2023-01-01";
+
+    // Default end date (current date)
+    const defaultEndDate = new Date().toString();
+
+    // State variables for start date and end date
+    const [startDate, setStartDate] = useState(defaultStartDate);
+    const [endDate, setEndDate] = useState(defaultEndDate);
+
+    // Filter used for charts that filters them by patient ID, date, and the valueType (aka Formula)
+    const filter = {"patient_id" : id , "valueType" : selectedCalculation.name, "date" :  { $gte: new Date(startDate), $lt: new Date(endDate) }}
 
     // Possible calculations, for the dropdown menu
     const calculations = [
@@ -47,6 +57,21 @@ const TrendTableEntry = ({id}) => {
         );
     }
 
+    /**
+     * Sets the start date to whatever the user specifies in the "Start Date" text box.
+     */
+    const handleStartDateChange = (event) => {
+        setStartDate(event.target.value);
+    };
+
+    /**
+     * Sets the end date to whatever the user specifies in the "Start Date" text box.
+     */
+    const handleEndDateChange = (event) => {
+        setEndDate(event.target.value);
+    };
+
+
     return (
         <div>
             <form>
@@ -54,6 +79,14 @@ const TrendTableEntry = ({id}) => {
                     Calculation:
                     <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
                 </label>
+                    <label>
+                        Start Date:
+                        <input type="date" value={startDate} onChange={handleStartDateChange} />
+                    </label>
+                    <label>
+                        End Date:
+                        <input type="date" value={endDate} onChange={handleEndDateChange} />
+                    </label>
             </form>
 
             <div style={{ display: 'inline-block' }}>
