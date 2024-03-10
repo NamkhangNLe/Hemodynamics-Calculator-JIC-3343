@@ -28,6 +28,9 @@ const IndividualTrends = () => {
                     <tr>
                         <TrendTableEntry id = {id} />
                     </tr>
+                    <tr>
+                        <TrendTableEntry id = {id} />
+                    </tr>
                 </tbody>
             </table>
         );
