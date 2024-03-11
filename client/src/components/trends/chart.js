@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
-const Chart = ({URL, filter, chartId, height, width}) => {
+const Chart = ({ URL, filter, chartId, height, width }) => {
 
     // Sets SDK for the chart
-    const sdk = new ChartsEmbedSDK({baseUrl: URL});
+    const sdk = new ChartsEmbedSDK({ baseUrl: URL });
 
     // used for the actual chart being rendered in React
     const chartDiv = useRef(null);
@@ -13,7 +13,7 @@ const Chart = ({URL, filter, chartId, height, width}) => {
     const [rendered, setRendered] = useState(false);
 
     // create the actual chart by rendering it with the passed in params
-    const [chart] = useState(sdk.createChart({chartId: chartId, height: height, width: width, theme: "light"}));
+    const [chart] = useState(sdk.createChart({ chartId: chartId, height: height, width: width, theme: "light" }));
 
     /**
      * Renders the chart
@@ -27,11 +27,11 @@ const Chart = ({URL, filter, chartId, height, width}) => {
      */
     useEffect(() => {
         if (rendered) {
-        chart.setFilter(filter).catch(err => console.log("Error while filtering.", err));
+            chart.setFilter(filter).catch(err => console.log("Error while filtering.", err));
         }
     }, [chart, filter, rendered]);
 
-    return <div className="chart" ref={chartDiv}/>;
+    return <div className="chart" ref={chartDiv} />;
 };
 
 export default Chart;
