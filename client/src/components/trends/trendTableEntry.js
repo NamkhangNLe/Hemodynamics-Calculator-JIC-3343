@@ -1,10 +1,8 @@
 import Chart from "./chart"
-import React, { useState } from "react";
-import { Dropdown, DropdownButton } from 'react-bootstrap';
 
-const TrendTableEntry = ({ id, calculation }) => {
-    // Filer used for charts that filters them by patient ID and the valueType (aka Formula)
-    const filter = { "patient_id": id, "valueType": calculation }
+const TrendTableEntry = ({ id, calculation, startDate, endDate }) => {
+    // Filter used for charts that filters them by patient ID, date, and the valueType (aka Formula)
+    const filter = { "patient_id": id, "valueType": calculation, "date": { $gte: new Date(startDate), $lt: new Date(new Date(endDate).getTime() + 8.64e7) } } // 6,640,000 ms in a day
 
     return (
         <div>

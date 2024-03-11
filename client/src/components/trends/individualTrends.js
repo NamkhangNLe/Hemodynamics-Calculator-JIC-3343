@@ -17,6 +17,24 @@ const IndividualTrends = () => {
     const [bsa, setBsa] = useState(false);
     const [lafarge, setLafarge] = useState(false);
 
+    // Default start date
+    const defaultStartDate = "2023-01-01";
+    // Default end date (current date)
+    const defaultEndDate = getCurrentDate();
+
+    // State variables for start date and end date
+    const [startDate, setStartDate] = useState(defaultStartDate);
+    const [endDate, setEndDate] = useState(defaultEndDate);
+
+    function getCurrentDate() {
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = now.getMonth() + 1;
+        month = (month < 10) ? '0' + (month) : month;
+        let date = now.getDate();
+        return `${year}-${month}-${date}`;
+    }
+
     /**
      * Renders a list of checkboxes so that the user can select which trends to display.
      */
@@ -26,6 +44,16 @@ const IndividualTrends = () => {
                 <form className="form">
                     <div>
                         <h3>Individual Trends</h3>
+                    </div>
+                    <div>
+                        <label>
+                            Start Date:
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        </label>
+                        <label>
+                            End Date:
+                            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        </label>
                     </div>
                     <div>
                         <input
@@ -154,17 +182,17 @@ const IndividualTrends = () => {
 
             {trendOptions()}
             <hr />
-            {addition && <TrendTableEntry id={id} calculation={"Addition"} />}
-            {svr && <TrendTableEntry id={id} calculation={"Systemic Vasuclar Resistance"} />}
-            {pvr && <TrendTableEntry id={id} calculation={"Pulmonary Vascular Resistance"} />}
-            {transpulGradient && <TrendTableEntry id={id} calculation={"Transpulmonary Gradient"} />}
-            {dpg && <TrendTableEntry id={id} calculation={"Diastolic Pulmonary Gradient"} />}
-            {papi && <TrendTableEntry id={id} calculation={"Pulmonary Artery Pulsatility Index"} />}
-            {ci && <TrendTableEntry id={id} calculation={"Cardiac Index"} />}
-            {fick && <TrendTableEntry id={id} calculation={"Fick Cardiac Output"} />}
-            {weight && <TrendTableEntry id={id} calculation={"VO2 by Weight"} />}
-            {bsa && <TrendTableEntry id={id} calculation={"VO2 by BSA"} />}
-            {lafarge && <TrendTableEntry id={id} calculation={"VO2 by LaFarge Equation"} />}
+            {addition && <TrendTableEntry id={id} calculation={"Addition"} startDate={startDate} endDate={endDate} />}
+            {svr && <TrendTableEntry id={id} calculation={"Systemic Vasuclar Resistance"} startDate={startDate} endDate={endDate} />}
+            {pvr && <TrendTableEntry id={id} calculation={"Pulmonary Vascular Resistance"} startDate={startDate} endDate={endDate} />}
+            {transpulGradient && <TrendTableEntry id={id} calculation={"Transpulmonary Gradient"} startDate={startDate} endDate={endDate} />}
+            {dpg && <TrendTableEntry id={id} calculation={"Diastolic Pulmonary Gradient"} startDate={startDate} endDate={endDate} />}
+            {papi && <TrendTableEntry id={id} calculation={"Pulmonary Artery Pulsatility Index"} startDate={startDate} endDate={endDate} />}
+            {ci && <TrendTableEntry id={id} calculation={"Cardiac Index"} startDate={startDate} endDate={endDate} />}
+            {fick && <TrendTableEntry id={id} calculation={"Fick Cardiac Output"} startDate={startDate} endDate={endDate} />}
+            {weight && <TrendTableEntry id={id} calculation={"VO2 by Weight"} startDate={startDate} endDate={endDate} />}
+            {bsa && <TrendTableEntry id={id} calculation={"VO2 by BSA"} startDate={startDate} endDate={endDate} />}
+            {lafarge && <TrendTableEntry id={id} calculation={"VO2 by LaFarge Equation"} startDate={startDate} endDate={endDate} />}
         </div>
     )
 }
