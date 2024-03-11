@@ -38,11 +38,17 @@ const IndividualTrends = () => {
 
     const viewLink = `/view/${id}`;
 
+    const handlePrint = () => {
+        window.print();
+    }
+
+    
     return(
         <div>
             <div>
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
                 <Link to="/trends"> <button> View Other Patient Trends </button></Link>
+                <button onClick={handlePrint}>Save as PDF</button>
             </div>
 
             {trendsTable()}
