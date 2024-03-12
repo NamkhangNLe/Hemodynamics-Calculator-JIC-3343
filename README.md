@@ -4,6 +4,23 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 # Release Notes
 
+## Version 0.3.0
+
+### Features
+* Implemented data visualization for patient profiles and calculations
+* Fleshed out trends page to display graphs for each type of calculation for a selected patient
+* Added navigational buttons to each page to improve navigation intuitiveness
+* Added table of past values to trends page
+* Implemented time window selection for trend graphs/tables
+
+### Bug Fixes
+* General refinements and polishing to the sidebar css
+
+### Known Issues
+* Trend graphs sometimes flicker when processing lots of data
+* Emory logo still continues to disappear unpredictably
+* Patient notes don't display anywhere
+
 ## Version 0.2.0
 
 ### Features
