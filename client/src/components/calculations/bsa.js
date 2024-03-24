@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../utils/calculationUtils";
-import "../styles/styles.css";
+import { onSubmit } from "../../utils/calculationUtils";
+import "../../styles/styles.css";
 
-export default function Weight({ patientObj }) {
-    const [weight, setWeight] = useState("");
-    const valueType = "Weight";
+export default function Bsa({ patientObj }) {
+    const [bsa, setBsa] = useState("");
+    const valueType = "VO2 by BSA";
     const [calculatedValue, setCalculatedValue] = useState("");
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
-        setPlaceholderText((weight === "") ? "Enter calculation inputs" : "Missing inputs");
-        setWeight((patientObj !== undefined) ? patientObj.weight : weight);
+        setPlaceholderText((bsa === "") ? "Enter calculation inputs" : "Missing input");
 
-        if (weight === "") {
+        setBsa((patientObj !== undefined) ? patientObj.bsa : bsa);
+
+        if (bsa === "") {
             setCalculatedValue("");
             return;
         }
 
-        const result = +(+weight * 3).toFixed(3);
+        const result = +(+bsa * 125).toFixed(3);
         setCalculatedValue(result);
-    }, [weight, patientObj]);
+    }, [bsa, patientObj]);
 
     return (
         <div>
             <h1>{valueType}</h1>
             <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
                 <div>
-                    Weight (kg): <input name="weight" placeholder="Ex: 120 lbs" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
+                    Body Surface Area (m<sup>2</sup>): <input name="BSA" placeholder="Ex: 1.9 m2" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>

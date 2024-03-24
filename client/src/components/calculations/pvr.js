@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../utils/calculationUtils";
-import "../styles/styles.css";
+import { onSubmit } from "../../utils/calculationUtils";
+import "../../styles/styles.css";
 
 export default function Pvr({ patientObj }) {
     const [pap, setPap] = useState("");

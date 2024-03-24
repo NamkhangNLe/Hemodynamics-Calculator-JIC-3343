@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../utils/calculationUtils";
-import "../styles/styles.css";
+import { onSubmit } from "../../utils/calculationUtils";
+import "../../styles/styles.css";
 
-export default function TranspulGradient({ patientObj }) {
-    const [map, setMap] = useState("");
+export default function Dpg({ patientObj }) {
+    const [padp, setPadp] = useState("");
     const [pcwp, setPcwp] = useState("");
-    const valueType = "Transpulmonary Gradient";
+    const valueType = "Diastolic Pulmonary Gradient";
     const [calculatedValue, setCalculatedValue] = useState("");
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
-        setPlaceholderText((map === "" && pcwp === "") ? "Enter calculation inputs" : "Missing inputs");
+        setPlaceholderText((padp === "" && pcwp === "") ? "Enter calculation inputs" : "Missing inputs");
 
-        if (map === "" || pcwp === "") {
+        if (padp === "" || pcwp === "") {
             setCalculatedValue("");
             return;
         }
 
-        const result = +(+map - +pcwp).toFixed(3);
+        const result = +(+padp - +pcwp).toFixed(3);
         setCalculatedValue(result);
-    }, [map, pcwp]);
+    }, [padp, pcwp]);
 
     return (
         <div>
             <h1>{valueType}</h1>
             <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
                 <div>
-                    Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 72 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                    Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+
                 </div>
                 <div>
-                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="CVP" placeholder="Ex: 8 mmHg" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="pcwp" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg

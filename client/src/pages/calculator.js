@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import Addition from "../components/addition";
-import Svr from "../components/svr";
-import Pvr from "../components/pvr";
-import TranspulGradient from "../components/transpulGradient";
-import Papi from "../components/papi";
-import CardiacIndex from "../components/ci";
-import Fick from "../components/fick";
+import Addition from "../components/calculations/addition";
+import Svr from "../components/calculations/svr";
+import Pvr from "../components/calculations/pvr";
+import TranspulGradient from "../components/calculations/transpulGradient";
+import Papi from "../components/calculations/papi";
+import CardiacIndex from "../components/calculations/ci";
+import Fick from "../components/calculations/fick";
 import "../styles/styles.css"
-import Weight from "../components/weight";
-import Bsa from "../components/bsa";
-import LaFarge from "../components/lafarge";
-import Dpg from "../components/dpg";
+import Weight from "../components/calculations/weight";
+import Bsa from "../components/calculations/bsa";
+import LaFarge from "../components/calculations/lafarge";
+import Dpg from "../components/calculations/dpg";
 
 
 
