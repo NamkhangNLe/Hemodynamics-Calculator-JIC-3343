@@ -179,6 +179,7 @@ export default function View() {
         e.preventDefault();
 
         const editedCalculation = {
+            selectedPatientId: params.id,
             date: new Date(`${editedDate}T${editedTime}:00.000`),
             valueType: editedValueType,
             calculatedValue: editedCalculatedValue

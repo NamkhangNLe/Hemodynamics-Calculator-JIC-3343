@@ -49,6 +49,7 @@ recordRoutes.route("/record/add").post(function (req, response) {
   let ageDiffMs = Date.now() - dob.getTime(); // Get the difference in milliseconds
   let ageDate = new Date(ageDiffMs); // Convert the age difference to a Date object
   let age = Math.abs(ageDate.getUTCFullYear() - 1970); // Calculate the age
+  let currentDate = new Date();
   let myobj = {
     initials: req.body.initials,
     dob: req.body.dob,
@@ -58,7 +59,9 @@ recordRoutes.route("/record/add").post(function (req, response) {
     weight: req.body.weight,
     bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
     medications: req.body.medications,
-    notes: req.body.notes
+    notes: req.body.notes,
+    lastActivity: currentDate,
+    archiveDate: new Date(currentDate.getTime() + (60 * 8.64e7))
   };
   db_connect
     .collection("records")
@@ -76,6 +79,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
   let ageDiffMs = Date.now() - dob.getTime(); // Get the difference in milliseconds
   let ageDate = new Date(ageDiffMs); // Convert the age difference to a Date object
   let age = Math.abs(ageDate.getUTCFullYear() - 1970); // Calculate the age
+  let currentDate = new Date();
   let newvalues = {
     $set: {
       initials: req.body.initials,
@@ -86,9 +90,12 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       weight: req.body.weight,
       bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
       medications: req.body.medications,
-      notes: req.body.notes
+      notes: req.body.notes,
+      lastActivity: currentDate,
+      archiveDate: new Date(currentDate.getTime() + (60 * 8.64e7))
     },
   };
+
   db_connect
     .collection("records")
     .updateOne(myquery, newvalues, function (err, res) {

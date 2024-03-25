@@ -38,20 +38,39 @@ calcuationRoutes.route("/calculation/:id").get(function (req, response) {
     });
 });
 
-// This section will help you create a new record.
+// This section will help you create a new calculation.
 calcuationRoutes.route("/calculation/add").post(function (req, response) {
   //  console.log("back", req.body)
+  let currentDate = new Date();
   let db_connect = dbo.getDb();
+
   let myobj = {
     patient_id: req.body.selectedPatientID,
-    date: new Date(),
+    date: currentDate,
     valueType: req.body.valueType,
     calculatedValue: req.body.calculatedValue,
   };
+  // add the calculation to the database
   db_connect
     .collection("calculations")
     .insertOne(myobj, function (err, res) {
       if (err) throw err;
+      response.json(res);
+    });
+
+  // update the patient's last activity date and archive date
+  let patientQuery = { _id: new ObjectId(req.body.selectedPatientID) };
+  let newDateValues = {
+    $set: {
+      lastActivity: currentDate,
+      archiveDate: new Date(currentDate.getTime() + (60 * 8.64e7))
+    }
+  };
+  db_connect
+    .collection("records")
+    .updateOne(patientQuery, newDateValues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
       response.json(res);
     });
 });
@@ -67,11 +86,29 @@ calcuationRoutes.route("/updatecalc/:id").post(function (req, response) {
       calculatedValue: req.body.calculatedValue
     },
   };
+  // update the calculation in the database
   db_connect
     .collection("calculations")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
       // console.log("1 document updated");
+      response.json(res);
+    });
+
+  // update the patient's last activity date and archive date
+  let currentDate = new Date();
+  let patientQuery = { _id: new ObjectId(req.body.selectedPatientId) };
+  let newDateValues = {
+    $set: {
+      lastActivity: currentDate,
+      archiveDate: new Date(currentDate.getTime() + (60 * 8.64e7))
+    }
+  };
+  db_connect
+    .collection("records")
+    .updateOne(patientQuery, newDateValues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
       response.json(res);
     });
 });
