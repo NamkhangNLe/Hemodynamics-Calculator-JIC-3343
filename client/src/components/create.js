@@ -15,7 +15,8 @@ export default function Create() {
         height: "",
         weight: "",
         medications: "",
-        notes: ""
+        notes: "",
+        archived: false
     });
 
 
