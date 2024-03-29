@@ -9,16 +9,61 @@ const Record = (props) => (
         <td>{props.record.weight}</td>
         <td>{props.record.medications}</td>
         <td>
-            <Link className="btn btn-link" to={`/view/${props.record._id}`}>View</Link> |
-            <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-            <button className="btn btn-link"
-                onClick={() => {
+        <Link to={`/view/${props.record._id}`} style={{
+                backgroundColor: '#4CAF50', /* Green */
+                border: 'none',
+                color: 'white',
+                padding: '15px 32px',
+                textAlign: 'center',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontSize: '16px',
+                margin: '4px 2px',
+                cursor: 'pointer',
+                borderRadius: '12px', /* Rounded corners */
+                transition: '0.3s', /* Transition for hover effect */
+            }}
+            onMouseOver={e => e.currentTarget.style.backgroundColor = '#45a049'} /* Darker green when hovered */
+            onMouseOut={e => e.currentTarget.style.backgroundColor = '#4CAF50'} /* Original color when not hovered */
+            >View</Link>
+            <Link to={`/edit/${props.record._id}`} style={{
+                backgroundColor: '#0000FF', /* Blue */
+                border: 'none',
+                color: 'white',
+                padding: '15px 32px',
+                textAlign: 'center',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontSize: '16px',
+                margin: '4px 2px',
+                cursor: 'pointer',
+                borderRadius: '12px', /* Rounded corners */
+                transition: '0.3s', /* Transition for hover effect */
+            }}
+            onMouseOver={e => e.currentTarget.style.backgroundColor = '#1C86EE'} /* Darker blue when hovered */
+            onMouseOut={e => e.currentTarget.style.backgroundColor = '#0000FF'} /* Original color when not hovered */
+            >Edit</Link> |
+            <button onClick={() => {
                     props.deleteRecord(props.record._id);
                     //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
                     sleep(500).then(() => { window.location.reload(); });
-                }}
-            >
-                Delete
+                }} style={{
+                backgroundColor: '#FF0000', /* Red */
+                border: 'none',
+                color: 'white',
+                padding: '15px 32px',
+                textAlign: 'center',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontSize: '16px',
+                margin: '4px 2px',
+                cursor: 'pointer',
+                orderRadius: '12px', /* Rounded corners */
+                transition: '0.3s', /* Transition for hover effect */
+            }} 
+            onMouseOver={e => e.currentTarget.style.backgroundColor = '#FF6347'} /* Darker red when hovered */
+            onMouseOut={e => e.currentTarget.style.backgroundColor = '#FF0000'} /* Original color when not hovered */
+            >Delete
             </button>
         </td>
     </tr>
