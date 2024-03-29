@@ -96,9 +96,18 @@ export default function RecordList() {
             <div>
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link style={{ paddingLeft: '20px', position: 'fixed' }} to="/create">
-                            Create New Patient
-                        </Link>
+                    <Link to="/create" style={{
+                        backgroundColor: '#4CAF50', /* Green */
+                        border: 'none',
+                        color: 'white',
+                        padding: '15px 32px',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        display: 'inline-block',
+                        fontSize: '16px',
+                        margin: '4px 2px',
+                        cursor: 'pointer'
+                    }}>Create New Patient</Link>
                     </li>
                 </ul>
             </div>
