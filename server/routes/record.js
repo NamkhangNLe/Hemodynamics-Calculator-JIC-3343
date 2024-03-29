@@ -58,7 +58,8 @@ recordRoutes.route("/record/add").post(function (req, response) {
     weight: req.body.weight,
     bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
     medications: req.body.medications,
-    notes: req.body.notes
+    notes: req.body.notes,
+    archived: false
   };
   db_connect
     .collection("records")
@@ -86,7 +87,8 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       weight: req.body.weight,
       bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
       medications: req.body.medications,
-      notes: req.body.notes
+      notes: req.body.notes,
+      archived: false
     },
   };
   db_connect

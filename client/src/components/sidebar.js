@@ -16,7 +16,7 @@ export default function SidebarComp() {
             <Menu className="menu">
                 <SubMenu className="submenu" label="Patients">
                     <MenuItem className="submenu-item" component={<Link to="/" />}> Create and View Patients </MenuItem>
-                    <MenuItem className="submenu-item"> Medication Info </MenuItem>
+                    <MenuItem className="submenu-item" component={<Link to="/archive" />}> Archived Patients </MenuItem>
                 </SubMenu>
                 <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
                 <MenuItem className="menu-item" component={<Link to="/trends" />}> Trends </MenuItem>

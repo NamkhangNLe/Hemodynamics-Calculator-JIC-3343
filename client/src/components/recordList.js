@@ -65,7 +65,8 @@ export default function RecordList() {
      * @returns {JSX.Element[]} An array of JSX elements representing the records.
      */
     function recordList() {
-        return records.map((record) => {
+        const activePatients = records.filter((record) => record.archived == false);
+        return activePatients.map((record) => {
             return (
                 <Record
                     record={record}

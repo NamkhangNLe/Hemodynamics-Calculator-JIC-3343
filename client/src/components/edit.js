@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from 'react-router-dom';
 import PatientForm from "./patientForm";
+import Archive from "./archive";
 
 /**
  * Edit component that allows the user to update a record in the database.
@@ -19,6 +20,7 @@ export default function Edit() {
         weight: "",
         medications: "",
         notes: "",
+        archived: false
     });
 
     useEffect(() => {
@@ -101,7 +103,8 @@ export default function Edit() {
             height: form.height,
             weight: form.weight,
             medications: form.medications,
-            notes: form.notes
+            notes: form.notes,
+            archived: form.archived
         };
 
         redirectConfirmation(); // Navigate back to the home page.
