@@ -88,7 +88,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
       medications: req.body.medications,
       notes: req.body.notes,
-      archived: false
+      archived: req.body.archived
     },
   };
   db_connect
