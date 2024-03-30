@@ -8,9 +8,8 @@ import SidebarComp from "../components/sidebar";
 const PageFramework = ({ component }) => {
     return (
         <div className="app-container">
-            <Navbar />
             <div className="content-container">
-                <SidebarComp className="sidebar" />
+                <SidebarComp className="sidebar" style={{width: 50 + "px"}}/>
                 <div className="main-content">
                     {component}
                 </div>
