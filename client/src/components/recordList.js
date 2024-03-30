@@ -47,19 +47,6 @@ export default function RecordList() {
         return;
     }, [records.length]);
 
-    /**
-     * Deletes a record from the database and updates the state of the records.
-     * @param {string} id - The ID of the record to be deleted.
-     * @returns {Promise<void>} A promise that resolves when the record is deleted.
-     */
-    async function deleteRecord(id) {
-        await fetch(`http://localhost:5000/${id}`, {
-            method: "DELETE"
-        });
-        const newRecords = records.filter((el) => el._id !== id);
-        setRecords(newRecords);
-    }
-
     async function archiveRecord(record) {
         const archivedPerson = {
             ...record,
