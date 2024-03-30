@@ -13,12 +13,12 @@ const Record = (props) => (
             <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
             <button className="btn btn-link"
                 onClick={() => {
-                    props.deleteRecord(props.record._id);
-                    //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
+                    props.archiveRecord(props.record);
+                    // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
                     sleep(500).then(() => { window.location.reload(); });
                 }}
             >
-                Delete
+                Archive
             </button>
         </td>
     </tr>
@@ -60,17 +60,32 @@ export default function RecordList() {
         setRecords(newRecords);
     }
 
+    async function archiveRecord(record) {
+        const archivedPerson = {
+            ...record,
+            archived: true
+        };
+
+        fetch(`http://localhost:5000/update/${record._id}`, {
+            method: "POST",
+            body: JSON.stringify(archivedPerson),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+
     /**
      * Maps out the records into a list of Record components.
      * @returns {JSX.Element[]} An array of JSX elements representing the records.
      */
     function recordList() {
-        const activePatients = records.filter((record) => record.archived == false);
+        const activePatients = records.filter((record) => record.archived === false);
         return activePatients.map((record) => {
             return (
                 <Record
                     record={record}
-                    deleteRecord={() => deleteRecord(record._id)}
+                    archiveRecord={archiveRecord}
                     key={record._id}
                 />
             );
