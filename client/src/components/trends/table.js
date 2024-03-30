@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
-const Table = ({ URL, filter, chartId, height, width }) => {
+const Table = ({ URL, filter, chartId, height, width, name }) => {
 
     // Sets SDK for the chart
     const sdk = new ChartsEmbedSDK({ baseUrl: URL });
@@ -44,7 +44,7 @@ const Table = ({ URL, filter, chartId, height, width }) => {
             const blob = new Blob([csv], { type: 'text/csv' });
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'data.csv';
+            link.download = `${name}.csv`;
             link.click();
         });
     };
