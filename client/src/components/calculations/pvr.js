@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function Pvr({ patientObj }) {
+export default function Pvr({ updateCalculatedValue }) {
     const [pap, setPap] = useState("");
     const [wedge, setWedge] = useState("");
     const [co, setCo] = useState("");
+
     const valueType = "Pulmonary Vascular Resistance";
+    const valueCode = "PVR";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -15,17 +17,19 @@ export default function Pvr({ patientObj }) {
 
         if (pap === "" || wedge === "" || co === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +((+pap - +wedge) / +co).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [pap, wedge, co]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Pulmonary Arterial Pressure (mmHg): <input name="PAP" placeholder="Ex: 16 mmHg" type="number" value={pap} onChange={e => setPap(e.target.value)} />
                 </div>
@@ -37,9 +41,6 @@ export default function Pvr({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

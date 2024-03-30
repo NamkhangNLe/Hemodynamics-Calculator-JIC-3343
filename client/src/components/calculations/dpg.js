@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function Dpg({ patientObj }) {
+export default function Dpg({ updateCalculatedValue }) {
     const [padp, setPadp] = useState("");
     const [pcwp, setPcwp] = useState("");
+
     const valueType = "Diastolic Pulmonary Gradient";
+    const valueCode = "DPG";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -14,17 +16,19 @@ export default function Dpg({ patientObj }) {
 
         if (padp === "" || pcwp === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +(+padp - +pcwp).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [padp, pcwp]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
 
@@ -34,9 +38,6 @@ export default function Dpg({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

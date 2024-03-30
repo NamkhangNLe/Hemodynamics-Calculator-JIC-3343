@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function Papi({ patientObj }) {
+export default function Papi({ updateCalculatedValue }) {
     const [pasp, setPasp] = useState("");
     const [padp, setPadp] = useState("");
     const [ra, setRa] = useState("");
+
     const valueType = "Pulmonary Artery Pulsatility Index";
+    const valueCode = "PAPI";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -15,17 +17,19 @@ export default function Papi({ patientObj }) {
 
         if (pasp === "" || padp === "" || ra === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +((+pasp - +padp) / +ra).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [pasp, padp, ra]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Pulmonary Artery Systolic Pressure (mmHg): <input name="PASP" placeholder="Ex: 21 mmHg" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
                 </div>
@@ -37,9 +41,6 @@ export default function Papi({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

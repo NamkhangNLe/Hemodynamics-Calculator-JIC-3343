@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function Fick({ patientObj }) {
+export default function Fick({ updateCalculatedValue }) {
     const [vo2, setVo2] = useState("");
     const [hb, setHb] = useState("");
     const [satA, setSatA] = useState("");
     const [satMV, setSatMV] = useState("");
+
     const valueType = "Fick Cardiac Output";
+    const valueCode = "CO";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -16,17 +18,19 @@ export default function Fick({ patientObj }) {
 
         if (vo2 === "" || hb === "" || satA === "" || satMV === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +(+vo2 / (+hb * 13.6 * (+satA - +satMV))).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [vo2, hb, satA, satMV]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     VO<sub>2</sub> (ml/min/m<sup>2</sup>): <input name="VO2" placeholder="Ex: 40 mL/kg/min" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
                 </div>
@@ -41,9 +45,6 @@ export default function Fick({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> L/min
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

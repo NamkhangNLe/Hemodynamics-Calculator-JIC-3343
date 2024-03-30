@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function Svr({ patientObj }) {
+export default function Svr({ updateCalculatedValue }) {
     const [map, setMap] = useState("");
     const [cvp, setCvp] = useState("");
     const [co, setCo] = useState("");
+
     const valueType = "Systemic Vascular Resistance";
+    const valueCode = "SVR";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -15,17 +17,19 @@ export default function Svr({ patientObj }) {
 
         if (map === "" || cvp === "" || co === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +((+map - +cvp) / +co).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [map, cvp, co]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 68 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
@@ -37,9 +41,6 @@ export default function Svr({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

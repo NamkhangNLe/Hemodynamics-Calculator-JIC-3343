@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function CardiacIndex({ patientObj }) {
+export default function CardiacIndex({ patientObj, updateCalculatedValue }) {
     const [co, setco] = useState("");
     const [bsa, setbsa] = useState("");
+
     const valueType = "Cardiac Index";
+    const valueCode = "CI";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -15,17 +17,19 @@ export default function CardiacIndex({ patientObj }) {
 
         if (co === "" || bsa === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +(+co / +bsa).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [co, bsa]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Cardiac Output (L/min): <input name="CO" placeholder="Ex: 4.3 L/min" type="number" value={co} onChange={e => setco(e.target.value)} />
                 </div>
@@ -34,9 +38,6 @@ export default function CardiacIndex({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>
