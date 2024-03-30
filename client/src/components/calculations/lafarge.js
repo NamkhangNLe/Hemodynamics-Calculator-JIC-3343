@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function LaFarge({ patientObj }) {
+export default function LaFarge({ patientObj, updateCalculatedValue }) {
     const [age, setAge] = useState("");
     const [hr, setHr] = useState("");
+
     const valueType = "VO2 by LaFarge Equation";
+    const valueCode = "VO2L";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -18,11 +20,13 @@ export default function LaFarge({ patientObj }) {
 
             if (age === "" || hr === "") {
                 setCalculatedValue("");
+                updateCalculatedValue(valueCode, "");
                 return;
             }
 
             const result = +(138.1 - (factor * +age) + (0.378 * +hr)).toFixed(3);
             setCalculatedValue(result);
+            updateCalculatedValue(valueCode, result);
         }
 
         if (patientObj !== undefined) {
@@ -33,8 +37,8 @@ export default function LaFarge({ patientObj }) {
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Age: <input name="age" placeholder="Ex: ?" type="number" value={age} onChange={e => setAge(e.target.value)} />
                 </div>
@@ -43,9 +47,6 @@ export default function LaFarge({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

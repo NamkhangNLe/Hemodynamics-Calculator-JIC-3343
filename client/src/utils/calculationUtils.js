@@ -1,11 +1,11 @@
 /**
  * Handles the form submission by sending a POST request to the server to create a new calculation.
  * @param {Event} event The form submission event.
- * @param {String} patientObj The patient object containing the patient_id that the calculation should be saved to.
+ * @param {String} patientObj The patient object containing the patient_id that the calculation should be associated with.
  * @param {Object} form The form data, which contains the valueType and calculatedValue.
  * @returns {void}
  */
-export async function onSubmit(event, patientObj, form) {
+export async function submitOne(event, patientObj, form) {
     event.preventDefault();
 
     const value = form.calculatedValue;
@@ -36,6 +36,87 @@ export async function onSubmit(event, patientObj, form) {
         },
         body: JSON.stringify(newCalculation),
     }).then(messageAnimation("Calculation saved!"));
+}
+
+/**
+ * Handles the form submission by sending a POST request to the server to create a new calculation.
+ * @param {Event} event The form submission event.
+ * @param {String} patientObj The patient object containing the patient_id that the calculation should be associated with.
+ * @param {Object} calculations An object containing the valueType and calculatedValue of all calculations.
+ * @returns {void}
+ */
+export async function submitAll(event, patientObj, calculations) {
+    event.preventDefault();
+
+    if (patientObj === undefined) {
+        messageAnimation("Patient was not selected.\nCalculation not saved.", "lightpink");
+        return;
+    }
+
+    const missingInputs = [];
+    const badOutputs = [];
+
+    for (const valueCode in calculations) {
+        const calculation = calculations[valueCode];
+        const value = calculation.calculatedValue;
+
+        if (value === "") {
+            missingInputs.push(valueCode);
+            continue;
+        }
+
+        if (value === +Infinity || value === -Infinity) {
+            badOutputs.push(valueCode);
+            continue;
+        }
+
+        // Create a new object with patient_id and the values from the form state using the spread operator.
+        const newCalculation = { selectedPatientID: patientObj._id.toString(), ...calculation };
+
+        // Send a POST request to the server to create a new calculation record.
+        fetch("http://localhost:5000/calculation/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newCalculation),
+        }).then();
+    }
+
+    const numTotalCalculations = Object.keys(calculations).length;
+    const numInvalidCalculations = missingInputs.length + badOutputs.length;
+    const numValidCalculations = numTotalCalculations - (numInvalidCalculations);
+
+    console.log(calculations);
+
+    if (numInvalidCalculations !== 0) {
+        messageAnimation(
+            `${arrString("Missing input", missingInputs)}`
+            + `${arrString("Bad output", badOutputs)}`
+            + `${numInvalidCalculations} calculation${numInvalidCalculations !== 1 ? "s" : ""} not saved.\n`
+            + `${numValidCalculations} calculation${numValidCalculations !== 1 ? "s" : ""} saved.`,
+            (numValidCalculations === numTotalCalculations) ? "lightpink" : "bisque"
+        );
+    } else {
+        messageAnimation("All calculations saved!");
+    }
+}
+
+function arrString(label, arr) {
+    if (arr.length === 0) {
+        return "";
+    }
+    let result = label + ((arr.length !== 1) ? "s" : "") + ": ";
+
+    for (let i = 0; i < arr.length; ++i) {
+        result += arr[i];
+
+        if (i !== arr.length - 1) {
+            result += ", "
+        }
+    }
+
+    return result + "\n";
 }
 
 export function messageAnimation(text, color) {

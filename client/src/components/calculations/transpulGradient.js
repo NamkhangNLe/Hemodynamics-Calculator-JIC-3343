@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { onSubmit } from "../../utils/calculationUtils";
 import "../../styles/styles.css";
 
-export default function TranspulGradient({ patientObj }) {
+export default function TranspulGradient({ updateCalculatedValue }) {
     const [map, setMap] = useState("");
     const [pcwp, setPcwp] = useState("");
+
     const valueType = "Transpulmonary Gradient";
+    const valueCode = "TPG";
     const [calculatedValue, setCalculatedValue] = useState("");
+
     const [placeholderText, setPlaceholderText] = useState("");
 
     useEffect(() => {
@@ -14,17 +16,19 @@ export default function TranspulGradient({ patientObj }) {
 
         if (map === "" || pcwp === "") {
             setCalculatedValue("");
+            updateCalculatedValue(valueCode, "");
             return;
         }
 
         const result = +(+map - +pcwp).toFixed(3);
         setCalculatedValue(result);
+        updateCalculatedValue(valueCode, result);
     }, [map, pcwp]);
 
     return (
         <div>
-            <h1>{valueType}</h1>
-            <form onSubmit={e => onSubmit(e, patientObj, { valueType: valueType, calculatedValue: calculatedValue })}>
+            <form>
+                <h2>{valueType}</h2>
                 <div>
                     Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 72 mmHg" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
@@ -33,9 +37,6 @@ export default function TranspulGradient({ patientObj }) {
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
-                </div>
-                <div>
-                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>

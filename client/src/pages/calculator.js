@@ -1,44 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { submitAll } from "../utils/calculationUtils.js";
+
 import Addition from "../components/calculations/addition";
 import Svr from "../components/calculations/svr";
 import Pvr from "../components/calculations/pvr";
 import TranspulGradient from "../components/calculations/transpulGradient";
+import Dpg from "../components/calculations/dpg";
 import Papi from "../components/calculations/papi";
 import CardiacIndex from "../components/calculations/ci";
 import Fick from "../components/calculations/fick";
-import "../styles/styles.css"
 import Weight from "../components/calculations/weight";
 import Bsa from "../components/calculations/bsa";
 import LaFarge from "../components/calculations/lafarge";
-import Dpg from "../components/calculations/dpg";
 
-
+import "../styles/styles.css"
 
 const CalculatorFramework = () => {
-    // TODO: Populate this list with the calculations
-    const availableCalculations = [
-        { name: "Addition", component: Addition },
-        { name: "Systemic Vasuclar Resistance", component: Svr },
-        { name: "Pulmonary Vascular Resistance", component: Pvr },
-        { name: "Transpulmonary Gradient", component: TranspulGradient },
-        { name: "Diastolic Pulmonary Gradient", component: Dpg },
-        { name: "Pulmonary Artery Pulsatility Index", component: Papi },
-        { name: "Cardiac Index", component: CardiacIndex },
-        { name: "Fick Cardiac Output", component: Fick },
-        { name: "VO2 by Weight", component: Weight },
-        { name: "VO2 by BSA", component: Bsa },
-        { name: "VO2 by LaFarge Equation", component: LaFarge }
-    ];
+    const calculations = {
+        ADD: { valueType: "Addition", calculatedValue: "" },
+        SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
+        PVR: { valueType: "Pulmonary Vascular Resistance", calculatedValue: "" },
+        TPG: { valueType: "Transpulmonary Gradient", calculatedValue: "" },
+        DPG: { valueType: "Diastolic Pulmonary Gradient", calculatedValue: "" },
+        PAPI: { valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: "" },
+        CI: { valueType: "Cardiac Index", calculatedValue: "" },
+        CO: { valueType: "Fick Cardiac Output", calculatedValue: "" },
+        VO2W: { valueType: "VO2 by Weight", calculatedValue: "" },
+        BSA: { valueType: "VO2 by BSA", calculatedValue: "" },
+        VO2L: { valueType: "VO2 by LaFarge Equation", calculatedValue: "" }
+    };
 
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
-    const [selectedCalculation, setSelectedCalculation] = useState(availableCalculations[0]);
-
     const [patientObj, setPatientObj] = useState();
 
     const [records, setRecords] = useState([]);
-    // This method fetches the records from the database.
+
+    // Fetches all patient records from the database.
     useEffect(() => {
         async function getRecords() {
             const response = await fetch(`http://localhost:5000/record/`);
@@ -54,6 +53,8 @@ const CalculatorFramework = () => {
         getRecords();
     }, [records.length]);
 
+    // Updates patientObj if a different patient is selected.
+    // Subsequently updates selectedPatient (initials) and selectedPatientID upon selection.
     useEffect(() => {
         async function getPatientObj() {
             const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
@@ -65,13 +66,13 @@ const CalculatorFramework = () => {
             const patient = await response.json();
             setPatientObj(patient);
         }
+
         if (selectedPatientID !== undefined) {
             getPatientObj();
         }
-
     }, [selectedPatientID]);
 
-    // DropdownOption object; updates selected patient using initials when clicked
+    // DropdownOption object; updates selectedPatient and selectedPatientID when clicked
     const PatientDropdownOption = (props) => (
         <Dropdown.Item onClick={() => {
             setSelectedPatient(props.record.initials)
@@ -79,28 +80,22 @@ const CalculatorFramework = () => {
         }}>{props.record.initials}</Dropdown.Item>
     )
 
+    /**
+     * Maps each patient object to a PatientDropdownOption object.
+     * @returns an array of PatientDropdownOption objects containing each patients' initials
+     */
     function patientList() {
         return records.map((record) => {
             return <PatientDropdownOption record={record} />
-        }
-        );
+        });
     }
 
-    // DropdownOption object; updates selected patient using initials when clicked
-    const CalculationDropdownOption = (props) => (
-        <Dropdown.Item onClick={() => {
-            setSelectedCalculation({
-                name: props.calculation.name,
-                component: props.calculation.component,
-            })
-        }}>{props.calculation.name}</Dropdown.Item>
-    )
-
-    function calculationList() {
-        return availableCalculations.map((calculation) => {
-            return <CalculationDropdownOption calculation={calculation} />
-        }
-        );
+    /**
+     * Passed into each component so that they can update the calculatedValue for their valueType
+     * in the calculations object.
+     */
+    function updateCalculatedValue(valueCode, calculatedValue) {
+        calculations[valueCode].calculatedValue = calculatedValue;
     }
 
     return (
@@ -109,23 +104,41 @@ const CalculatorFramework = () => {
                 <div className="main-content">
                     <h3>Calculate</h3>
                     <div id="calc-framework-top-bar">
-
-                        <form>
+                        <form onSubmit={e => submitAll(e, patientObj, calculations)}>
                             <label>
                                 Select Patient:
                                 <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
                             </label>
-                        </form>
+                            <input
+                                type="submit"
+                                value={"Save All Calculations"}
+                            />
 
-                        <form>
-                            <label>
-                                Select Calculation:
-                                <DropdownButton id="dropdown-basic-button" title={selectedCalculation.name}>{calculationList()}</DropdownButton>
-                            </label>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Pvr updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><TranspulGradient updateCalculatedValue={updateCalculatedValue} /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><Dpg updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Papi updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><CardiacIndex patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><Fick updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Weight patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Bsa patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><LaFarge patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Addition updateCalculatedValue={updateCalculatedValue} /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </form>
-
                     </div>
-                    {<selectedCalculation.component patientObj={patientObj} />}
                 </div>
             </div>
         </div>
