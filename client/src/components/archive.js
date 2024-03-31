@@ -19,7 +19,7 @@ const ArchiveRecord = (props) => (
                 Restore
             </button> |
             <DeleteModal
-                id = {props.record._id}/>
+                id={props.record._id} />
         </td>
     </tr>
 );
@@ -44,7 +44,7 @@ function Archive() {
         return;
     }, [records.length]);
 
-    
+
 
     /**
         * Maps out the records into a list of Record components.
@@ -77,26 +77,26 @@ function Archive() {
         });
     }
 
-  
 
-  return (
-    <div>
-        <h3>Archived Patients</h3>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-            <thead>
-                <tr>
-                    <th>Initials</th>
-                    <th>Date of Birth</th>
-                    <th>Sex</th>
-                </tr>
-            </thead>
-            <tbody>{getArchivedRecords()}</tbody>
-        </table>
-        <div className="modal fade" id="">
 
+    return (
+        <div>
+            <h3>Archived Patients</h3>
+            <table className="table table-striped" style={{ marginTop: 20 }}>
+                <thead>
+                    <tr>
+                        <th>Initials</th>
+                        <th>Date of Birth</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody>{getArchivedRecords()}</tbody>
+            </table>
+            <div className="modal fade" id="">
+
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 /**

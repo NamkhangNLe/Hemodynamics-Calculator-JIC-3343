@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function DeleteModal({id}) {
+function DeleteModal({ id }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -14,14 +14,13 @@ function DeleteModal({id}) {
          * @returns {Promise<void>} A promise that resolves when the record is deleted.
          */
   async function deleteRecord(id) {
-    await fetch(`http://localhost:5000/${id}`, {
-        method: "DELETE"});
-    }
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE"
+    });
+  }
 
   return (
     <>
-    {/* {console.log(typeof(id))}
-    {console.log(id)} */}
       <button className="btn btn-link" onClick={handleShow}>Delete</button>
 
       <Modal
@@ -49,11 +48,11 @@ function DeleteModal({id}) {
     </>
   );
 
-    /**
-     * Waits an amount of time
-     * @param {int} ms - Time in milliseconds
-     * @returns
-     */
+  /**
+   * Waits an amount of time
+   * @param {int} ms - Time in milliseconds
+   * @returns
+   */
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
