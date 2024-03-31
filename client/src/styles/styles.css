@@ -5,46 +5,51 @@
 
 .content-container {
   display: flex;
-  min-height: 85vh; /* vh stands for viewport height */
+  min-height: 100vh; /* vh stands for viewport height */
 }
 
 .menu {
-  width: 250px;
-  min-height: 100%;
-  background-color: #012169;
+  width: 100%;
+  min-height: 75%;
+  background-color: #212C65;
   color: #ffffff;
 }
 
 .submenu {
-  width: 250px;
+  width: 100%;
   min-height: 100%;
-  background-color: #012169;
+  background-color: #212C65;
   color: #ffffff;
   &:hover {
-    background-color: #012169;
+    background-color: #212C65;
     color: #29a6cf;
   }
 }
 
 .submenu-item {
   color: #ffffff;
-  background-color: #012169;
+  background-color: #212C65;
   &:hover {
-    background-color: #012169;
-    color: #012169;
+    background-color: #212C65;
+    color: #212C65;
   }
 }
 
+.sidebar {
+  min-height: 100%;
+}
+
 .menu-item {
-  background-color: #012169;
+  background-color: #212C65;
   &:hover {
-    background-color: #012169;
-    color: #012169;
+    background-color: #212C65;
+    color: #212C65;
   }
 }
 
 .main-content {
   flex: 1;
+  padding-top:2%
   /* Additional styles for the main content */
 }
 
