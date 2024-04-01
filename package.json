@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "fortawesome": "^0.0.1-security",
     "react-pro-sidebar": "^0.7.1"
   }
 }
