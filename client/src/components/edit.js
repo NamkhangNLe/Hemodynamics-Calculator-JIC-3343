@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from 'react-router-dom';
 import PatientForm from "./patientForm";
-import Archive from "./archive";
 
 /**
  * Edit component that allows the user to update a record in the database.
