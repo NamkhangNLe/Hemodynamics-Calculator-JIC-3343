@@ -4,6 +4,30 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 # Release Notes
 
+## Version 0.4.0
+
+### Features
+* Created an Archive page to display archived patients with ability to unarchive patients
+* Changed the delete button on the Patients page to an archive button
+* Moved the delete button from the Patients page to the Archive page
+* Added a feature to export a patient's data sto a CSV
+* Updated the calculation page to display and save all calculations at once
+
+### Bug Fixes
+* Removed the Emory logo from the navbar and moved it into the sidebar.
+* Removed the navigation bar to decrease white space on pages
+
+### Known Issues
+* Patient notes don't display anywhere
+* Trend graphs sometimes flicker when processing lots of data
+* Exported CSV does not show all values for a given timestamp
+* Navigation bar is shown in exported PDFs
+* Patient notes popup is not working
+* Sidebar width does not resize according to screen size
+* Calculate page has excessive padding on the top
+* Deleting a patient does not delete calculations associated with the patient
+* Medication selection should be checkboxes instead of radio buttons
+
 ## Version 0.3.0
 
 ### Features
@@ -49,7 +73,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Fixed bug where getting patient records by patient id did not return any records.
 * DateTime for patient calculation is now a correctly formatted object.
 * Fixed month indexing in edit calculations page.
-* Removed Herobrine. 
+* Removed Herobrine.
 
 ### Known Issues
 * Emory logo still disappears unpredictably
@@ -99,9 +123,9 @@ This basic patient system is the backbone of the application, as users must be a
 
 ## Platform Description and Tech Stack
 
-This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node). 
+This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node).
 
-- **MongoDB:**  MongoDB's document-oriented database allows efficient storage and retrieval of patient profiles, data, and trends. It provides the foundation for our patient database system, and is scalable so that should the application need to expand, we have the capacity to do so. 
+- **MongoDB:**  MongoDB's document-oriented database allows efficient storage and retrieval of patient profiles, data, and trends. It provides the foundation for our patient database system, and is scalable so that should the application need to expand, we have the capacity to do so.
 - **Express.JS:** Paired with Node, Express allows the creation of RESTful APIs, allowing for efficient and easy access from our backend MongoDB database to our front-end.
 - **React:** React's component-based architecture provides the application with a myriad of easy-to-implement, interactive elements. This provides a foundation for our intuitive UX and UI to be built off of.
 - **Node.JS:** Paired with Express, Node allows us to easily integrate our front-end components with our back-end database through its "JavaScript Everywhere" format.
@@ -116,7 +140,7 @@ To get started with the Hemodynamics Calculator, follow these steps:
 npm -v
 ```
 2. Next, make sure you install the MongoDB, Express, cors, and dotenv with npm:
-   
+
 ```bash
 npm install mongodb express cors dotenv
 ```
