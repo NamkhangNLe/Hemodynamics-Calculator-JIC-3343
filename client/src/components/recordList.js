@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArchive } from '@fortawesome/free-solid-svg-icons';
 const Record = (props) => (
     <tr>
         <td>{props.record.initials}</td>
@@ -14,7 +17,9 @@ const Record = (props) => (
             <Link className="btn btn-link" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
             </Link> |
-            <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
+            <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+            </Link> |
             <button className="btn btn-link"
                 onClick={() => {
                     props.archiveRecord(props.record);
@@ -22,7 +27,7 @@ const Record = (props) => (
                     sleep(500).then(() => { window.location.reload(); });
                 }}
             >
-                Archive
+                <FontAwesomeIcon icon={faArchive} />
             </button>
         </td>
     </tr>
