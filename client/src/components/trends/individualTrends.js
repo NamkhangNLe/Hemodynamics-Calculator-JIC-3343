@@ -5,7 +5,6 @@ import React, { useState } from "react";
 const IndividualTrends = () => {
     const { id } = useParams();
 
-    const [addition, setAddition] = useState(true);
     const [svr, setSvr] = useState(false);
     const [pvr, setPvr] = useState(false);
     const [transpulGradient, setTranspulGradient] = useState(false);
@@ -54,17 +53,6 @@ const IndividualTrends = () => {
                             End Date:
                             <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                         </label>
-                    </div>
-                    <div>
-                        <input
-                            type="checkbox"
-                            value={addition}
-                            id="addition"
-                            name="trends"
-                            onChange={(e) => setAddition(!addition)}
-                            checked={addition}
-                        />
-                        <label for="addition"> Addition </label>
                     </div>
                     <div>
                         <input
@@ -177,8 +165,8 @@ const IndividualTrends = () => {
         window.print();
     }
 
-    
-    return(
+
+    return (
         <div>
             <div>
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
@@ -188,7 +176,6 @@ const IndividualTrends = () => {
 
             {trendOptions()}
             <hr />
-            {addition && <TrendTableEntry id={id} calculation={"Addition"} startDate={startDate} endDate={endDate} />}
             {svr && <TrendTableEntry id={id} calculation={"Systemic Vasuclar Resistance"} startDate={startDate} endDate={endDate} />}
             {pvr && <TrendTableEntry id={id} calculation={"Pulmonary Vascular Resistance"} startDate={startDate} endDate={endDate} />}
             {transpulGradient && <TrendTableEntry id={id} calculation={"Transpulmonary Gradient"} startDate={startDate} endDate={endDate} />}

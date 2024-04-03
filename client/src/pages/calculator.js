@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { submitAll } from "../utils/calculationUtils.js";
 
-import Addition from "../components/calculations/addition";
 import Svr from "../components/calculations/svr";
 import Pvr from "../components/calculations/pvr";
 import TranspulGradient from "../components/calculations/transpulGradient";
@@ -18,7 +17,6 @@ import "../styles/styles.css"
 
 const CalculatorFramework = () => {
     const calculations = {
-        ADD: { valueType: "Addition", calculatedValue: "" },
         SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
         PVR: { valueType: "Pulmonary Vascular Resistance", calculatedValue: "" },
         TPG: { valueType: "Transpulmonary Gradient", calculatedValue: "" },
@@ -133,7 +131,6 @@ const CalculatorFramework = () => {
                                     </tr>
                                     <tr>
                                         <td><LaFarge patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Addition updateCalculatedValue={updateCalculatedValue} /></td>
                                     </tr>
                                 </tbody>
                             </table>
