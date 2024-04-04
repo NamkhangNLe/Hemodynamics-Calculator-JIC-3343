@@ -25,7 +25,8 @@ const Trends = () => {
                 return;
             }
             const records = await response.json();
-            setRecords(records);
+            const active_records = records.filter((record) => record.archived === false);
+            setRecords(active_records);
         }
 
         getRecords();
