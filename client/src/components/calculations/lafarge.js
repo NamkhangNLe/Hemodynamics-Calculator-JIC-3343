@@ -40,10 +40,10 @@ export default function LaFarge({ patientObj, updateCalculatedValue }) {
             <form>
                 <h2>{valueType}</h2>
                 <div>
-                    Age: <input name="age" placeholder="Ex: ?" type="number" value={age} onChange={e => setAge(e.target.value)} />
+                    Age (Years): <input name="age" placeholder="Ex: 21" type="number" value={age} onChange={e => setAge(e.target.value)} />
                 </div>
                 <div>
-                    Heart Rate (bpm): <input name="hr" placeholder="Ex: ?" type="number" value={hr} onChange={e => setHr(e.target.value)} />
+                    Heart Rate (bpm): <input name="hr" placeholder="Ex: 80" type="number" value={hr} onChange={e => setHr(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
