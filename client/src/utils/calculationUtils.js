@@ -80,7 +80,7 @@ export async function submitAll(event, patientObj, calculations) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(newCalculation),
-        }).then();
+        });
     }
 
     const numTotalCalculations = Object.keys(calculations).length;

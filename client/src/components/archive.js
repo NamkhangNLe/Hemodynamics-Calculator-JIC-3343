@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DeleteModal from "./deleteModal";
 
-
 const ArchiveRecord = (props) => (
     <tr>
-        {console.log(props.record)}
         <td>{props.record.initials}</td>
         <td>{props.record.dob}</td>
         <td>{props.record.sex}</td>
@@ -12,7 +10,7 @@ const ArchiveRecord = (props) => (
             <button className="btn btn-link"
                 onClick={() => {
                     props.restoreRecord(props.record);
-                    // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
+                    // CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
                     sleep(500).then(() => { window.location.reload(); });
                 }}
             >
@@ -24,9 +22,7 @@ const ArchiveRecord = (props) => (
     </tr>
 );
 
-
 function Archive() {
-
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
@@ -43,8 +39,6 @@ function Archive() {
         getRecords();
         return;
     }, [records.length]);
-
-
 
     /**
         * Maps out the records into a list of Record components.
@@ -76,8 +70,6 @@ function Archive() {
             },
         });
     }
-
-
 
     return (
         <div>

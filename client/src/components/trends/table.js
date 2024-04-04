@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
 const Table = ({ URL, filter, chartId, height, width, name }) => {
-
     // Sets SDK for the chart
     const sdk = new ChartsEmbedSDK({ baseUrl: URL });
 
@@ -36,10 +35,7 @@ const Table = ({ URL, filter, chartId, height, width, name }) => {
      */
     const exportToCSV = () => {
         chart.getData().then(data => {
-
-            console.log(data.documents);
             const csv = convertToCSV(data.documents);
-            console.log(csv);
 
             const blob = new Blob([csv], { type: 'text/csv' });
             const link = document.createElement('a');
@@ -70,8 +66,6 @@ const Table = ({ URL, filter, chartId, height, width, name }) => {
 
         return csvRows.join('\n');
     };
-
-
 
     return (
         <div>

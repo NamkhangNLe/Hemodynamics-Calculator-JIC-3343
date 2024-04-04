@@ -95,7 +95,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
     .collection("records")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log("1 document updated");
+      // console.log("1 document updated");
       response.json(res);
     });
 });
@@ -108,7 +108,7 @@ recordRoutes.route("/:id").delete((req, response) => {
     .collection("records")
     .deleteOne(myquery, function (err, obj) {
       if (err) throw err;
-      console.log("1 document deleted");
+      // console.log("1 document deleted");
       response.json(obj);
     });
 });
