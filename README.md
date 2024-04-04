@@ -1,6 +1,6 @@
 # Hemodynamics Calculator - Emory School of Medicine
 
-Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's Cardiac ICU, this tool is desgined to assist healthcare professionals and clinicians in the ICU, providing a streamlined, user-friendly interface to calculate, track, and analyze hemodynamic values and trends for patients.
+Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's Cardiac ICU, this tool is designed to assist healthcare professionals and clinicians in the ICU, providing a streamlined, user-friendly interface to calculate, track, and analyze hemodynamic values and trends for patients.
 
 # Release Notes
 
@@ -10,7 +10,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Created an Archive page to display archived patients with ability to unarchive patients
 * Changed the delete button on the Patients page to an archive button
 * Moved the delete button from the Patients page to the Archive page
-* Added a feature to export a patient's data sto a CSV
+* Added a feature to export a patient's data to a CSV file
 * Updated the calculation page to display and save all calculations at once
 
 ### Bug Fixes
@@ -38,7 +38,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Implemented time window selection for trend graphs/tables
 
 ### Bug Fixes
-* General refinements and polishing to the sidebar css
+* General refinements and polishing to the sidebar CSS
 * Fixed an issue where graphs weren't appearing correctly on the trends page
 * Fixed an issue where page wouldn't adjust to fit all new trend graphs
 
@@ -51,16 +51,16 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 ### Features
 * All hemodynamics formulas added as frontend components:
-   * VO2 by LeFarge Equation
-   * VO2 by body surface area
-   * VO2 by weight
+   * VO2 by LaFarge Equation
+   * VO2 by Body Surface Area
+   * VO2 by Weight
    * FICK Cardiac Output
    * Cardiac Index
    * Systemic Vascular Resistance
-   * Pulminary Vascular Resistance
-   * Transpulminary gradient
+   * Pulmonary Vascular Resistance
+   * Transpulmonary gradient
    * Diastolic Pulmonary Gradient
-   * Pulminary Artery Pulsatilic Index
+   * Pulmonary Artery Pulsatility Index
 * Fleshed out calculator page with dropdown menu for patient and calculator values.
 * Calculator components update the calculated value in real time with proper error handling.
 * Added functionality to save particular calculations to a selected patient.
@@ -86,7 +86,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Edit patient screen updated to match create patient screen.
 * Calculator page added.
 * Added "selected patient" functionality using dropdown on Calculator page.
-* Added funcitonality for saving calculated values to database with unique patient id.
+* Added functionality for saving calculated values to database with unique patient id.
 * Sidebar color changed to blue.
 * Patient history page added.
 * Added functionality for editing calculated values and associated fields on patient history screen.
