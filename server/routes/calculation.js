@@ -40,7 +40,7 @@ calcuationRoutes.route("/calculation/:id").get(function (req, response) {
 
 // This section will help you create a new record.
 calcuationRoutes.route("/calculation/add").post(function (req, response) {
-  //  console.log("back", req.body)
+  // console.log("back", req.body)
   let db_connect = dbo.getDb();
   let myobj = {
     patient_id: req.body.selectedPatientID,
