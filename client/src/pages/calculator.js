@@ -5,7 +5,7 @@ import { submitAll } from "../utils/calculationUtils.js";
 import Addition from "../components/calculations/addition";
 import Svr from "../components/calculations/svr";
 import Pvr from "../components/calculations/pvr";
-import TranspulGradient from "../components/calculations/transpulGradient";
+import Tpg from "../components/calculations/tpg.js";
 import Dpg from "../components/calculations/dpg";
 import Papi from "../components/calculations/papi";
 import CardiacIndex from "../components/calculations/ci";
@@ -119,7 +119,7 @@ const CalculatorFramework = () => {
                                     <tr>
                                         <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
                                         <td><Pvr updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><TranspulGradient updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Tpg updateCalculatedValue={updateCalculatedValue} /></td>
                                     </tr>
                                     <tr>
                                         <td><Dpg updateCalculatedValue={updateCalculatedValue} /></td>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function TranspulGradient({ updateCalculatedValue }) {
+export default function Tpg({ updateCalculatedValue }) {
     const [map, setMap] = useState("");
     const [pcwp, setPcwp] = useState("");
 
