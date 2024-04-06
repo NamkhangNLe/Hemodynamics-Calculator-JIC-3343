@@ -1,4 +1,6 @@
 import React from "react";
+
+import Navbar from "../components/navbar";
 import SidebarComp from "../components/sidebar";
 
 // This page component includes the navbar and sidebar components.

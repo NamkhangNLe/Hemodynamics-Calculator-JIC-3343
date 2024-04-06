@@ -93,7 +93,7 @@ export default function Create() {
             }
 
             // If the fetch request is successful, log the response (optional).
-            // console.log('Record added successfully:', await response.json());
+            console.log('Record added successfully:', await response.json());
 
             // Reset the form state to empty values.
             setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: "", notes: "" });
