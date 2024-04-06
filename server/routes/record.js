@@ -111,6 +111,14 @@ recordRoutes.route("/:id").delete((req, response) => {
       // console.log("1 document deleted");
       response.json(obj);
     });
+
+  let calcQuery = { patient_id: req.params.id };
+  db_connect
+    .collection("calculations")
+    .deleteMany(calcQuery, function (err, obj) {
+      if (err) throw err;
+      response.json(obj);
+    });
 });
 
 module.exports = recordRoutes;
