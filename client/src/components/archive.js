@@ -37,6 +37,7 @@ function Archive() {
             setRecords(records);
         }
         getRecords();
+        return;
     }, [records.length]);
 
     /**
@@ -44,7 +45,7 @@ function Archive() {
         * @returns {JSX.Element[]} An array of JSX elements representing the records.
         */
     function getArchivedRecords() {
-        const archived = records.filter((record) => record.archived);
+        const archived = records.filter((record) => record.archived === true);
         return archived.map((record) => {
             return (
                 <ArchiveRecord
@@ -62,7 +63,7 @@ function Archive() {
         };
 
         fetch(`http://localhost:5000/update/${record._id}`, {
-            method: "PATCH",
+            method: "POST",
             body: JSON.stringify(restoredPerson),
             headers: {
                 'Content-Type': 'application/json'

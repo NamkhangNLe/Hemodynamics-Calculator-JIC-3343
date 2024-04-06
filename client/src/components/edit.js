@@ -106,16 +106,16 @@ export default function Edit() {
             archived: form.archived
         };
 
+        redirectConfirmation(); // Navigate back to the home page.
+        // Sends a post request to update the data in the database.
+
         fetch(`http://localhost:5000/update/${params.id}`, {
-            method: "PATCH",
+            method: "POST",
             body: JSON.stringify(editedPerson),
             headers: {
                 'Content-Type': 'application/json'
             },
         });
-
-        redirectConfirmation(); // Navigate back to the home page.
-        // Sends a post request to update the data in the database.
     }
 
     // Displays the form that takes input from the user to update the data.

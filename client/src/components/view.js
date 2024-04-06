@@ -185,7 +185,7 @@ export default function View() {
         };
 
         fetch(`http://localhost:5000/updatecalc/${editingID}`, {
-            method: "PATCH",
+            method: "POST",
             body: JSON.stringify(editedCalculation),
             headers: {
                 'Content-Type': 'application/json'
