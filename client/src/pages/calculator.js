@@ -32,6 +32,7 @@ const CalculatorFramework = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [patientObj, setPatientObj] = useState();
+    const [selectedPatientRecord, setSelectedPatientRecord] = useState();
 
     const [records, setRecords] = useState([]);
 
@@ -73,10 +74,11 @@ const CalculatorFramework = () => {
     // DropdownOption object; updates selectedPatient and selectedPatientID when clicked
     const PatientDropdownOption = (props) => (
         <Dropdown.Item onClick={() => {
-            setSelectedPatient(props.record.initials)
-            setSelectedPatientID(props.record._id)
+            setSelectedPatient(props.record.initials);
+            setSelectedPatientID(props.record._id);
+            setSelectedPatientRecord(props.record);
         }}>{props.record.initials}</Dropdown.Item>
-    )
+    );
 
     /**
      * Maps each patient object to a PatientDropdownOption object.
@@ -94,6 +96,23 @@ const CalculatorFramework = () => {
      */
     function updateCalculatedValue(valueCode, calculatedValue) {
         calculations[valueCode].calculatedValue = calculatedValue;
+    }
+    /**
+     * Used for displaying Selected Patient's Medications
+     * Converts the medications object to a string.
+     * @returns a string representation of the medications object
+     */
+    let medications = '';
+    if (selectedPatientRecord) {
+        if (Array.isArray(selectedPatientRecord.medications)) {
+            medications = selectedPatientRecord.medications.join(', ');
+        } else if (typeof selectedPatientRecord.medications === 'string') {
+            medications = selectedPatientRecord.medications;
+        } else if (typeof selectedPatientRecord.medications === 'object') {
+            // Convert the object to a string, depending on its structure
+            // This is just an example, adjust it according to your needs
+            medications = JSON.stringify(selectedPatientRecord.medications);
+        }
     }
 
     return (
@@ -113,6 +132,10 @@ const CalculatorFramework = () => {
                             />
 
                             <table>
+                            <label>
+                                Selected Patient's Medications: 
+                                <input type="text" value={medications} readOnly />
+                            </label>
                                 <tbody>
                                     <tr>
                                         <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
