@@ -1,26 +1,31 @@
 const { MongoClient } = require("mongodb");
-const Db = process.env.ATLAS_URI;
-const client = new MongoClient(Db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
+const uri = process.env.ATLAS_URI;
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
-let _db;
+const db = client.db("hemodynamics-calculator");
 
 module.exports = {
-  connectToServer: async function (callback) {
+    connectToServer: async function (callback) {
+        try {
+            // Connect the client to the server
+            await client.connect();
 
-    try {
-      await client.connect();
-    } catch (e) {
-      console.error(e);
-    }
+            // Send a ping to confirm a successful connection
+            await client.db("admin").command({ ping: 1 });
+            console.log(
+                "Pinged your deployment. You successfully connected to MongoDB!"
+            );
+        } catch (err) {
+            console.error(err);
+        }
 
-    _db = client.db("hemodynamics-calculator");
-
-    return (_db === undefined ? false : true);
-  },
-  getDb: function () {
-    return _db;
-  },
+        return (db === undefined ? false : true);
+    },
+    getDb: function () {
+        return db;
+    },
 };

@@ -63,7 +63,7 @@ export default function RecordList() {
         };
 
         fetch(`http://localhost:5000/update/${record._id}`, {
-            method: "POST",
+            method: "PATCH",
             body: JSON.stringify(archivedPerson),
             headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ export default function RecordList() {
      * @returns {JSX.Element[]} An array of JSX elements representing the records.
      */
     function recordList() {
-        const activePatients = records.filter((record) => record.archived === false);
+        const activePatients = records.filter((record) => !record.archived);
         return activePatients.map((record) => {
             return (
                 <Record
