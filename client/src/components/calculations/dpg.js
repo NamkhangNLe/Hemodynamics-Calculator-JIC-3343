@@ -30,11 +30,11 @@ export default function Dpg({ updateCalculatedValue }) {
             <form>
                 <h2>{valueType}</h2>
                 <div>
-                    Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+                    Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" placeholder="Ex: 12" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
 
                 </div>
                 <div>
-                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="pcwp" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="pcwp" placeholder="Ex: 5" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg

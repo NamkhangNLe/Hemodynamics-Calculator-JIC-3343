@@ -30,7 +30,7 @@ export default function Weight({ patientObj, updateCalculatedValue }) {
             <form>
                 <h2>{valueType}</h2>
                 <div>
-                    Weight (kg): <input name="weight" placeholder="Ex: 120 lbs" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
+                    Weight (kg): <input name="weight" placeholder="Ex: 120" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
                 </div>
                 <div>
                     Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
