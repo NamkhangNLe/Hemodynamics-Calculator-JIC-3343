@@ -87,8 +87,6 @@ export async function submitAll(event, patientObj, calculations) {
     const numInvalidCalculations = missingInputs.length + badOutputs.length;
     const numValidCalculations = numTotalCalculations - (numInvalidCalculations);
 
-    console.log(calculations);
-
     if (numInvalidCalculations !== 0) {
         messageAnimation(
             `${arrString("Missing input", missingInputs)}`
