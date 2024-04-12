@@ -86,7 +86,7 @@ export default function Create() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newPerson),
-            }).then(sleep(100).then(redirectConfirmation));
+            }).then(redirectConfirmation);
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -111,13 +111,4 @@ export default function Create() {
             <PatientForm form={form} onSubmit={onSubmit} updateForm={updateForm} mode="Create" />
         </div>
     );
-}
-
-/**
-   * Waits an amount of time
-   * @param {int} ms - Time in milliseconds
-   * @returns
-   */
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
