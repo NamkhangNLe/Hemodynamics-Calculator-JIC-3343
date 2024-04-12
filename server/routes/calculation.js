@@ -17,7 +17,7 @@ const ObjectId = require("mongodb").ObjectId;
 calcuationRoutes.get("/calculation", async (req, res) => {
     const collection = await db.collection("calculations");
     const results = await collection.find({}).toArray();
-    res.send(results).status(200);
+    res.send(results).status(200); // OK
 });
 
 // This section will help you get a list of all the calculations for a specific patient by patient_id.
@@ -26,8 +26,8 @@ calcuationRoutes.get("/calculation/:id", async (req, res) => {
     const collection = await db.collection("calculations");
     const results = await collection.find(query).toArray();
 
-    if (!results) res.send("Not found").status(404);
-    else res.send(results).status(200);
+    if (!results) res.send("Not found").status(404); // Not Found
+    else res.send(results).status(200); // OK
 });
 
 // This section will help you create a new record.
@@ -42,10 +42,10 @@ calcuationRoutes.post("/calculation/add", async (req, res) => {
 
         const collection = await db.collection("calculations");
         const result = await collection.insertOne(newPatient);
-        res.send(result).status(204);
+        res.send(result).status(204); // No Content
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error adding record");
+        res.status(500).send("Error adding record"); // Internal Server Error
     }
 });
 
@@ -64,10 +64,10 @@ calcuationRoutes.patch("/updatecalc/:id", async (req, res) => {
 
         const collection = await db.collection("calculations");
         const result = await collection.updateOne(query, updates);
-        res.send(result).status(200);
+        res.send(result).status(200); // OK
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error updating record");
+        res.status(500).send("Error updating record"); // Internal Server Error
     }
 });
 
@@ -77,10 +77,10 @@ calcuationRoutes.delete("/:id", async (req, res) => {
         const query = { _id: new ObjectId(req.params.id) };
         const collection = await db.collection("calculations");
         const result = await collection.deleteOne(query);
-        res.send(result).status(200);
+        res.send(result).status(200); // OK
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error deleting record");
+        res.status(500).send("Error deleting record"); // Internal Server Error
     }
 });
 

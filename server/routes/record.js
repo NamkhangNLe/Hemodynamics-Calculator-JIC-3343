@@ -17,7 +17,7 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.get("/record", async (req, res) => {
     const collection = await db.collection("records");
     const results = await collection.find({}).toArray();
-    res.send(results).status(200);
+    res.send(results).status(200); // OK
 });
 
 // This section will help you get a record for a specific patient by patient_id.
@@ -27,7 +27,7 @@ recordRoutes.get("/record/:id", async (req, res) => {
     const result = await collection.findOne(query);
 
     if (!result) res.send("Not found").status(404);
-    else res.send(result).status(200);
+    else res.send(result).status(200); // OK
 });
 
 // This section will help you create a new record.
@@ -53,10 +53,10 @@ recordRoutes.post("/record/add", async (req, res) => {
 
         const collection = await db.collection("records");
         const result = await collection.insertOne(newPatient);
-        res.send(result).status(204);
+        res.send(result).status(204); // No Content
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error adding record");
+        res.status(500).send("Error adding record"); // Internal Server Error
     }
 });
 
@@ -87,10 +87,10 @@ recordRoutes.patch("/update/:id", async (req, res) => {
 
         const collection = await db.collection("records");
         const result = await collection.updateOne(query, updates);
-        res.send(result).status(200);
+        res.send(result).status(200); // OK
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error updating record");
+        res.status(500).send("Error updating record"); // Internal Server Error
     }
 });
 
@@ -100,15 +100,14 @@ recordRoutes.delete("/:id", async (req, res) => {
         const recordsQuery = { _id: new ObjectId(req.params.id) };
         const recordsCollection = await db.collection("records");
         const result1 = await recordsCollection.deleteOne(recordsQuery);
-        res.send(result1).status(200);
+        res.send(result1).status(200); // OK
 
         const calculationsQuery = { patient_id: req.params.id };
         const calculationsCollection = await db.collection("calculations");
-        const result2 = calculationsCollection.deleteMany(calculationsQuery)
-        // res.send(result2).status(200);
+        const result2 = await calculationsCollection.deleteMany(calculationsQuery);
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error deleting record");
+        res.status(500).send("Error deleting record"); // Internal Server Error
     }
 });
 
