@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Dpg({ updateCalculatedValue }) {
-    const [padp, setPadp] = useState("");
-    const [pcwp, setPcwp] = useState("");
-
+export default function Dpg({ updateCalculatedValue, padp, pcwp, setPadp, setPcwp }) {
     const valueType = "Diastolic Pulmonary Gradient";
     const valueCode = "DPG";
     const [calculatedValue, setCalculatedValue] = useState("");

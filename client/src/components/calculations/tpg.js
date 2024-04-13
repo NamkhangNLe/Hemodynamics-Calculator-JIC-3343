@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Tpg({ updateCalculatedValue }) {
-    const [map, setMap] = useState("");
-    const [pcwp, setPcwp] = useState("");
-
+export default function Tpg({ updateCalculatedValue, map, pcwp, setMap, setPcwp }) {
     const valueType = "Transpulmonary Gradient";
     const valueCode = "TPG";
     const [calculatedValue, setCalculatedValue] = useState("");

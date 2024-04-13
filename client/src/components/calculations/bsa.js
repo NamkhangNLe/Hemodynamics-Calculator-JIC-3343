@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Bsa({ patientObj, updateCalculatedValue }) {
-    const [bsa, setBsa] = useState("");
-
+export default function Bsa({ updateCalculatedValue, bsa, setBsa }) {
     const valueType = "VO2 by BSA";
     const valueCode = "BSA";
     const [calculatedValue, setCalculatedValue] = useState("");
@@ -12,8 +10,6 @@ export default function Bsa({ patientObj, updateCalculatedValue }) {
 
     useEffect(() => {
         setPlaceholderText((bsa === "") ? "Enter calculation inputs" : "Missing input");
-
-        setBsa((patientObj !== undefined) ? patientObj.bsa : bsa);
 
         if (bsa === "") {
             setCalculatedValue("");
@@ -24,7 +20,7 @@ export default function Bsa({ patientObj, updateCalculatedValue }) {
         const result = +(+bsa * 125).toFixed(3);
         setCalculatedValue(result);
         updateCalculatedValue(valueCode, result);
-    }, [bsa, patientObj]);
+    }, [bsa]);
 
     return (
         <div>
