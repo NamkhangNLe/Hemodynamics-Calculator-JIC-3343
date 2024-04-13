@@ -16,9 +16,7 @@ const IndividualTrends = () => {
     const [bsa, setBsa] = useState(false);
     const [lafarge, setLafarge] = useState(false);
 
-    // Default start date
     const defaultStartDate = "2023-01-01";
-    // Default end date (current date)
     const defaultEndDate = getCurrentDate();
 
     // State variables for start date and end date
@@ -165,6 +163,109 @@ const IndividualTrends = () => {
         window.print();
     }
 
+    async function getRecords() {
+        const response = await fetch(`http://localhost:5000/calculation/${id}`);
+
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+        }
+
+        return response.json();
+    }
+
+    function getUniqueDates(calculations) {
+        const dates = [];
+
+        for (let calc of calculations) {
+            const date = new Date(calc.date);
+
+            if (!dates.includes(date.getTime())) {
+                dates.push(date.getTime());
+            }
+        }
+
+        return dates;
+    }
+
+    async function mapTimeToCalculations() {
+        let calcsFromDb = await getRecords();
+
+        let calculations = {};
+
+        const uniqueDates = getUniqueDates(calcsFromDb);
+        for (let date of uniqueDates) {
+            calculations[date] = {};
+        }
+
+        for (let calc of calcsFromDb) {
+            let time = new Date(calc.date).getTime();
+            calculations[time][calc.valueType] = calc.calculatedValue;
+        }
+
+        return calculations;
+    }
+
+    async function convertCalculationsToCSV() {
+        const mapping = await mapTimeToCalculations();
+        const csvRows = [];
+
+        const codeToName = {
+            SVR: "Systemic Vasuclar Resistance",
+            PVR: "Pulmonary Vascular Resistance",
+            TPG: "Transpulmonary Gradient",
+            DPG: "Diastolic Pulmonary Gradient",
+            PAPI: "Pulmonary Artery Pulsatility Index",
+            CI: "Cardiac Index",
+            CO: "Fick Cardiac Output",
+            VO2W: "VO2 by Weight",
+            BSA: "VO2 by BSA",
+            VO2L: "VO2 by LaFarge Equation"
+        };
+
+        // const headers = ["Date", "Time", "SVR", "PVR", "TPG", "DPG", "PAPI", "CI", "CI", "VO2W", "BSA", "VO2L"];
+        csvRows.push("Date,Time," + Object.keys(codeToName).join(", "));
+
+        for (let time of Object.keys(mapping)) {
+            const calculations = mapping[time];
+
+            const date = new Date(+time);
+            const year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            month = month < 10 ? '0' + month : month;
+            let day = date.getDate();
+            day = day < 10 ? '0' + day : day;
+            let hours = date.getHours();
+            hours = hours < 10 ? '0' + hours : hours;
+            let minutes = date.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            let seconds = date.getSeconds();
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const values = [];
+
+            values.push(`${year}-${month}-${day}`); // YYYY-MM-DD
+            values.push(`${hours}:${minutes}:${seconds}`); // HH:MM:SS
+            for (let code of Object.keys(codeToName)) {
+                let value = calculations[codeToName[code]];
+                values.push(code + " " + (value === undefined ? "---" : value));
+            }
+
+            csvRows.push(values.join(", "));
+        }
+
+        return csvRows.join("\n");
+    }
+
+    async function exportToCSV() {
+        const blob = new Blob([await convertCalculationsToCSV()], { type: 'text/csv' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `calculations_${id}.csv`;
+        link.click();
+    }
+
 
     return (
         <div>
@@ -172,6 +273,7 @@ const IndividualTrends = () => {
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
                 <Link to="/trends"> <button> View Other Patient Trends </button></Link>
                 <button onClick={handlePrint}>Save as PDF</button>
+                <button onClick={exportToCSV}>Export to CSV</button>
             </div>
 
             {trendOptions()}

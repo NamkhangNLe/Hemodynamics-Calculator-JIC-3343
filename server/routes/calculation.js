@@ -32,9 +32,12 @@ calcuationRoutes.get("/calculation/:id", async (req, res) => {
 
 // This section will help us create a new calculation.
 calcuationRoutes.post("/calculation/add", async (req, res) => {
+    const currentDate = new Date();
+    currentDate.setMilliseconds(0); // NOTE: assumes the same calculation won't be calculated for the same patient more than once per second
+
     const newPatient = {
         patient_id: req.body.selectedPatientID,
-        date: new Date(),
+        date: currentDate,
         valueType: req.body.valueType,
         calculatedValue: req.body.calculatedValue,
     };
@@ -52,10 +55,12 @@ calcuationRoutes.post("/calculation/add", async (req, res) => {
 // This section will help us update the date, valuetype/formula, and value for a calculation by _id.
 calcuationRoutes.patch("/updatecalc/:id", async (req, res) => {
     const query = { _id: new ObjectId(req.params.id) };
+    const updatedDate = new Date(req.body.date);
+    updatedDate.setMilliseconds(0); // NOTE: assumes the same calculation won't be calculated for the same patient more than once per second
 
     const updates = {
         $set: {
-            date: new Date(req.body.date),
+            date: updatedDate,
             valueType: req.body.valueType,
             calculatedValue: req.body.calculatedValue
         },

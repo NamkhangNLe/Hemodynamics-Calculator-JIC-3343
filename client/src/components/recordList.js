@@ -53,7 +53,6 @@ export default function RecordList() {
             setRecords(records);
         }
         getRecords();
-        return;
     }, [records.length]);
 
     async function archiveRecord(record) {
