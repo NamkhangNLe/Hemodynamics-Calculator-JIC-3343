@@ -133,10 +133,10 @@ const CalculatorFramework = () => {
                             />
 
                             <table>
-                            <label>
-                                Selected Patient's Medications: 
-                                <input type="text" value={medications} readOnly />
-                            </label>
+                                <label>
+                                    Selected Patient's Medications:
+                                    <input type="text" value={medications} readOnly />
+                                </label>
                                 <tbody>
                                     <tr>
                                         <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
