@@ -117,50 +117,46 @@ const CalculatorFramework = () => {
     }
 
     return (
-        <div className="app-container">
-            <div className="content-container">
-                <div className="main-content">
-                    <h3>Calculate</h3>
-                    <div id="calc-framework-top-bar">
-                        <form onSubmit={e => submitAll(e, patientObj, calculations)}>
-                            <label>
-                                Select Patient:
-                                <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                            </label>
-                            <input
-                                type="submit"
-                                value={"Save All Calculations"}
-                            />
+        <div>
+            <h3>Calculate</h3>
+            <div id="calc-framework-top-bar">
+                <form onSubmit={e => submitAll(e, patientObj, calculations)}>
+                    <label>
+                        Select Patient:
+                        <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+                    </label>
+                    <input
+                        type="submit"
+                        value={"Save All Calculations"}
+                    />
 
-                            <table>
-                                <label>
-                                    Selected Patient's Medications:
-                                    <input type="text" value={medications} readOnly />
-                                </label>
-                                <tbody>
-                                    <tr>
-                                        <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Pvr updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Tpg updateCalculatedValue={updateCalculatedValue} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Dpg updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Papi updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><CardiacIndex patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Fick updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Weight patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Bsa patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><LaFarge patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
+                    <table>
+                        <label>
+                            Selected Patient's Medications:
+                            <input type="text" value={medications} readOnly />
+                        </label>
+                        <tbody>
+                            <tr>
+                                <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><Pvr updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><Tpg updateCalculatedValue={updateCalculatedValue} /></td>
+                            </tr>
+                            <tr>
+                                <td><Dpg updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><Papi updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><CardiacIndex patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                            </tr>
+                            <tr>
+                                <td><Fick updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><Weight patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                <td><Bsa patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                            </tr>
+                            <tr>
+                                <td><LaFarge patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     );
