@@ -1,6 +1,8 @@
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function DeleteModal({ id }) {
     const [show, setShow] = useState(false);
@@ -21,7 +23,9 @@ function DeleteModal({ id }) {
 
     return (
         <>
-            <button className="btn btn-link" onClick={handleShow}>Delete</button>
+            <button className="btn btn-link" title="Delete Record" onClick={handleShow}>
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
 
             <Modal
                 show={show}
