@@ -92,6 +92,7 @@ export default function RecordList() {
     return (
         <div>
             <h3>Patient List</h3>
+            <p className="subheading">View, edit, or create all saved patient profiles.</p>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>

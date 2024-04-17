@@ -54,6 +54,7 @@ const Trends = () => {
     return (
         <div>
             <h3>Patient Trends</h3>
+            <p className="subheading">View patient trends for selected calculations.</p>
             <form>
                 <label>
                     Select Patient:

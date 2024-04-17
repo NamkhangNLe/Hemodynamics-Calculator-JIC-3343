@@ -207,7 +207,8 @@ export default function View() {
     // For front-end team: patientCalculations is a JSON. You can parse it however you want to display it.
     return (
         <div>
-            <h3>View Patient</h3>
+            <h3>View Patient History</h3>
+            <p className="subheading">History of all calculations saved on a patient profile.</p>
             <div>
                 <h4>Calculation History</h4>
 

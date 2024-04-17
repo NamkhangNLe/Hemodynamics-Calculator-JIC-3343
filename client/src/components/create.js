@@ -107,6 +107,7 @@ export default function Create() {
     return (
         <div>
             <h3> New Patient Profile</h3>
+            <p className="subheading">Create patient profile.</p>
             <span style={{ fontStyle: "italic", color: "gray" }}> <span style={{ color: "red" }}>*</span> = required field</span>
             <PatientForm form={form} onSubmit={onSubmit} updateForm={updateForm} mode="Create" />
         </div>
