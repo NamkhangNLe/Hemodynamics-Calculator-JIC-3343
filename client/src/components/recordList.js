@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
+import NotesModal from "./notesModal";
 const Record = (props) => (
     <tr>
         <td>{props.record.initials}</td>
@@ -17,6 +17,7 @@ const Record = (props) => (
             <Link className="btn btn-link" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
             </Link> |
+            <NotesModal id ={props.record._id} /> |
             <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
                 <FontAwesomeIcon icon={faPencilAlt} />
             </Link> |
