@@ -28,13 +28,19 @@ export default function Create() {
 
 
     /**
-     * Updates the form state with the provided values.
+     * Updates the form state with the given values.
      * @param {Object} value - The values to update the form state with.
-     * @returns {void}
      */
     function updateForm(value) {
-        // Use the spread operator to merge the previous state with the new values.
         return setForm((prev) => {
+            if (value.medications) {
+
+                const updatedMedications = prev.medications.includes(value.medications)
+                    ? prev.medications.filter(med => med !== value.medications)
+                    : [...prev.medications, value.medications];
+
+                return { ...prev, medications: updatedMedications };
+            }
             return { ...prev, ...value };
         });
     }
