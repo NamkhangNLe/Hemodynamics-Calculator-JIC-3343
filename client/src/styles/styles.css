@@ -110,6 +110,10 @@ form {
   padding: 20px;
 }
 
+.subheading {
+  font-style: italic;
+}
+
 .submit-form-section {
   margin: 0 auto;
   padding: 10px;

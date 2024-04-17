@@ -122,6 +122,7 @@ export default function Edit() {
     return (
         <div className="form-div">
             <h3> Edit Patient Profile</h3>
+            <p className="subheading">Edit patient profile.</p>
             <span style={{ fontStyle: "italic", color: "gray" }}> <span style={{ color: "red" }}>*</span> = required field</span>
             <PatientForm form={form} onSubmit={onSubmit} updateForm={updateForm} mode="Update" />
         </div>

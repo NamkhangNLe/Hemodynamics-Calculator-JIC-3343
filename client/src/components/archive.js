@@ -78,6 +78,7 @@ function Archive() {
     return (
         <div>
             <h3>Archived Patients</h3>
+            <p className="subheading">Archived patients are not available to be used for calculations.</p>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>

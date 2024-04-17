@@ -145,6 +145,7 @@ const CalculatorFramework = () => {
     return (
         <div>
             <h3>Calculate</h3>
+            <p className="subheading">Calculate hemodynamic values and save them to patient profiles.</p>
             <div id="calc-framework-top-bar">
                 <form onSubmit={e => submitAll(e, patientObj, calculations)}>
                     <label>
