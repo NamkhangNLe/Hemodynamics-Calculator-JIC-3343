@@ -57,15 +57,6 @@ function NotesModal({ id }) {
             </Modal>
         </>
     );
-
-    /**
-     * Waits an amount of time
-     * @param {int} ms - Time in milliseconds
-     * @returns
-     */
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 }
 
 export default NotesModal;
