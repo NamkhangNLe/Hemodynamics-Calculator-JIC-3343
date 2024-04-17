@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Fick({ updateCalculatedValue }) {
-    const [vo2, setVo2] = useState("");
-    const [hb, setHb] = useState("");
-    const [satA, setSatA] = useState("");
-    const [satMV, setSatMV] = useState("");
-
+export default function Fick({ updateCalculatedValue, vo2, hb, satA, satMV, setVo2, setHb, setSatA, setSatMV }) {
     const valueType = "Fick Cardiac Output";
     const valueCode = "CO";
     const [calculatedValue, setCalculatedValue] = useState("");

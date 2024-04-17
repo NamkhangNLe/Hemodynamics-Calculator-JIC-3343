@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Pvr({ updateCalculatedValue }) {
-    const [pap, setPap] = useState("");
-    const [wedge, setWedge] = useState("");
-    const [co, setCo] = useState("");
-
+export default function Pvr({ updateCalculatedValue, pap, wedge, co, setPap, setWedge, setCo }) {
     const valueType = "Pulmonary Vascular Resistance";
     const valueCode = "PVR";
     const [calculatedValue, setCalculatedValue] = useState("");

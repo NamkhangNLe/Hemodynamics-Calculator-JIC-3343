@@ -15,26 +15,45 @@ import LaFarge from "../components/calculations/lafarge";
 
 import "../styles/styles.css"
 
-const CalculatorFramework = () => {
-    const calculations = {
-        SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
-        PVR: { valueType: "Pulmonary Vascular Resistance", calculatedValue: "" },
-        TPG: { valueType: "Transpulmonary Gradient", calculatedValue: "" },
-        DPG: { valueType: "Diastolic Pulmonary Gradient", calculatedValue: "" },
-        PAPI: { valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: "" },
-        CI: { valueType: "Cardiac Index", calculatedValue: "" },
-        CO: { valueType: "Fick Cardiac Output", calculatedValue: "" },
-        VO2W: { valueType: "VO2 by Weight", calculatedValue: "" },
-        BSA: { valueType: "VO2 by BSA", calculatedValue: "" },
-        VO2L: { valueType: "VO2 by LaFarge Equation", calculatedValue: "" }
-    };
+const calculations = {
+    SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
+    PVR: { valueType: "Pulmonary Vascular Resistance", calculatedValue: "" },
+    TPG: { valueType: "Transpulmonary Gradient", calculatedValue: "" },
+    DPG: { valueType: "Diastolic Pulmonary Gradient", calculatedValue: "" },
+    PAPI: { valueType: "Pulmonary Artery Pulsatility Index", calculatedValue: "" },
+    CI: { valueType: "Cardiac Index", calculatedValue: "" },
+    CO: { valueType: "Fick Cardiac Output", calculatedValue: "" },
+    VO2W: { valueType: "VO2 by Weight", calculatedValue: "" },
+    BSA: { valueType: "VO2 by BSA", calculatedValue: "" },
+    VO2L: { valueType: "VO2 by LaFarge Equation", calculatedValue: "" }
+};
 
+const CalculatorFramework = () => {
     const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [patientObj, setPatientObj] = useState();
     const [selectedPatientRecord, setSelectedPatientRecord] = useState();
 
     const [records, setRecords] = useState([]);
+
+    const [age, setAge] = useState("");
+    const [bsa, setBsa] = useState("");
+    const [co, setCo] = useState("");
+    const [cvp, setCvp] = useState("");
+    const [hb, setHb] = useState("");
+    const [hr, setHr] = useState("");
+    const [map, setMap] = useState("");
+    const [pap, setPap] = useState("");
+    const [padp, setPadp] = useState("");
+    const [pasp, setPasp] = useState("");
+    const [pcwp, setPcwp] = useState("");
+    const [ra, setRa] = useState("");
+    const [satA, setSatA] = useState("");
+    const [satMV, setSatMV] = useState("");
+    const [sex, setSex] = useState("");
+    const [vo2, setVo2] = useState("");
+    const [wedge, setWedge] = useState("");
+    const [weight, setWeight] = useState("");
 
     // Fetches all patient records from the database.
     useEffect(() => {
@@ -46,12 +65,19 @@ const CalculatorFramework = () => {
                 return;
             }
             const records = await response.json();
-            const active_records = records.filter((record) => record.archived === false);
-            setRecords(active_records);
+            const activeRecords = records.filter((record) => record.archived === false);
+            setRecords(activeRecords);
         }
 
         getRecords();
     }, [records.length]);
+
+    useEffect(() => {
+        setSex((patientObj !== undefined) ? patientObj.sex : "");
+        setAge((patientObj !== undefined) ? patientObj.age : age);
+        setBsa((patientObj !== undefined) ? patientObj.bsa : bsa);
+        setWeight((patientObj !== undefined) ? patientObj.weight : weight);
+    }, [patientObj]);
 
     // Updates patientObj if a different patient is selected.
     // Subsequently updates selectedPatient (initials) and selectedPatientID upon selection.
@@ -139,22 +165,22 @@ const CalculatorFramework = () => {
                                 </label>
                                 <tbody>
                                     <tr>
-                                        <td><Svr updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Pvr updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Tpg updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Svr updateCalculatedValue={updateCalculatedValue} map={map} cvp={cvp} co={co} setMap={setMap} setCvp={setCvp} setCo={setCo} /></td>
+                                        <td><Pvr updateCalculatedValue={updateCalculatedValue} pap={pap} wedge={wedge} co={co} setPap={setPap} setWedge={setWedge} setCo={setCo} /></td>
+                                        <td><Tpg updateCalculatedValue={updateCalculatedValue} map={map} pcwp={pcwp} setMap={setMap} setPcwp={setPcwp} /></td>
                                     </tr>
                                     <tr>
-                                        <td><Dpg updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Papi updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><CardiacIndex patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Dpg updateCalculatedValue={updateCalculatedValue} padp={padp} pcwp={pcwp} setPadp={setPadp} setPcwp={setPcwp} /></td>
+                                        <td><Papi updateCalculatedValue={updateCalculatedValue} pasp={pasp} padp={padp} ra={ra} setPasp={setPasp} setPadp={setPadp} setRa={setRa} /></td>
+                                        <td><CardiacIndex updateCalculatedValue={updateCalculatedValue} co={co} bsa={bsa} setCo={setCo} setBsa={setBsa} /></td>
                                     </tr>
                                     <tr>
-                                        <td><Fick updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Weight patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
-                                        <td><Bsa patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><Fick updateCalculatedValue={updateCalculatedValue} vo2={vo2} hb={hb} satA={satA} satMV={satMV} setVo2={setVo2} setHb={setHb} setSatA={setSatA} setSatMV={setSatMV} /></td>
+                                        <td><Weight updateCalculatedValue={updateCalculatedValue} weight={weight} setWeight={setWeight} /></td>
+                                        <td><Bsa updateCalculatedValue={updateCalculatedValue} bsa={bsa} setBsa={setBsa} /></td>
                                     </tr>
                                     <tr>
-                                        <td><LaFarge patientObj={patientObj} updateCalculatedValue={updateCalculatedValue} /></td>
+                                        <td><LaFarge updateCalculatedValue={updateCalculatedValue} sex={sex} age={age} hr={hr} setAge={setAge} setHr={setHr} /></td>
                                     </tr>
                                 </tbody>
                             </table>

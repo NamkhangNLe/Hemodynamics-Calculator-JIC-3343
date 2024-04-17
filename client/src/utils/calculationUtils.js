@@ -105,14 +105,7 @@ function arrString(label, arr) {
         return "";
     }
     let result = label + ((arr.length !== 1) ? "s" : "") + ": ";
-
-    for (let i = 0; i < arr.length; ++i) {
-        result += arr[i];
-
-        if (i !== arr.length - 1) {
-            result += ", "
-        }
-    }
+    result += arr.join(", ");
 
     return result + "\n";
 }

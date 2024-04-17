@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function LaFarge({ patientObj, updateCalculatedValue }) {
-    const [age, setAge] = useState("");
-    const [hr, setHr] = useState("");
-
+export default function LaFarge({ updateCalculatedValue, sex, age, hr, setAge, setHr }) {
     const valueType = "VO2 by LaFarge Equation";
     const valueCode = "VO2L";
     const [calculatedValue, setCalculatedValue] = useState("");
@@ -13,10 +10,9 @@ export default function LaFarge({ patientObj, updateCalculatedValue }) {
 
     useEffect(() => {
         setPlaceholderText((age === "" && hr === "") ? "Enter calculation inputs" : "Missing inputs");
-        setAge((patientObj !== undefined) ? patientObj.age : age);
 
         function calculateLafarge() {
-            let factor = patientObj.sex === "M" ? 11.49 : 17.04;
+            let factor = sex === "M" ? 11.49 : 17.04;
 
             if (age === "" || hr === "") {
                 setCalculatedValue("");
@@ -24,16 +20,16 @@ export default function LaFarge({ patientObj, updateCalculatedValue }) {
                 return;
             }
 
-            const result = +(138.1 - (factor * +age) + (0.378 * +hr)).toFixed(3);
+            const result = +(138.1 - (factor * Math.log(age)) + (0.378 * +hr)).toFixed(3);
             setCalculatedValue(result);
             updateCalculatedValue(valueCode, result);
         }
 
-        if (patientObj !== undefined) {
+        if (sex !== "") {
             calculateLafarge();
         }
 
-    }, [age, hr, patientObj]);
+    }, [sex, age, hr]);
 
     return (
         <div>

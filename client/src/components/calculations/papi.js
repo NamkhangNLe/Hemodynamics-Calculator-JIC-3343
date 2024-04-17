@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Papi({ updateCalculatedValue }) {
-    const [pasp, setPasp] = useState("");
-    const [padp, setPadp] = useState("");
-    const [ra, setRa] = useState("");
-
+export default function Papi({ updateCalculatedValue, pasp, padp, ra, setPasp, setPadp, setRa }) {
     const valueType = "Pulmonary Artery Pulsatility Index";
     const valueCode = "PAPI";
     const [calculatedValue, setCalculatedValue] = useState("");

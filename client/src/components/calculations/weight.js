@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Weight({ patientObj, updateCalculatedValue }) {
-    const [weight, setWeight] = useState("");
-
+export default function Weight({ updateCalculatedValue, weight, setWeight }) {
     const valueType = "VO2 by Weight";
     const valueCode = "VO2W";
     const [calculatedValue, setCalculatedValue] = useState("");
@@ -12,7 +10,6 @@ export default function Weight({ patientObj, updateCalculatedValue }) {
 
     useEffect(() => {
         setPlaceholderText((weight === "") ? "Enter calculation inputs" : "Missing inputs");
-        setWeight((patientObj !== undefined) ? patientObj.weight : weight);
 
         if (weight === "") {
             setCalculatedValue("");
@@ -23,7 +20,7 @@ export default function Weight({ patientObj, updateCalculatedValue }) {
         const result = +(+weight * 3).toFixed(3);
         setCalculatedValue(result);
         updateCalculatedValue(valueCode, result);
-    }, [weight, patientObj]);
+    }, [weight]);
 
     return (
         <div>

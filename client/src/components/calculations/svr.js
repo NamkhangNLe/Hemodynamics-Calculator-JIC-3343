@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 
-export default function Svr({ updateCalculatedValue }) {
-    const [map, setMap] = useState("");
-    const [cvp, setCvp] = useState("");
-    const [co, setCo] = useState("");
-
+export default function Svr({ updateCalculatedValue, map, cvp, co, setMap, setCvp, setCo }) {
     const valueType = "Systemic Vascular Resistance";
     const valueCode = "SVR";
     const [calculatedValue, setCalculatedValue] = useState("");
