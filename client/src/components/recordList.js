@@ -14,14 +14,14 @@ const Record = (props) => (
         <td>{props.record.weight}</td>
         <td>{props.record.medications}</td>
         <td>
-            <Link className="btn btn-link" to={`/view/${props.record._id}`}>
+            <Link className="btn btn-link" title="View Calculation History" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
             </Link> |
             <NotesModal id ={props.record._id} /> |
-            <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+            <Link className="btn btn-link" title="Edit Patient" to={`/edit/${props.record._id}`}>
                 <FontAwesomeIcon icon={faPencilAlt} />
             </Link> |
-            <button className="btn btn-link"
+            <button className="btn btn-link" title = "Archive Patient"
                 onClick={() => {
                     props.archiveRecord(props.record);
                     // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page

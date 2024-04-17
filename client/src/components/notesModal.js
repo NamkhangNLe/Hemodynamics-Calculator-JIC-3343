@@ -33,9 +33,9 @@ function NotesModal({ id }) {
     return (
         <>
 
-            <Button className="btn btn-link" variant="contained" color="primary" onClick={handleShow}>
+            <button className="btn btn-link" title="View Patient Notes" onClick={handleShow}>
                 <FontAwesomeIcon icon={faNoteSticky} />
-            </Button>
+            </button>
 
             <Modal
                 show={show}
