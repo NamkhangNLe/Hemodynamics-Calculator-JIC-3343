@@ -5,6 +5,7 @@ import React from "react";
  * @returns {JSX.Element} The form component.
  */
 export default function PatientForm({ form, onSubmit, updateForm, mode }) {
+
     return (
         <form onSubmit={onSubmit} className="form">
             <div className="form-region">
@@ -101,16 +102,18 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                     {/* Column 2 */}
                     <div className="form-column">
                         <h6>Current Medications:</h6>
+
+
                         {/* TODO: Make this section into checkboxes */}
                         <div className="medication-section">
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="milrinone"
                                     value="Milrinone"
-                                    checked={form.medications === "Milrinone"}
+                                    checked={form.medications.includes("Milrinone")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="milrinone" className="form-check-label">
@@ -120,11 +123,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="dobutamine"
                                     value="Dobutamine"
-                                    checked={form.medications === "Dobutamine"}
+                                    checked={form.medications.includes("Dobutamine")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="dobutamine" className="form-check-label">
@@ -134,11 +137,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="lasix"
                                     value="Lasix"
-                                    checked={form.medications === "Lasix"}
+                                    checked={form.medications.includes("Lasix")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="lasix" className="form-check-label">
@@ -148,11 +151,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="bumex"
                                     value="Bumex"
-                                    checked={form.medications === "Bumex"}
+                                    checked={form.medications.includes("Bumex")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="bumex" className="form-check-label">
@@ -162,11 +165,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="diuril"
                                     value="Diuril"
-                                    checked={form.medications === "Diuril"}
+                                    checked={form.medications.includes("Diuril")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="diuril" className="form-check-label">
@@ -176,11 +179,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="hydralazine"
                                     value="Hydralazine"
-                                    checked={form.medications === "Hydralazine"}
+                                    checked={form.medications.includes("Hydralazine")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="hydralazine" className="form-check-label">
@@ -190,11 +193,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="epinephrine"
                                     value="Epinephrine"
-                                    checked={form.medications === "Epinephrine"}
+                                    checked={form.medications.includes("Epinephrine")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="epinephrine" className="form-check-label">
@@ -204,11 +207,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="norepinephrine"
                                     value="Norepinephrine"
-                                    checked={form.medications === "Norepinephrine"}
+                                    checked={form.medications.includes("Norepinephrine")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="norepinephrine" className="form-check-label">
@@ -218,11 +221,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="dopamine"
                                     value="Dopamine"
-                                    checked={form.medications === "Dopamine"}
+                                    checked={form.medications.includes("Dopamine")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="dopamine" className="form-check-label">
@@ -232,11 +235,11 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                             <div className="form-check form-check-inline">
                                 <input
                                     className="form-check-input"
-                                    type="radio"
+                                    type="checkbox"
                                     name="medicationOptions"
                                     id="vasopressin"
                                     value="Vasopressin"
-                                    checked={form.medications === "Vasopressin"}
+                                    checked={form.medications.includes("Vasopressin")}
                                     onChange={(e) => updateForm({ medications: e.target.value })}
                                 />
                                 <label htmlFor="vasopressin" className="form-check-label">
