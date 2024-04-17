@@ -47,6 +47,14 @@
   }
 }
 
+.sidebar-content {
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  align-items: center;
+  padding-left: 6%;
+}
+
 .main-content {
   flex: 1;
   padding-top:2%;
