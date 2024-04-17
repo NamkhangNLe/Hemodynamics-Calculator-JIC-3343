@@ -143,50 +143,46 @@ const CalculatorFramework = () => {
     }
 
     return (
-        <div className="app-container">
-            <div className="content-container">
-                <div className="main-content">
-                    <h3>Calculate</h3>
-                    <div id="calc-framework-top-bar">
-                        <form onSubmit={e => submitAll(e, patientObj, calculations)}>
-                            <label>
-                                Select Patient:
-                                <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                            </label>
-                            <input
-                                type="submit"
-                                value={"Save All Calculations"}
-                            />
+        <div>
+            <h3>Calculate</h3>
+            <div id="calc-framework-top-bar">
+                <form onSubmit={e => submitAll(e, patientObj, calculations)}>
+                    <label>
+                        Select Patient:
+                        <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+                    </label>
+                    <input
+                        type="submit"
+                        value={"Save All Calculations"}
+                    />
 
-                            <table>
-                                <label>
-                                    Selected Patient's Medications:
-                                    <input type="text" value={medications} readOnly />
-                                </label>
-                                <tbody>
-                                    <tr>
-                                        <td><Svr updateCalculatedValue={updateCalculatedValue} map={map} cvp={cvp} co={co} setMap={setMap} setCvp={setCvp} setCo={setCo} /></td>
-                                        <td><Pvr updateCalculatedValue={updateCalculatedValue} pap={pap} wedge={wedge} co={co} setPap={setPap} setWedge={setWedge} setCo={setCo} /></td>
-                                        <td><Tpg updateCalculatedValue={updateCalculatedValue} map={map} pcwp={pcwp} setMap={setMap} setPcwp={setPcwp} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Dpg updateCalculatedValue={updateCalculatedValue} padp={padp} pcwp={pcwp} setPadp={setPadp} setPcwp={setPcwp} /></td>
-                                        <td><Papi updateCalculatedValue={updateCalculatedValue} pasp={pasp} padp={padp} ra={ra} setPasp={setPasp} setPadp={setPadp} setRa={setRa} /></td>
-                                        <td><CardiacIndex updateCalculatedValue={updateCalculatedValue} co={co} bsa={bsa} setCo={setCo} setBsa={setBsa} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Fick updateCalculatedValue={updateCalculatedValue} vo2={vo2} hb={hb} satA={satA} satMV={satMV} setVo2={setVo2} setHb={setHb} setSatA={setSatA} setSatMV={setSatMV} /></td>
-                                        <td><Weight updateCalculatedValue={updateCalculatedValue} weight={weight} setWeight={setWeight} /></td>
-                                        <td><Bsa updateCalculatedValue={updateCalculatedValue} bsa={bsa} setBsa={setBsa} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><LaFarge updateCalculatedValue={updateCalculatedValue} sex={sex} age={age} hr={hr} setAge={setAge} setHr={setHr} /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
+                    <table>
+                        <label>
+                            Selected Patient's Medications:
+                            <input type="text" value={medications} readOnly />
+                        </label>
+                        <tbody>
+                            <tr>
+                                <td><Svr updateCalculatedValue={updateCalculatedValue} map={map} cvp={cvp} co={co} setMap={setMap} setCvp={setCvp} setCo={setCo} /></td>
+                                <td><Pvr updateCalculatedValue={updateCalculatedValue} pap={pap} wedge={wedge} co={co} setPap={setPap} setWedge={setWedge} setCo={setCo} /></td>
+                                <td><Tpg updateCalculatedValue={updateCalculatedValue} map={map} pcwp={pcwp} setMap={setMap} setPcwp={setPcwp} /></td>
+                            </tr>
+                            <tr>
+                                <td><Dpg updateCalculatedValue={updateCalculatedValue} padp={padp} pcwp={pcwp} setPadp={setPadp} setPcwp={setPcwp} /></td>
+                                <td><Papi updateCalculatedValue={updateCalculatedValue} pasp={pasp} padp={padp} ra={ra} setPasp={setPasp} setPadp={setPadp} setRa={setRa} /></td>
+                                <td><CardiacIndex updateCalculatedValue={updateCalculatedValue} co={co} bsa={bsa} setCo={setCo} setBsa={setBsa} /></td>
+                            </tr>
+                            <tr>
+                                <td><Fick updateCalculatedValue={updateCalculatedValue} vo2={vo2} hb={hb} satA={satA} satMV={satMV} setVo2={setVo2} setHb={setHb} setSatA={setSatA} setSatMV={setSatMV} /></td>
+                                <td><Weight updateCalculatedValue={updateCalculatedValue} weight={weight} setWeight={setWeight} /></td>
+                                <td><Bsa updateCalculatedValue={updateCalculatedValue} bsa={bsa} setBsa={setBsa} /></td>
+                            </tr>
+                            <tr>
+                                <td><LaFarge updateCalculatedValue={updateCalculatedValue} sex={sex} age={age} hr={hr} setAge={setAge} setHr={setHr} /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     );
