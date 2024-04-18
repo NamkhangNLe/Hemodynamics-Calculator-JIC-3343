@@ -60,7 +60,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setSvr(!svr)}
                         />
-                        <label for="svr"> Systemic Vasuclar Resistance </label>
+                        <label htmlFor="svr"> Systemic Vasuclar Resistance </label>
                     </div>
                     <div>
                         <input
@@ -70,7 +70,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setPvr(!pvr)}
                         />
-                        <label for="pvr"> Pulmonary Vascular Resistance </label>
+                        <label htmlFor="pvr"> Pulmonary Vascular Resistance </label>
                     </div>
                     <div>
                         <input
@@ -80,7 +80,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setTranspulGradient(!transpulGradient)}
                         />
-                        <label for="transpulGradient"> Transpulmonary Gradient </label>
+                        <label htmlFor="transpulGradient"> Transpulmonary Gradient </label>
                     </div>
                     <div>
                         <input
@@ -90,7 +90,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setDpg(!dpg)}
                         />
-                        <label for="dpg"> Diastolic Pulmonary Gradient </label>
+                        <label htmlFor="dpg"> Diastolic Pulmonary Gradient </label>
                     </div>
                     <div>
                         <input
@@ -100,7 +100,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setPapi(!papi)}
                         />
-                        <label for="papi"> Pulmonary Artery Pulsatility Index </label>
+                        <label htmlFor="papi"> Pulmonary Artery Pulsatility Index </label>
                     </div>
                     <div>
                         <input
@@ -110,7 +110,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setCi(!ci)}
                         />
-                        <label for="ci"> Cardiac Index </label>
+                        <label htmlFor="ci"> Cardiac Index </label>
                     </div>
                     <div>
                         <input
@@ -120,7 +120,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setFick(!fick)}
                         />
-                        <label for="fick"> Fick Cardiac Output </label>
+                        <label htmlFor="fick"> Fick Cardiac Output </label>
                     </div>
                     <div>
                         <input
@@ -130,7 +130,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setWeight(!weight)}
                         />
-                        <label for="weight"> VO2 by Weight </label>
+                        <label htmlFor="weight"> VO2 by Weight </label>
                     </div>
                     <div>
                         <input
@@ -140,7 +140,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setBsa(!bsa)}
                         />
-                        <label for="bsa"> VO2 by BSA </label>
+                        <label htmlFor="bsa"> VO2 by BSA </label>
                     </div>
                     <div>
                         <input
@@ -150,7 +150,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setLafarge(!lafarge)}
                         />
-                        <label for="lafarge"> VO2 by LaFarge Equation </label>
+                        <label htmlFor="lafarge"> VO2 by LaFarge Equation </label>
                     </div>
                 </form>
             </div>
@@ -269,6 +269,8 @@ const IndividualTrends = () => {
 
     return (
         <div>
+            <h3>Patient Trends</h3>
+                <p className="subheading">View patient trends for selected calculations.</p>
             <div>
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
                 <Link to="/trends"> <button> View Other Patient Trends </button></Link>
