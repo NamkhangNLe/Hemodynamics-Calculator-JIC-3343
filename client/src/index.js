@@ -5,9 +5,10 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { createRoot } from 'react-dom';
 
 /**
  * Renders the App component inside a BrowserRouter component.
@@ -17,11 +18,22 @@ import { BrowserRouter } from "react-router-dom";
  * @param {HTMLElement} container - The DOM element where the application will be rendered.
  * @returns {void}
  */
-ReactDOM.render(
+
+
+const root = createRoot(document.getElementById('root'));
+
+root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+            {/* <Auth0Provider
+                domain="dev-pucfassinisyfvbm.us.auth0.com"
+                clientId="dRidvZAKqeoLrd6Kgr5Ps4stA9QZb48O"
+                authorizationParams={{
+                redirect_uri: window.location.origin
+                }}
+            > */}
+                <App />
+            {/* </Auth0Provider> */}
         </BrowserRouter>
     </React.StrictMode>,
-    document.getElementById("root")
 );

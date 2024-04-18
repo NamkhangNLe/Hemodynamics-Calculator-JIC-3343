@@ -12,6 +12,7 @@ import View from "./components/view";
 import Trends from "./pages/trends"
 import IndividualTrends from "./components/trends/individualTrends"
 import Archive from "./components/archive";
+import Login from "./pages/login";
 
 import './styles/styles.css';
 
@@ -27,6 +28,7 @@ const App = () => {
 
     return (
         <Routes>
+            <Route exact path="/login" element={<PageFramework component={<Login />} />} />
             <Route exact path="/" element={<PageFramework component={<RecordList />} />} />
             <Route exact path="/archive" element={<PageFramework component={<Archive />} />} />
             <Route path="/calculator" element={<PageFramework component={<CalculatorFramework />} />} />
