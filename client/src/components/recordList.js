@@ -5,34 +5,38 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import NotesModal from "./notesModal";
-const Record = (props) => (
-    <tr>
-        <td>{props.record.initials}</td>
-        <td>{props.record.dob}</td>
-        <td>{props.record.sex}</td>
-        <td>{props.record.height}</td>
-        <td>{props.record.weight}</td>
-        <td>{props.record.medications}</td>
-        <td>
-            <Link className="btn btn-link" title="View Calculation History" to={`/view/${props.record._id}`}>
-                <FontAwesomeIcon icon={faEye} />
-            </Link> |
-            <NotesModal id ={props.record._id} /> |
-            <Link className="btn btn-link" title="Edit Patient" to={`/edit/${props.record._id}`}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-            </Link> |
-            <button className="btn btn-link" title = "Archive Patient"
-                onClick={() => {
-                    props.archiveRecord(props.record);
-                    // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
-                    sleep(500).then(() => { window.location.reload(); });
-                }}
-            >
-                <FontAwesomeIcon icon={faArchive} />
-            </button>
-        </td>
-    </tr>
-);
+const Record = (props) => {
+    // Convert medications to an array if it's not already THIS IS REQUIRED TO ADD A SPACE
+    const medicationsArray = Array.isArray(props.record.medications) ? props.record.medications : [props.record.medications];
+    
+    return (
+        <tr>
+            <td>{props.record.initials}</td>
+            <td>{props.record.dob}</td>
+            <td>{props.record.sex}</td>
+            <td>{props.record.height}</td>
+            <td>{props.record.weight}</td>
+            <td>{medicationsArray.join(', ')}</td>
+            <td>
+                <Link className="btn btn-link" to={`/view/${props.record._id}`}>
+                    <FontAwesomeIcon icon={faEye} />
+                </Link> |
+                <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                </Link> |
+                <button className="btn btn-link"
+                    onClick={() => {
+                        props.archiveRecord(props.record);
+                        // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
+                        sleep(500).then(() => { window.location.reload(); });
+                    }}
+                >
+                    <FontAwesomeIcon icon={faArchive} />
+                </button>
+            </td>
+        </tr>
+    );
+};
 
 /**
  * Renders a table of records fetched from the database and provides a method to delete a record.
