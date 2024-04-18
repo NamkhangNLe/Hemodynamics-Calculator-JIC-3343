@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
-import NotesModal from "./notesModal";
-const Record = (props) => (
-    <tr>
+import NotesModal from './notesModal';
+
+const Record = (props) => {
+    const numMedications = props.record.medications.length;
+
+    return (
+        <tr>
         <td>{props.record.initials}</td>
         <td>{props.record.dob}</td>
         <td>{props.record.sex}</td>
         <td>{props.record.height}</td>
         <td>{props.record.weight}</td>
-        <td>{props.record.medications}</td>
+        <td>{numMedications}</td>
         <td>
             <Link className="btn btn-link" title="View Calculation History" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
@@ -31,8 +35,9 @@ const Record = (props) => (
                 <FontAwesomeIcon icon={faArchive} />
             </button>
         </td>
-    </tr>
-);
+        </tr>
+    );
+};
 
 /**
  * Renders a table of records fetched from the database and provides a method to delete a record.
@@ -93,6 +98,12 @@ export default function RecordList() {
         <div>
             <h3>Patient List</h3>
             <p className="subheading">View, edit, or create all saved patient profiles.</p>
+            <Link className="btn btn-primary" to="/create">
+                <div className="button-icon" style={{width: "170px"}}>
+                    <FontAwesomeIcon icon={faAdd} />
+                    Create New Patient
+                </div>
+            </Link>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>
@@ -101,19 +112,12 @@ export default function RecordList() {
                         <th>Sex</th>
                         <th>Height</th>
                         <th>Weight</th>
-                        <th>Medications</th>
+                        <th>Number of Medications</th>
                     </tr>
                 </thead>
                 <tbody>{recordList()}</tbody>
             </table>
             <div>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <Link style={{ paddingLeft: '20px', position: 'fixed' }} to="/create">
-                            Create New Patient
-                        </Link>
-                    </li>
-                </ul>
             </div>
         </div>
     );

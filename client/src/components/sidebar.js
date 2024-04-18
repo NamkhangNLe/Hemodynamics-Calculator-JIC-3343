@@ -56,5 +56,6 @@ export default function SidebarComp() {
                 </MenuItem>
             </Menu>
         </Sidebar>
+
     );
 }

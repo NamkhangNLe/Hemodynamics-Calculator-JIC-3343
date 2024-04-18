@@ -57,6 +57,14 @@ export default function Edit() {
      */
     function updateForm(value) {
         return setForm((prev) => {
+            if (value.medications) {
+
+                const updatedMedications = prev.medications.includes(value.medications)
+                    ? prev.medications.filter(med => med !== value.medications)
+                    : [...prev.medications, value.medications];
+
+                return { ...prev, medications: updatedMedications };
+            }
             return { ...prev, ...value };
         });
     }
