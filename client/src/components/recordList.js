@@ -4,15 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
-import NotesModal from "./notesModal";
-const Record = (props) => (
-    <tr>
+
+const Record = (props) => {
+    const numMedications = props.record.medications.length;
+
+    return (
+        <tr>
         <td>{props.record.initials}</td>
         <td>{props.record.dob}</td>
         <td>{props.record.sex}</td>
         <td>{props.record.height}</td>
         <td>{props.record.weight}</td>
-        <td>{props.record.medications}</td>
+        <td>{numMedications}</td>
         <td>
             <Link className="btn btn-link" title="View Calculation History" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
@@ -31,8 +34,9 @@ const Record = (props) => (
                 <FontAwesomeIcon icon={faArchive} />
             </button>
         </td>
-    </tr>
-);
+        </tr>
+    );
+};
 
 /**
  * Renders a table of records fetched from the database and provides a method to delete a record.
@@ -101,7 +105,7 @@ export default function RecordList() {
                         <th>Sex</th>
                         <th>Height</th>
                         <th>Weight</th>
-                        <th>Medications</th>
+                        <th>Number of Medications</th>
                     </tr>
                 </thead>
                 <tbody>{recordList()}</tbody>
