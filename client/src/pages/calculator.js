@@ -184,8 +184,8 @@ const CalculatorFramework = () => {
             <h3>Calculate</h3>
             <p className="subheading">Calculate hemodynamic values and save them to patient profiles.</p>
             <div className="d-flex justify-content-between">
-                <DropdownButton id="dropdown-basic-button" title={selectedPatient} size="lg">{patientList()}</DropdownButton>
-                <button className="btn btn-primary btn-lg" onClick={e => submitAll(e, patientObj, calculations)}>
+                <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+                <button className="btn btn-primary" onClick={e => submitAll(e, patientObj, calculations)}>
                     <div className="button-icon">
                         <FontAwesomeIcon icon={faSave} />
                         Save All Calculations

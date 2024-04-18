@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import NotesModal from './notesModal';
@@ -98,6 +98,12 @@ export default function RecordList() {
         <div>
             <h3>Patient List</h3>
             <p className="subheading">View, edit, or create all saved patient profiles.</p>
+            <Link className="btn btn-primary" to="/create">
+                <div className="button-icon" style={{width: "170px"}}>
+                    <FontAwesomeIcon icon={faAdd} />
+                    Create New Patient
+                </div>
+            </Link>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>
@@ -112,13 +118,6 @@ export default function RecordList() {
                 <tbody>{recordList()}</tbody>
             </table>
             <div>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <Link style={{ paddingLeft: '20px', position: 'fixed' }} to="/create">
-                            Create New Patient
-                        </Link>
-                    </li>
-                </ul>
             </div>
         </div>
     );
