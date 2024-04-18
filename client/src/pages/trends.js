@@ -55,12 +55,7 @@ const Trends = () => {
         <div>
             <h3>Patient Trends</h3>
             <p className="subheading">View patient trends for selected calculations.</p>
-            <form>
-                <label>
-                    Select Patient:
-                    <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                </label>
-            </form>
+            <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
         </div>
     );
 }
