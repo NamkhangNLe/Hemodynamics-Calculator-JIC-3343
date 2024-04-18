@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
+import NotesModal from './notesModal';
 
 const Record = (props) => {
     const numMedications = props.record.medications.length;
