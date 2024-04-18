@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton} from 'react-bootstrap';
 import { submitAll } from "../utils/calculationUtils.js";
-
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Svr from "../components/calculations/svr";
 import Pvr from "../components/calculations/pvr";
 import Tpg from "../components/calculations/tpg.js";
@@ -12,8 +14,11 @@ import Fick from "../components/calculations/fick";
 import Weight from "../components/calculations/weight";
 import Bsa from "../components/calculations/bsa";
 import LaFarge from "../components/calculations/lafarge";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import "../styles/styles.css"
+import PatientMedicationsDisplay from "../components/patientMedicationsDisplay.js";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 const calculations = {
     SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
@@ -142,49 +147,53 @@ const CalculatorFramework = () => {
         }
     }
 
+    const calculationComponents = [
+        <Svr updateCalculatedValue={updateCalculatedValue} map={map} cvp={cvp} co={co} setMap={setMap} setCvp={setCvp} setCo={setCo} />,
+        <Pvr updateCalculatedValue={updateCalculatedValue} pap={pap} wedge={wedge} co={co} setPap={setPap} setWedge={setWedge} setCo={setCo} />,
+        <Tpg updateCalculatedValue={updateCalculatedValue} map={map} pcwp={pcwp} setMap={setMap} setPcwp={setPcwp} />,
+        <Dpg updateCalculatedValue={updateCalculatedValue} padp={padp} pcwp={pcwp} setPadp={setPadp} setPcwp={setPcwp} />,
+        <Papi updateCalculatedValue={updateCalculatedValue} pasp={pasp} padp={padp} ra={ra} setPasp={setPasp} setPadp={setPadp} setRa={setRa} />,
+        <CardiacIndex updateCalculatedValue={updateCalculatedValue} co={co} bsa={bsa} setCo={setCo} setBsa={setBsa} />,
+        <Fick updateCalculatedValue={updateCalculatedValue} vo2={vo2} hb={hb} satA={satA} satMV={satMV} setVo2={setVo2} setHb={setHb} setSatA={setSatA} setSatMV={setSatMV} />,
+        <Weight updateCalculatedValue={updateCalculatedValue} weight={weight} setWeight={setWeight} />,
+        <Bsa updateCalculatedValue={updateCalculatedValue} bsa={bsa} setBsa={setBsa} />,
+        <LaFarge updateCalculatedValue={updateCalculatedValue} sex={sex} age={age} hr={hr} setAge={setAge} setHr={setHr} />
+    ];
+
+
+    function getComponentCards() {
+        return (
+            <Row xs={1} md={3} className="g-4 calculation-grid">
+                {calculationComponents.map((component, index) => {
+                    return (
+                        <Col key={index}>
+                            <Card className="calculation-card">
+                                <Card.Body>
+                                    {component}
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    );
+                })}
+            </Row>
+        );
+    }
+
     return (
         <div>
             <h3>Calculate</h3>
             <p className="subheading">Calculate hemodynamic values and save them to patient profiles.</p>
-            <div id="calc-framework-top-bar">
-                <form onSubmit={e => submitAll(e, patientObj, calculations)}>
-                    <label>
-                        Select Patient:
-                        <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                    </label>
-                    <input
-                        type="submit"
-                        value={"Save All Calculations"}
-                    />
-
-                    <table>
-                        <label>
-                            Selected Patient's Medications:
-                            <input type="text" value={medications} readOnly />
-                        </label>
-                        <tbody>
-                            <tr>
-                                <td><Svr updateCalculatedValue={updateCalculatedValue} map={map} cvp={cvp} co={co} setMap={setMap} setCvp={setCvp} setCo={setCo} /></td>
-                                <td><Pvr updateCalculatedValue={updateCalculatedValue} pap={pap} wedge={wedge} co={co} setPap={setPap} setWedge={setWedge} setCo={setCo} /></td>
-                                <td><Tpg updateCalculatedValue={updateCalculatedValue} map={map} pcwp={pcwp} setMap={setMap} setPcwp={setPcwp} /></td>
-                            </tr>
-                            <tr>
-                                <td><Dpg updateCalculatedValue={updateCalculatedValue} padp={padp} pcwp={pcwp} setPadp={setPadp} setPcwp={setPcwp} /></td>
-                                <td><Papi updateCalculatedValue={updateCalculatedValue} pasp={pasp} padp={padp} ra={ra} setPasp={setPasp} setPadp={setPadp} setRa={setRa} /></td>
-                                <td><CardiacIndex updateCalculatedValue={updateCalculatedValue} co={co} bsa={bsa} setCo={setCo} setBsa={setBsa} /></td>
-                            </tr>
-                            <tr>
-                                <td><Fick updateCalculatedValue={updateCalculatedValue} vo2={vo2} hb={hb} satA={satA} satMV={satMV} setVo2={setVo2} setHb={setHb} setSatA={setSatA} setSatMV={setSatMV} /></td>
-                                <td><Weight updateCalculatedValue={updateCalculatedValue} weight={weight} setWeight={setWeight} /></td>
-                                <td><Bsa updateCalculatedValue={updateCalculatedValue} bsa={bsa} setBsa={setBsa} /></td>
-                            </tr>
-                            <tr>
-                                <td><LaFarge updateCalculatedValue={updateCalculatedValue} sex={sex} age={age} hr={hr} setAge={setAge} setHr={setHr} /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+            <div className="d-flex justify-content-between">
+                <DropdownButton id="dropdown-basic-button" title={selectedPatient} size="lg">{patientList()}</DropdownButton>
+                <button className="btn btn-primary btn-lg" onClick={e => submitAll(e, patientObj, calculations)}>
+                    <div className="button-icon">
+                        <FontAwesomeIcon icon={faSave} />
+                        Save All Calculations
+                    </div>
+                </button>
             </div>
+            <PatientMedicationsDisplay medications={medications} />
+            {getComponentCards()}
         </div>
     );
 };
