@@ -36,7 +36,9 @@
 }
 
 .card.calculation-card {
-  background-color: #eaedff;
+  background-color: rgba(164, 164, 164, 0.37);
+  border-width: 0px;
+  height: 340px;
 }
 
 .calculation-grid {
@@ -61,6 +63,14 @@
   gap: 10%;
   align-items: center;
   padding-left: 6%;
+}
+
+.button-icon {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  align-items: center;
+  width: 210px;
 }
 
 .main-content {
@@ -161,7 +171,6 @@ form {
   flex-direction: column;
 }
 
-#calc-framework-top-bar {
-  display: flex;
-  flex-direction: horizontal;
+.calculation-form {
+  padding: 0px;
 }

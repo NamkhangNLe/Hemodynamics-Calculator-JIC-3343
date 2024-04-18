@@ -14,8 +14,11 @@ import Fick from "../components/calculations/fick";
 import Weight from "../components/calculations/weight";
 import Bsa from "../components/calculations/bsa";
 import LaFarge from "../components/calculations/lafarge";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import "../styles/styles.css"
+import PatientMedicationsDisplay from "../components/patientMedicationsDisplay.js";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 const calculations = {
     SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
@@ -180,24 +183,17 @@ const CalculatorFramework = () => {
         <div>
             <h3>Calculate</h3>
             <p className="subheading">Calculate hemodynamic values and save them to patient profiles.</p>
-            <div id="calc-framework-top-bar">
-                <form onSubmit={e => submitAll(e, patientObj, calculations)}>
-                    <label>
-                        Select Patient:
-                        <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                    </label>
-                    <input
-                        type="submit"
-                        value={"Save All Calculations"}
-                    />
-
-                    <label>
-                        Selected Patient's Medications:
-                        <input type="text" value={medications} readOnly />
-                    </label>
-                    {getComponentCards()}
-                </form>
+            <div className="d-flex justify-content-between">
+                <DropdownButton id="dropdown-basic-button" title={selectedPatient} size="lg">{patientList()}</DropdownButton>
+                <button className="btn btn-primary btn-lg" onClick={e => submitAll(e, patientObj, calculations)}>
+                    <div className="button-icon">
+                        <FontAwesomeIcon icon={faSave} />
+                        Save All Calculations
+                    </div>
+                </button>
             </div>
+            <PatientMedicationsDisplay medications={medications} />
+            {getComponentCards()}
         </div>
     );
 };
