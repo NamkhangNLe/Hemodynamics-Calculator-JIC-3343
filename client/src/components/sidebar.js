@@ -1,7 +1,8 @@
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
-import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faArchive, faCalculator, faChartSimple, faGear, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 import "bootstrap/dist/css/bootstrap.css";
 import '../styles/styles.css';
@@ -17,12 +18,42 @@ export default function SidebarComp() {
         <Sidebar className="sidebar">
             <img style={{ "width": 100 + '%', "height": 25 + "%" }} src="emory.png"></img>
             <Menu className="menu">
-                <MenuItem className="menu-item" component={<Link to="/" />}> Patients </MenuItem>
-                <MenuItem className="menu-item" component={<Link to="/calculator" />}> Calculate </MenuItem>
-                <MenuItem className="menu-item" component={<Link to="/trends" />}> Trends </MenuItem>
-                <MenuItem className="menu-item" component={<Link to="/archive" />}> Archive </MenuItem>
-                <MenuItem className="menu-item"> Settings </MenuItem>
-                <MenuItem className="menu-item"> Log Out </MenuItem>
+                <MenuItem className="menu-item" component={<Link to="/" />}>
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faUsers}/>
+                        Patients
+                    </div>
+                </MenuItem>
+                <MenuItem className="menu-item" component={<Link to="/calculator" />}>
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faCalculator}/>
+                        Calculate
+                    </div>
+                </MenuItem>
+                <MenuItem className="menu-item" component={<Link to="/trends" />}>
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faChartSimple}/>
+                        Trends
+                    </div>
+                </MenuItem>
+                <MenuItem className="menu-item" component={<Link to="/archive" />}>
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faArchive}/>
+                        Archive
+                    </div>
+                </MenuItem>
+                <MenuItem className="menu-item">
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faGear}/>
+                        Settings
+                    </div>
+                </MenuItem>
+                <MenuItem className="menu-item">
+                    <div className="sidebar-content">
+                        <FontAwesomeIcon icon={faSignOut}/>
+                        Log Out
+                    </div>
+                </MenuItem>
             </Menu>
         </Sidebar>
     );

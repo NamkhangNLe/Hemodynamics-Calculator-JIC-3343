@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DeleteModal from "./deleteModal";
+import NotesModal from "./notesModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashRestore } from '@fortawesome/free-solid-svg-icons';
 
 const ArchiveRecord = (props) => (
     <tr>
@@ -7,14 +10,16 @@ const ArchiveRecord = (props) => (
         <td>{props.record.dob}</td>
         <td>{props.record.sex}</td>
         <td>
+            <NotesModal id ={props.record._id} /> |
             <button className="btn btn-link"
+                title = "Restore Patient From Archive"
                 onClick={() => {
                     props.restoreRecord(props.record);
                     // CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
                     sleep(500).then(() => { window.location.reload(); });
                 }}
             >
-                Restore
+                <FontAwesomeIcon icon={faTrashRestore} />
             </button> |
             <DeleteModal
                 id={props.record._id} />
@@ -73,6 +78,7 @@ function Archive() {
     return (
         <div>
             <h3>Archived Patients</h3>
+            <p className="subheading">Archived patients are not available to be used for calculations.</p>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>

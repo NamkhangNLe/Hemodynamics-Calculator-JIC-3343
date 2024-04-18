@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
+
 const Record = (props) => {
     const numMedications = props.record.medications.length;
 
@@ -17,13 +17,14 @@ const Record = (props) => {
         <td>{props.record.weight}</td>
         <td>{numMedications}</td>
         <td>
-            <Link className="btn btn-link" to={`/view/${props.record._id}`}>
+            <Link className="btn btn-link" title="View Calculation History" to={`/view/${props.record._id}`}>
                 <FontAwesomeIcon icon={faEye} />
             </Link> |
-            <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+            <NotesModal id ={props.record._id} /> |
+            <Link className="btn btn-link" title="Edit Patient" to={`/edit/${props.record._id}`}>
                 <FontAwesomeIcon icon={faPencilAlt} />
             </Link> |
-            <button className="btn btn-link"
+            <button className="btn btn-link" title = "Archive Patient"
                 onClick={() => {
                     props.archiveRecord(props.record);
                     // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
@@ -95,6 +96,7 @@ export default function RecordList() {
     return (
         <div>
             <h3>Patient List</h3>
+            <p className="subheading">View, edit, or create all saved patient profiles.</p>
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>

@@ -128,8 +128,9 @@ export default function Edit() {
 
     // Displays the form that takes input from the user to update the data.
     return (
-        <div className="form-div">
+        <div>
             <h3> Edit Patient Profile</h3>
+            <p className="subheading">Edit patient profile.</p>
             <span style={{ fontStyle: "italic", color: "gray" }}> <span style={{ color: "red" }}>*</span> = required field</span>
             <PatientForm form={form} onSubmit={onSubmit} updateForm={updateForm} mode="Update" />
         </div>
