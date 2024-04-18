@@ -9,7 +9,7 @@ import NotesModal from "./notesModal";
 const Record = (props) => {
     // Convert medications to an array if it's not already THIS IS REQUIRED TO ADD A SPACE
     const medicationsArray = Array.isArray(props.record.medications) ? props.record.medications : [props.record.medications];
-    
+
     return (
         <tr>
             <td>{props.record.initials}</td>
@@ -22,6 +22,7 @@ const Record = (props) => {
                 <Link className="btn btn-link" to={`/view/${props.record._id}`}>
                     <FontAwesomeIcon icon={faEye} />
                 </Link> |
+                <NotesModal id ={props.record._id} /> |
                 <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
                     <FontAwesomeIcon icon={faPencilAlt} />
                 </Link> |
