@@ -35,6 +35,14 @@
   }
 }
 
+.card.calculation-card {
+  background-color: #eaedff;
+}
+
+.calculation-grid {
+  padding-top: 2%;
+}
+
 .sidebar {
   min-height: 100%;
 }
