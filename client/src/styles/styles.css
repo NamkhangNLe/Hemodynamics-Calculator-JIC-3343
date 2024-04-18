@@ -10,7 +10,7 @@
 
 .menu {
   width: 100%;
-  min-height: calc(100% - 230px);
+  min-height: calc(100% - 250px);
   background-color: #212C65;
   color: #ffffff;
 }

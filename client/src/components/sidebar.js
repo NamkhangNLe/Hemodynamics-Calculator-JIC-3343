@@ -16,7 +16,7 @@ import '../styles/styles.css';
 export default function SidebarComp() {
     return (
         <Sidebar className="sidebar">
-            <img style={{ "width": 250 + 'px', "height": 230 + "px" }} src="/emory.png"></img>
+            <img style={{ "width": 250 + 'px', "height": 250 + "px" }} src="emory.png"></img>
             <Menu className="menu">
                 <MenuItem className="menu-item" component={<Link to="/" />}>
                     <div className="sidebar-content">
