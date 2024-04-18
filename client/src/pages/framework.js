@@ -1,5 +1,6 @@
 import React from "react";
 import SidebarComp from "../components/sidebar";
+import '../styles/styles.css';
 
 // This page component includes the navbar and sidebar components.
 // Takes in the main page component as a paramater.
