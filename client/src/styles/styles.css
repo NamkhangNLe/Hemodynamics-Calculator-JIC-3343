@@ -181,3 +181,9 @@ form {
 .calculation-form {
   padding: 0px;
 }
+
+@media print {
+  .noPrint {
+    display:none;
+  }
+}
