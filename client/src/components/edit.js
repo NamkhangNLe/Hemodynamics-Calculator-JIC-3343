@@ -19,7 +19,8 @@ export default function Edit() {
         weight: "",
         medications: "",
         notes: "",
-        archived: false
+        archived: false,
+        hardware: []
     });
 
     useEffect(() => {
@@ -54,17 +55,40 @@ export default function Edit() {
     /**
      * Updates the form state with the given values.
      * @param {Object} value - The values to update the form state with.
+     * @param {number} permission - For hardware updates, set to 1 if we are removing.
      */
-    function updateForm(value) {
+    function updateForm(value, permission) {
         return setForm((prev) => {
-            if (value.medications) {
 
+            if (value.medications) {
                 const updatedMedications = prev.medications.includes(value.medications)
                     ? prev.medications.filter(med => med !== value.medications)
                     : [...prev.medications, value.medications];
 
                 return { ...prev, medications: updatedMedications };
             }
+
+            if (value.hardware) {
+
+                if (permission === 1) {
+
+                    const updatedHardware = prev.hardware.filter(hardware => hardware.deviceName !== value.hardware.deviceName);
+                    return { ...prev, hardware: updatedHardware };
+
+                } else {
+
+                    const deviceName = value.hardware[0].deviceName;
+                    for (let i = 0; i < prev.hardware.length; i += 1) {
+
+                        if (prev.hardware[i].deviceName === deviceName) {
+                            const updatedHardware = value.hardware;
+                            return { ...prev, hardware: updatedHardware };
+                        }
+                    }
+                    const updatedHardware = [...prev.hardware, ...value.hardware];
+                    return { ...prev, hardware: updatedHardware };
+                }
+                }
             return { ...prev, ...value };
         });
     }
@@ -111,7 +135,8 @@ export default function Edit() {
             weight: form.weight,
             medications: form.medications,
             notes: form.notes,
-            archived: form.archived
+            archived: form.archived,
+            hardware: form.hardware
         };
 
         fetch(`http://localhost:5000/update/${params.id}`, {

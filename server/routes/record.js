@@ -54,7 +54,8 @@ recordRoutes.post("/record/add", async (req, res) => {
         bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
         medications: req.body.medications,
         notes: req.body.notes,
-        archived: false
+        archived: false,
+        hardware: req.body.hardware
     };
 
     try {
@@ -82,7 +83,8 @@ recordRoutes.patch("/update/:id", async (req, res) => {
             bsa: Math.sqrt((+req.body.height * +req.body.weight) / 3600),
             medications: req.body.medications,
             notes: req.body.notes,
-            archived: req.body.archived
+            archived: req.body.archived,
+            hardware: req.body.hardware
         },
     };
 
