@@ -16,31 +16,51 @@ export default function Create() {
         weight: "",
         medications: "",
         notes: "",
-        archived: false
+        archived: false,
+        hardware: [[]]
     });
-
-
 
 
     // Import the useNavigate hook from the React Router library.
     const navigate = useNavigate();
 
-
-
     /**
      * Updates the form state with the given values.
      * @param {Object} value - The values to update the form state with.
+     * @param {number} permission - For hardware updates, set to 1 if we are removing.
      */
-    function updateForm(value) {
+    function updateForm(value, permission) {
         return setForm((prev) => {
-            if (value.medications) {
 
+            if (value.medications) {
                 const updatedMedications = prev.medications.includes(value.medications)
                     ? prev.medications.filter(med => med !== value.medications)
                     : [...prev.medications, value.medications];
 
                 return { ...prev, medications: updatedMedications };
             }
+
+            if (value.hardware) {
+
+                if (permission === 1) {
+
+                    const updatedHardware = prev.hardware.filter(hardware => hardware.deviceName !== value.hardware.deviceName);
+                    return { ...prev, hardware: updatedHardware };
+
+                } else {
+
+                    const deviceName = value.hardware[0].deviceName;
+                    for (let i = 0; i < prev.hardware.length; i += 1) {
+
+                        if (prev.hardware[i].deviceName === deviceName) {
+                            const updatedHardware = value.hardware;
+                            return { ...prev, hardware: updatedHardware };
+                        }
+                    }
+                    const updatedHardware = [...prev.hardware, ...value.hardware];
+                    return { ...prev, hardware: updatedHardware };
+                }
+              }
             return { ...prev, ...value };
         });
     }
@@ -102,7 +122,7 @@ export default function Create() {
             // console.log('Record added successfully:', await response.json());
 
             // Reset the form state to empty values.
-            setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: "", notes: "" });
+            setForm({ initials: "", dob: "", sex: "", height: "", weight: "", medications: "", notes: "", hardware: "" });
 
         } catch (error) {
             console.error('Error submitting form:', error);
