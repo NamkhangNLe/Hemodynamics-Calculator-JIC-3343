@@ -102,7 +102,6 @@ export default function View() {
                     {editingID === calculation._id ? (
                         <>
                             <td>
-                                Date:
                                 <input
                                     type="text"
                                     value={editedDate}
@@ -112,7 +111,6 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Time:
                                 <input
                                     type="text"
                                     value={editedTime}
@@ -122,7 +120,6 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Formula:
                                 <input
                                     type="text"
                                     value={editedValueType}
@@ -130,14 +127,13 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Calculated Value:
                                 <input
                                     type="text"
                                     value={editedCalculatedValue}
                                     onChange={(e) => setEditedCalculatedValue(e.target.value)}
                                 />
                             </td>
-                            <td><button onClick={handleSave}>Save</button></td>
+                            <td><button onClick={handleSave} className="btn btn-primary">Save</button></td>
                         </>
                     ) : (
                         <>
@@ -145,7 +141,7 @@ export default function View() {
                             <td>{data.time}</td>
                             <td>{data.formula}</td>
                             <td>{data.value}</td>
-                            <td><button onClick={() => handleEdit(calculation._id)}>Edit</button></td>
+                            <td><button onClick={() => handleEdit(calculation._id)} className="btn btn-primary">Edit</button></td>
                         </>
                     )}
                 </tr>
