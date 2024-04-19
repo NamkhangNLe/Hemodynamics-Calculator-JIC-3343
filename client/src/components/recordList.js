@@ -19,11 +19,11 @@ const Record = (props) => {
             <td>{props.record.weight}</td>
             <td>{medicationsArray.join(', ')}</td>
             <td>
-                <Link className="btn btn-link" to={`/view/${props.record._id}`}>
+                <Link className="btn btn-link" to={`/view/${props.record._id}`} title="View Patient History">
                     <FontAwesomeIcon icon={faEye} />
                 </Link> |
-                <NotesModal id ={props.record._id} /> |
-                <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+                <NotesModal id ={props.record._id} title="Patient Notes"/> |
+                <Link className="btn btn-link" to={`/edit/${props.record._id}`} title="Edit Patient">
                     <FontAwesomeIcon icon={faPencilAlt} />
                 </Link> |
                 <button className="btn btn-link"
@@ -32,6 +32,7 @@ const Record = (props) => {
                         // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
                         sleep(500).then(() => { window.location.reload(); });
                     }}
+                    title="Archive Patient"
                 >
                     <FontAwesomeIcon icon={faArchive} />
                 </button>
