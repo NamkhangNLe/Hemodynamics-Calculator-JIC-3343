@@ -115,7 +115,7 @@ export default function RecordList() {
                         <th>Sex</th>
                         <th>Height</th>
                         <th>Weight</th>
-                        <th>Number of Medications</th>
+                        <th>Medications</th>
                     </tr>
                 </thead>
                 <tbody>{recordList()}</tbody>
