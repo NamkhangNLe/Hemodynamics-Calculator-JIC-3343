@@ -131,7 +131,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
                     <Card.Title>Most Recent {valueType}</Card.Title>
                     <Card.Text>
                         <b>{value} {units}</b> <br/>
-                        Calculated on <i>{parseDate(date)}</i>
+                        <i> Calculated on {parseDate(date)}</i>
                     </Card.Text>
                 </Card.Body>
             </Card>
