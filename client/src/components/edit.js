@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from 'react-router-dom';
 import PatientForm from "./patientForm";
+import ConfirmationAlert from "./confirmationAlert";
 
 /**
  * Edit component that allows the user to update a record in the database.
@@ -10,6 +11,7 @@ import PatientForm from "./patientForm";
 export default function Edit() {
     const params = useParams();
     const navigate = useNavigate();
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const [form, setForm] = useState({
         initials: "",
@@ -118,6 +120,8 @@ export default function Edit() {
                 divElement.parentNode.removeChild(divElement); // Remove the div from the body
             }, 1000); // Delay removal after animation
         }, 2000); // Delay fade out after 2 seconds
+
+        setShowSuccess(true);
     }
 
     /**
