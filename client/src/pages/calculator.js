@@ -163,19 +163,19 @@ const CalculatorFramework = () => {
 
     function getComponentCards() {
         return (
-            <Row xs={1} md={3} className="g-4 calculation-grid">
+            <div style={{ display: "flex", flexDirection: "row", gap: "1%", flexWrap: "wrap"}}>
                 {calculationComponents.map((component, index) => {
                     return (
-                        <Col key={index}>
+                        // <Col key={index}>
                             <Card className="calculation-card">
                                 <Card.Body>
                                     {component}
                                 </Card.Body>
                             </Card>
-                        </Col>
+                        // </Col>
                     );
                 })}
-            </Row>
+            </div>
         );
     }
 

@@ -149,7 +149,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
                     <FontAwesomeIcon icon={faPencilAlt} />
                 </Link>
             </div>
-            <div style={{display: "flex", flexDirection: "row", gap: "1%"}}>
+            <div style={{display: "flex", flexDirection: "row", gap: "1%", flexWrap: "wrap"}}>
                 {initialsCard()}
                 {medicationsCard()}
                 {hardwareCard()}
