@@ -1,12 +1,18 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link, useNavigate } from 'react-router-dom';
+import PatientMedicationsDisplay from "./patientMedicationsDisplay";
+import PatientHardwareDisplay from "./patientHardwareDisplay";
+import PatientInfoCards from "./patientInfoCards";
 
 export default function View() {
     const params = useParams();
     const navigate = useNavigate();
 
     const [patientCalculations, setPatientCalculations] = useState([]);
+    const [patientRecord, setPatientRecord] = useState([]);
 
     /** EditingID keeps track of which calculation we are currently editing */
     const [editingID, setEditingID] = useState(null);
@@ -23,12 +29,15 @@ export default function View() {
             const id = params.id;
 
             // Check if a patient with the specified id is found; alerts if query returned null.
-            const patient = await fetch(`http://localhost:5000/record/${id}`);
-            if (await patient.json() == null) {
+            const patientResponse = await fetch(`http://localhost:5000/record/${id}`);
+            const patient = await patientResponse.json();
+            if (patient == null) {
                 window.alert(`Record with id ${id} not found`);
                 navigate("/");
                 return;
             }
+
+            setPatientRecord(patient);
 
             const response = await fetch(`http://localhost:5000/calculation/${id}`);
             if (!response.ok) {
@@ -102,7 +111,6 @@ export default function View() {
                     {editingID === calculation._id ? (
                         <>
                             <td>
-                                Date:
                                 <input
                                     type="text"
                                     value={editedDate}
@@ -112,7 +120,6 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Time:
                                 <input
                                     type="text"
                                     value={editedTime}
@@ -122,7 +129,6 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Formula:
                                 <input
                                     type="text"
                                     value={editedValueType}
@@ -130,14 +136,13 @@ export default function View() {
                                 />
                             </td>
                             <td>
-                                Calculated Value:
                                 <input
                                     type="text"
                                     value={editedCalculatedValue}
                                     onChange={(e) => setEditedCalculatedValue(e.target.value)}
                                 />
                             </td>
-                            <td><button onClick={handleSave}>Save</button></td>
+                            <td><button onClick={handleSave} className="btn btn-primary">Save</button></td>
                         </>
                     ) : (
                         <>
@@ -145,7 +150,7 @@ export default function View() {
                             <td>{data.time}</td>
                             <td>{data.formula}</td>
                             <td>{data.value}</td>
-                            <td><button onClick={() => handleEdit(calculation._id)}>Edit</button></td>
+                            <td><button onClick={() => handleEdit(calculation._id)} className="btn btn-primary">Edit</button></td>
                         </>
                     )}
                 </tr>
@@ -162,7 +167,7 @@ export default function View() {
                         <th>Time</th>
                         <th>Formula</th>
                         <th>Calculated Value</th>
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,16 +209,23 @@ export default function View() {
     // Used to set the link to the trends page using the params.id
     const trendsLink = `/trends/${params.id}`;
 
-    // For front-end team: patientCalculations is a JSON. You can parse it however you want to display it.
     return (
         <div>
-            <h3>View Patient History</h3>
-            <p className="subheading">History of all calculations saved on a patient profile.</p>
+            <h3>View Calculation History</h3>
+            <p className="subheading">History of all calculations saved on the patient's profile.</p>
+            <div style={{paddingBottom: "2%"}}>
+                <PatientInfoCards patientRecord={patientRecord} patientCalculations={patientCalculations}/>
+                <Link to={trendsLink}>
+                    <button className="btn btn-primary" style={{width: "175px"}}>
+                        <div className="button-icon">
+                            <FontAwesomeIcon icon={faChartSimple} />
+                            View {patientRecord.initials}'s Trends
+                        </div>
+                    </button>
+                </Link>
+            </div>
             <div>
                 <h4>Calculation History</h4>
-
-                <Link to={trendsLink}> <button> Inspect Trends </button></Link>
-
                 {calculationsTable()}
             </div>
         </div>

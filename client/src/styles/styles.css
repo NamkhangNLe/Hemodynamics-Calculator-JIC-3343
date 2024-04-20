@@ -181,3 +181,14 @@ form {
 .calculation-form {
   padding: 0px;
 }
+
+.patient-history-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.patient-info-card{
+  background-color: rgba(164, 164, 164, 0.37) !important;
+  border-width: 0px !important;
+}

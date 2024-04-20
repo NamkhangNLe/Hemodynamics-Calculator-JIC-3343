@@ -42,7 +42,7 @@ export default function Edit() {
             const patientRecord = await response.json();
             if (patientRecord == null) {
                 window.alert(`No patient with id ${id} found.`);
-                navigate("/");
+                navigate(-1);
                 return;
             }
 
@@ -98,7 +98,7 @@ export default function Edit() {
      * @returns {void}
      */
     function redirectConfirmation() {
-        navigate("/");
+        navigate(-1);
 
         // Create a div element with a fading animation
         const divElement = document.createElement('div');
