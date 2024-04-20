@@ -21,7 +21,7 @@ import PatientMedicationsDisplay from "../components/patientMedicationsDisplay.j
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 const calculations = {
-    SVR: { valueType: "Systemic Vasuclar Resistance", calculatedValue: "" },
+    SVR: { valueType: "Systemic Vascular Resistance", calculatedValue: "" },
     PVR: { valueType: "Pulmonary Vascular Resistance", calculatedValue: "" },
     TPG: { valueType: "Transpulmonary Gradient", calculatedValue: "" },
     DPG: { valueType: "Diastolic Pulmonary Gradient", calculatedValue: "" },
