@@ -1,5 +1,8 @@
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Card, ListGroup } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 function PatientInfoCards({ patientRecord, patientCalculations, showInitials=true, showMedications=true, showHardware=true}) {
 
@@ -91,7 +94,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
             <Card className="patient-info-card">
                 <Card.Body>
                     <Card.Title>Initials</Card.Title>
-                    <Card.Text>{patientRecord.initials}</Card.Text>
+                    <Card.Text><b>{patientRecord.initials}</b></Card.Text>
                 </Card.Body>
             </Card>
         )
@@ -140,7 +143,12 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
 
     return (
         <div style={{paddingBottom: "1%"}}>
-            <h4>Patient Information</h4>
+            <div style={{display: "flex", flexDirection: "row"}}>
+                <h4>Patient Information</h4>
+                <Link style={{marginTop: "-4px"}}className="btn btn-link" to={`/edit/${patientRecord._id}`} title="Edit Patient">
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                </Link>
+            </div>
             <div style={{display: "flex", flexDirection: "row", gap: "1%"}}>
                 {initialsCard()}
                 {medicationsCard()}
