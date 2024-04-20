@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple, faPencil, faPencilAlt, faSave } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link, useNavigate } from 'react-router-dom';
-import PatientMedicationsDisplay from "./patientMedicationsDisplay";
-import PatientHardwareDisplay from "./patientHardwareDisplay";
 import PatientInfoCards from "./patientInfoCards";
 
 export default function View() {
@@ -142,7 +140,11 @@ export default function View() {
                                     onChange={(e) => setEditedCalculatedValue(e.target.value)}
                                 />
                             </td>
-                            <td><button onClick={handleSave} className="btn btn-primary">Save</button></td>
+                            <td>
+                                <button onClick={handleSave} className="btn btn-link" title="Save Calculation">
+                                    <FontAwesomeIcon icon={faSave} />
+                                </button>
+                            </td>
                         </>
                     ) : (
                         <>
@@ -150,7 +152,11 @@ export default function View() {
                             <td>{data.time}</td>
                             <td>{data.formula}</td>
                             <td>{data.value}</td>
-                            <td><button onClick={() => handleEdit(calculation._id)} className="btn btn-primary">Edit</button></td>
+                            <td>
+                                <button onClick={() => handleEdit(calculation._id)} className="btn btn-link" title="Edit Calculation">
+                                    <FontAwesomeIcon icon={faPencilAlt} />
+                                </button>
+                            </td>
                         </>
                     )}
                 </tr>
