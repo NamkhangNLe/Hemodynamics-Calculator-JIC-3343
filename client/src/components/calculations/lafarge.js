@@ -35,14 +35,17 @@ export default function LaFarge({ updateCalculatedValue, sex, age, hr, setAge, s
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div>
-                    Age (Years): <input name="age" placeholder="Ex: 21" type="number" value={age} onChange={e => setAge(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Age (Years):</span>
+                    <input name="age" placeholder="Ex: 21" type="number" value={age} onChange={e => setAge(e.target.value)} />
                 </div>
-                <div>
-                    Heart Rate (bpm): <input name="hr" placeholder="Ex: 80" type="number" value={hr} onChange={e => setHr(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Heart Rate (bpm):</span>
+                    <input name="hr" placeholder="Ex: 80" type="number" value={hr} onChange={e => setHr(e.target.value)} />
                 </div>
-                <div>
-                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Output:</span>
+                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
                 </div>
             </form>
         </div>

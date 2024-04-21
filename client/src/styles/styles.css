@@ -187,3 +187,7 @@ form {
     display:none;
   }
 }
+
+.right-aligned-input {
+  text-align: right;
+}

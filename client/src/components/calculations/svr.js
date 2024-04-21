@@ -26,17 +26,21 @@ export default function Svr({ updateCalculatedValue, map, cvp, co, setMap, setCv
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div>
-                    Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 68" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Mean Arterial Pressure (mmHg):</span>
+                    <input name="MPA" placeholder="Ex: 68" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
-                <div>
-                    Central Venous Pressure (mmHg): <input name="CVP" placeholder="Ex: 12" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Central Venous Pressure (mmHg):</span>
+                    <input name="CVP" placeholder="Ex: 12" type="number" value={cvp} onChange={e => setCvp(e.target.value)} />
                 </div>
-                <div>
-                    Cardiac Output (L/min): <input name="CO" placeholder="Ex: 4.3" type="number" value={co} onChange={e => setCo(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Cardiac Output (L/min):</span>
+                    <input name="CO" placeholder="Ex: 4.3" type="number" value={co} onChange={e => setCo(e.target.value)} />
                 </div>
-                <div>
-                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Output:</span>
+                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
                 </div>
             </form>
         </div>

@@ -26,20 +26,25 @@ export default function Fick({ updateCalculatedValue, vo2, hb, satA, satMV, setV
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div>
-                    VO<sub>2</sub> (ml/min/m<sup>2</sup>): <input name="VO2" placeholder="Ex: 40" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>VO<sub>2</sub> (ml/min/m<sup>2</sup>):</span>
+                    <input name="VO2" placeholder="Ex: 40" type="number" value={vo2} onChange={e => setVo2(e.target.value)} />
                 </div>
-                <div>
-                    Hemoglobin (g/dl): <input name="Hb" placeholder="Ex: 18" type="number" value={hb} onChange={e => setHb(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Hemoglobin (g/dl):</span>
+                    <input name="Hb" placeholder="Ex: 18" type="number" value={hb} onChange={e => setHb(e.target.value)} />
                 </div>
-                <div>
-                    Arterial O<sub>2</sub> Saturation (Percent/100): <input name="Sat A" placeholder="Ex: 0.95" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Arterial O<sub>2</sub> Saturation (Percent/100):</span>
+                    <input name="Sat A" placeholder="Ex: 0.95" type="number" value={satA} onChange={e => setSatA(e.target.value)} />
                 </div>
-                <div>
-                    Mixed Venous Saturation (Percent/100): <input name="Sat MV" placeholder="Ex: 0.7" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Mixed Venous Saturation (Percent/100):</span>
+                    <input name="Sat MV" placeholder="Ex: 0.7" type="number" value={satMV} onChange={e => setSatMV(e.target.value)} />
                 </div>
-                <div>
-                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> L/min
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Output:</span>
+                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> L/min
                 </div>
             </form>
         </div>
