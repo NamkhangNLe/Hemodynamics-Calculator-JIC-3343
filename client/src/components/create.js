@@ -66,35 +66,6 @@ export default function Create() {
     }
 
     /**
-     * Redirects to the record list page and displays the confirmation box.
-     * @returns {void}
-     */
-    function redirectConfirmation() {
-
-
-        navigate("/");
-
-        // Create a div element with a fading animation
-        const divElement = document.createElement('div');
-        const textElement = document.createElement('span');
-        textElement.innerText = 'Patient created successfully!';
-        divElement.className = "fading-div";
-        divElement.append(textElement);
-        divElement.style.opacity = 0; // Set initial opacity to 0
-        divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
-        document.body.appendChild(divElement); // Append the div to the body
-
-        // Animate the div to fade in and fade out
-        divElement.style.opacity = 1; // Fade in
-        setTimeout(() => {
-            divElement.style.opacity = 0; // Fade out
-            setTimeout(() => {
-                divElement.parentNode.removeChild(divElement); // Remove the div from the body
-            }, 1000); // Delay removal after animation
-        }, 2000); // Delay fade out after 2 seconds
-    }
-
-    /**
      * Handles the form submission by sending a POST request to the server to create a new record.
      * @param {Event} e - The form submission event.
      * @returns {void}
@@ -112,7 +83,7 @@ export default function Create() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newPerson),
-            }).then(redirectConfirmation);
+            }).then(() => navigate("/", {state: {createSuccess: true}}));
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status} - ${response.statusText}`);

@@ -106,6 +106,10 @@ export default function RecordList() {
             return (
                 <ConfirmationAlert message="Patient updated successfully!" variant="success"/>
             );
+        } else if (state.createSuccess === true) {
+            return (
+                <ConfirmationAlert message="Patient created successfully!" variant="success"/>
+            );
         }
     }
 
