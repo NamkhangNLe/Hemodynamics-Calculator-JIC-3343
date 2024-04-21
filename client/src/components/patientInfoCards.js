@@ -102,6 +102,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
 
     function medicationsCard() {
         if (!showMedications) return null;
+        if (!patientRecord.medications) return null;
         return (
             <Card className="patient-info-card">
                 <Card.Body>
