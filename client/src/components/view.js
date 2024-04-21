@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartSimple, faPencil, faPencilAlt, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple, faPencilAlt, faSave } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import PatientInfoCards from "./patientInfoCards";
+import ConfirmationAlert from "./confirmationAlert";
 
 export default function View() {
     const params = useParams();
     const navigate = useNavigate();
+    const state = useLocation().state;
 
     const [patientCalculations, setPatientCalculations] = useState([]);
     const [patientRecord, setPatientRecord] = useState([]);
@@ -89,6 +91,17 @@ export default function View() {
         let hours = date.getHours().toString();
         let minutes = date.getMinutes().toString();
         return (hours.length === 1 ? '0' + hours : hours) + ':' + (minutes.length === 1 ? '0' + minutes : minutes);
+    }
+
+    function getAlerts() {
+        if (state === null) {
+            return;
+        }
+        if (state.editSuccess === true) {
+            return (
+                <ConfirmationAlert message="Patient updated successfully!" variant="success"/>
+            );
+        }
     }
 
     /**
@@ -217,6 +230,7 @@ export default function View() {
 
     return (
         <div>
+            {getAlerts()}
             <h3>View Calculation History</h3>
             <p className="subheading">History of all calculations saved on the patient's profile.</p>
             <div style={{paddingBottom: "2%"}}>

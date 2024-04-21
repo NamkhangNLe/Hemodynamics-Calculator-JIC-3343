@@ -1,16 +1,27 @@
-import React from 'react'
-import { useState } from 'react'
 import Alert from 'react-bootstrap/Alert';
+import { useState, useEffect } from 'react';
 
-function ConfirmationAlert( {message, variant}) {
+function ConfirmationAlert({ message, variant }) {
     const [show, setShow] = useState(true);
-    if (show) {
-        return (
-            <Alert variant={variant} onClose={() => setShow(false)} dismissible fade="true">
-                {message}
-            </Alert>
-        );
-    }
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShow(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div id="confirmationAlert" className={`confirmation ${show ? 'fade-in' : 'fade-out'}`}>
+            {show && (
+                <Alert variant={variant}>
+                    {message}
+                </Alert>
+            )}
+        </div>
+    );
 }
+
 
 export default ConfirmationAlert
