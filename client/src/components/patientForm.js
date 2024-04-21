@@ -1,4 +1,5 @@
 import React from "react";
+import HardwareForm from "./hardwareForm";
 
 /**
  * Form component to edit/create patient fields.
@@ -22,7 +23,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                 className="form-control"
                                 id="initials"
                                 value={form.initials}
-                                onChange={(e) => { updateForm({ initials: e.target.value }) }}
+                                onChange={(e) => { updateForm({ initials: e.target.value }, 0) }}
                                 style={{ width: '100px' }}
                             />
                         </div>
@@ -34,7 +35,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                 required={true}
                                 id="dob"
                                 value={form.dob}
-                                onChange={(e) => updateForm({ dob: e.target.value })}
+                                onChange={(e) => updateForm({ dob: e.target.value }, 0)}
                                 style={{ width: '200px' }}
                             />
                         </div>
@@ -49,7 +50,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="male"
                                     value="M"
                                     checked={form.sex === "M"}
-                                    onChange={(e) => updateForm({ sex: e.target.value })}
+                                    onChange={(e) => updateForm({ sex: e.target.value }, 0)}
                                 />
                                 <label htmlFor="male" className="form-check-label">
                                     M
@@ -64,7 +65,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     required={true}
                                     value="F"
                                     checked={form.sex === "F"}
-                                    onChange={(e) => updateForm({ sex: e.target.value })}
+                                    onChange={(e) => updateForm({ sex: e.target.value }, 0)}
                                 />
                                 <label htmlFor="female" className="form-check-label">
                                     F
@@ -79,7 +80,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                 required={true}
                                 id="height"
                                 value={form.height}
-                                onChange={(e) => updateForm({ height: e.target.value })}
+                                onChange={(e) => updateForm({ height: e.target.value }, 0)}
                                 style={{ width: '100px' }}
                             />
                             <span style={{ paddingLeft: 5 + "px" }}>cm</span>
@@ -92,17 +93,22 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                 required={true}
                                 id="weight"
                                 value={form.weight}
-                                onChange={(e) => updateForm({ weight: e.target.value })}
+                                onChange={(e) => updateForm({ weight: e.target.value }, 0)}
                                 style={{ width: '100px' }}
                             />
                             <span style={{ paddingLeft: 5 + "px" }}>kg</span>
                         </div>
+
+                        <div className="hardware-section">
+                            <h6>Current Hardware:</h6>
+                            <HardwareForm form={form} updateForm={updateForm} />
+                        </div>
+
                     </div>
 
                     {/* Column 2 */}
                     <div className="form-column">
                         <h6>Current Medications:</h6>
-
 
                         {/* TODO: Make this section into checkboxes */}
                         <div className="medication-section">
@@ -114,7 +120,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="milrinone"
                                     value="Milrinone"
                                     checked={form.medications.includes("Milrinone")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="milrinone" className="form-check-label">
                                     Milrinone
@@ -128,7 +134,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="dobutamine"
                                     value="Dobutamine"
                                     checked={form.medications.includes("Dobutamine")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="dobutamine" className="form-check-label">
                                     Dobutamine
@@ -142,7 +148,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="lasix"
                                     value="Lasix"
                                     checked={form.medications.includes("Lasix")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="lasix" className="form-check-label">
                                     Lasix
@@ -156,7 +162,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="bumex"
                                     value="Bumex"
                                     checked={form.medications.includes("Bumex")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="bumex" className="form-check-label">
                                     Bumex
@@ -170,7 +176,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="diuril"
                                     value="Diuril"
                                     checked={form.medications.includes("Diuril")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="diuril" className="form-check-label">
                                     Diuril
@@ -184,7 +190,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="hydralazine"
                                     value="Hydralazine"
                                     checked={form.medications.includes("Hydralazine")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="hydralazine" className="form-check-label">
                                     Hydralazine
@@ -198,7 +204,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="epinephrine"
                                     value="Epinephrine"
                                     checked={form.medications.includes("Epinephrine")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="epinephrine" className="form-check-label">
                                     Epinephrine
@@ -212,7 +218,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="norepinephrine"
                                     value="Norepinephrine"
                                     checked={form.medications.includes("Norepinephrine")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="norepinephrine" className="form-check-label">
                                     Norepinephrine
@@ -226,7 +232,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="dopamine"
                                     value="Dopamine"
                                     checked={form.medications.includes("Dopamine")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="dopamine" className="form-check-label">
                                     Dopamine
@@ -240,16 +246,17 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                     id="vasopressin"
                                     value="Vasopressin"
                                     checked={form.medications.includes("Vasopressin")}
-                                    onChange={(e) => updateForm({ medications: e.target.value })}
+                                    onChange={(e) => updateForm({ medications: e.target.value }, 0)}
                                 />
                                 <label htmlFor="vasopressin" className="form-check-label">
                                     Vasopressin
                                 </label>
                             </div>
                         </div>
+
                         <div className="form-long-answer">
                             {/* TODO: add patient notes to the database*/}
-                            <h6>Other Notes:</h6>
+                            <h6>Notes:</h6>
                             <textarea
                                 className="form-control"
                                 name="message"
@@ -257,7 +264,7 @@ export default function PatientForm({ form, onSubmit, updateForm, mode }) {
                                 rows="5"
                                 cols="10"
                                 value={form.notes}
-                                onChange={(e) => updateForm({ notes: e.target.value })}
+                                onChange={(e) => updateForm({ notes: e.target.value }, 0)}
                             >
                             </textarea>
                         </div>
