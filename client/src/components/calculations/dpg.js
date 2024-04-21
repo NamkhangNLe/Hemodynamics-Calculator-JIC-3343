@@ -23,22 +23,20 @@ export default function Dpg({ updateCalculatedValue, padp, pcwp, setPadp, setPcw
     }, [padp, pcwp]);
 
     return (
-    <div>
-        <form>
-            <h2>{valueType}</h2>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Diastolic Pulmonary Artery Pressure (mmHg):</span>
-                <input name="padp" placeholder="Ex: 12" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Pulmonary Capillary Wedge Pressure (mmHg):</span>
-                <input name="pcwp" placeholder="Ex: 5" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Output:</span>
-                <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
-            </div>
-        </form>
-    </div>
-);
+        <div>
+            <form>
+                <h2>{valueType}</h2>
+                <div>
+                    Diastolic Pulmonary Artery Pressure (mmHg): <input name="padp" placeholder="Ex: 12" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+
+                </div>
+                <div>
+                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="pcwp" placeholder="Ex: 5" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                </div>
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
+                </div>
+            </form>
+        </div>
+    );
 }

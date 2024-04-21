@@ -26,13 +26,11 @@ export default function Bsa({ updateCalculatedValue, bsa, setBsa }) {
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Body Surface Area (m<sup>2</sup>):</span>
-                    <input name="BSA" placeholder="Ex: 1.9" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
+                <div>
+                    Body Surface Area (m<sup>2</sup>): <input name="BSA" placeholder="Ex: 1.9" type="number" value={bsa} onChange={e => setBsa(e.target.value)} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
                 </div>
             </form>
         </div>

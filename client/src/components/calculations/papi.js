@@ -26,21 +26,17 @@ export default function Papi({ updateCalculatedValue, pasp, padp, ra, setPasp, s
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Pulmonary Artery Systolic Pressure (mmHg):</span>
-                    <input name="PASP" placeholder="Ex: 21" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
+                <div>
+                    Pulmonary Artery Systolic Pressure (mmHg): <input name="PASP" placeholder="Ex: 21" type="number" value={pasp} onChange={e => setPasp(e.target.value)} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Pulmonary Artery Diastolic Pressure (mmHg):</span>
-                    <input name="PADP" placeholder="Ex: 10" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
+                <div>
+                    Pulmonary Artery Diastolic Pressure (mmHg): <input name="PADP" placeholder="Ex: 10" type="number" value={padp} onChange={e => setPadp(e.target.value)} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Right Atrial Pressure (mmHg):</span>
-                    <input name="RA" type="number" placeholder="Ex: 9" value={ra} onChange={e => setRa(e.target.value)} />
+                <div>
+                    Right Atrial Pressure (mmHg): <input name="RA" type="number" placeholder="Ex: 9" value={ra} onChange={e => setRa(e.target.value)} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
+                <div>
+                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
                 </div>
             </form>
         </div>

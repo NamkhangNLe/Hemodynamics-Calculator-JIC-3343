@@ -7,7 +7,7 @@
 .content-container {
   display: flex;
   flex: 1;
-  overflow: visible; /* Allow content to scroll if it's taller than the viewport */
+  overflow: auto; /* Allow content to scroll if it's taller than the viewport */
 }
 
 .menu {
@@ -196,16 +196,6 @@ form {
   padding: 0px;
 }
 
-@media print {
-  .noPrint {
-    display:none;
-  }
-}
-
-.right-aligned-input {
-  text-align: right;
-}
-
 .patient-history-header {
   display: flex;
   flex-direction: row;
@@ -223,4 +213,5 @@ form {
   bottom: 0;
   right: 0;
   padding: 20px;
+
 }
