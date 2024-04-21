@@ -51,7 +51,6 @@ const Record = (props) => {
 export default function RecordList() {
     const [records, setRecords] = useState([]);
     const state = useLocation().state;
-    const navigate = useNavigate();
 
     // This method fetches the records from the database.
     useEffect(() => {
