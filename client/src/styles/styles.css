@@ -40,7 +40,21 @@
 .card.calculation-card {
   background-color: rgba(164, 164, 164, 0.37);
   border-width: 0px;
-  height: 340px;
+  min-height: 340px;
+  margin-bottom: 1%;
+  width: 482px;
+}
+
+@media (max-width: 1200px) {
+  .card.calculation-card {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card.calculation-card {
+    width: 100%;
+  }
 }
 
 .calculation-grid {
@@ -191,4 +205,5 @@ form {
 .patient-info-card{
   background-color: rgba(164, 164, 164, 0.37) !important;
   border-width: 0px !important;
+  margin-bottom: 1% !important;
 }
