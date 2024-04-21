@@ -74,7 +74,6 @@ const HardwareForm = ({ form, updateForm }) => {
         </div>
         {hardwareInfo.map((device, index) => {
             if (device.deviceName === 'Impella') {
-            console.log(device);
             return (
                 <div key={index}>
                 <table>

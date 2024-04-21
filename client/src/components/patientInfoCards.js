@@ -145,7 +145,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
         <div style={{paddingBottom: "1%"}}>
             <div style={{display: "flex", flexDirection: "row"}}>
                 <h4>Patient Information</h4>
-                <Link style={{marginTop: "-4px"}}className="btn btn-link" to={`/edit/${patientRecord._id}`} title="Edit Patient">
+                <Link style={{marginTop: "-4px"}} className="btn btn-link" to={`/edit/${patientRecord._id}`} title="Edit Patient" state={{sourcePath: `/view/${patientRecord._id}`}}>
                     <FontAwesomeIcon icon={faPencilAlt} />
                 </Link>
             </div>

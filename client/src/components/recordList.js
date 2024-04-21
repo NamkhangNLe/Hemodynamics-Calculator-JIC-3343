@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import NotesModal from "./notesModal";
+import ConfirmationAlert from "./confirmationAlert";
 
 const Record = (props) => {
     // Convert medications to an array if it's not already THIS IS REQUIRED TO ADD A SPACE
     const medicationsArray = Array.isArray(props.record.medications) ? props.record.medications : [props.record.medications];
+    const navigate = useNavigate();
 
     return (
         <tr>
@@ -23,14 +25,14 @@ const Record = (props) => {
                     <FontAwesomeIcon icon={faEye} />
                 </Link> |
                 <NotesModal id ={props.record._id} title="Patient Notes"/> |
-                <Link className="btn btn-link" to={`/edit/${props.record._id}`} title="Edit Patient">
+                <Link className="btn btn-link" to={`/edit/${props.record._id}`} title="Edit Patient" state={{sourcePath: "/"}}>
                     <FontAwesomeIcon icon={faPencilAlt} />
                 </Link> |
                 <button className="btn btn-link"
                     onClick={() => {
                         props.archiveRecord(props.record);
                         // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
-                        sleep(500).then(() => { window.location.reload(); });
+                        sleep(500).then(() => { navigate("/", {state: null}); window.location.reload(); });
                     }}
                     title="Archive Patient"
                 >
@@ -48,6 +50,7 @@ const Record = (props) => {
  */
 export default function RecordList() {
     const [records, setRecords] = useState([]);
+    const state = useLocation().state;
 
     // This method fetches the records from the database.
     useEffect(() => {
@@ -96,9 +99,25 @@ export default function RecordList() {
         });
     }
 
+    function getAlerts() {
+        if (state === null) {
+            return;
+        }
+        if (state.editSuccess === true) {
+            return (
+                <ConfirmationAlert message="Patient updated successfully!" variant="success"/>
+            );
+        } else if (state.createSuccess === true) {
+            return (
+                <ConfirmationAlert message="Patient created successfully!" variant="success"/>
+            );
+        }
+    }
+
     // This following section will display the table with the records of individuals.
     return (
         <div>
+            {getAlerts()}
             <h3>Patient List</h3>
             <p className="subheading">View, edit, or create all saved patient profiles.</p>
             <Link className="btn btn-primary" to="/create">

@@ -202,8 +202,16 @@ form {
   justify-content: space-between;
 }
 
-.patient-info-card{
+.patient-info-card {
   background-color: rgba(164, 164, 164, 0.37) !important;
   border-width: 0px !important;
   margin-bottom: 1% !important;
+}
+
+.confirmation {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+
 }

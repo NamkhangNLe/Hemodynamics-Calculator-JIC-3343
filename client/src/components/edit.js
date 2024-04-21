@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import PatientForm from "./patientForm";
 
 /**
@@ -10,6 +10,9 @@ import PatientForm from "./patientForm";
 export default function Edit() {
     const params = useParams();
     const navigate = useNavigate();
+    const state = useLocation().state;
+    const sourcePath = state ? state.sourcePath : "/";
+    console.log(sourcePath)
 
     const [form, setForm] = useState({
         initials: "",
@@ -42,7 +45,7 @@ export default function Edit() {
             const patientRecord = await response.json();
             if (patientRecord == null) {
                 window.alert(`No patient with id ${id} found.`);
-                navigate(-1);
+                navigate(sourcePath, {state: {editSuccess: false}});
                 return;
             }
 
@@ -94,33 +97,6 @@ export default function Edit() {
     }
 
     /**
-     * Redirects to the record list page and displays the confirmation box.
-     * @returns {void}
-     */
-    function redirectConfirmation() {
-        navigate(-1);
-
-        // Create a div element with a fading animation
-        const divElement = document.createElement('div');
-        const textElement = document.createElement('span');
-        textElement.innerText = 'Patient updated successfully!';
-        divElement.className = "fading-div";
-        divElement.append(textElement);
-        divElement.style.opacity = 0; // Set initial opacity to 0
-        divElement.style.transition = 'opacity 1s ease-in-out'; // Set animation transition
-        document.body.appendChild(divElement); // Append the div to the body
-
-        // Animate the div to fade in and fade out
-        divElement.style.opacity = 1; // Fade in
-        setTimeout(() => {
-            divElement.style.opacity = 0; // Fade out
-            setTimeout(() => {
-                divElement.parentNode.removeChild(divElement); // Remove the div from the body
-            }, 1000); // Delay removal after animation
-        }, 2000); // Delay fade out after 2 seconds
-    }
-
-    /**
      * Submits the updated record to the database.
      * @param {Event} e - The form submit event.
      */
@@ -147,8 +123,7 @@ export default function Edit() {
             },
         });
 
-        redirectConfirmation(); // Navigate back to the home page.
-        // Sends a post request to update the data in the database.
+        navigate(sourcePath, {state: {editSuccess: true}});
     }
 
     // Displays the form that takes input from the user to update the data.
