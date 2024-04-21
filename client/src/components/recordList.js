@@ -10,6 +10,7 @@ import ConfirmationAlert from "./confirmationAlert";
 const Record = (props) => {
     // Convert medications to an array if it's not already THIS IS REQUIRED TO ADD A SPACE
     const medicationsArray = Array.isArray(props.record.medications) ? props.record.medications : [props.record.medications];
+    const navigate = useNavigate();
 
     return (
         <tr>
@@ -31,7 +32,7 @@ const Record = (props) => {
                     onClick={() => {
                         props.archiveRecord(props.record);
                         // //CHANGE LATER, because deleteRecord is async, must reload the page after a record is deleted, currently waits 500 ms and then reloads the page
-                        sleep(500).then(() => { window.location.reload(); });
+                        sleep(500).then(() => { navigate("/", {state: null}); window.location.reload(); });
                     }}
                     title="Archive Patient"
                 >
@@ -50,6 +51,7 @@ const Record = (props) => {
 export default function RecordList() {
     const [records, setRecords] = useState([]);
     const state = useLocation().state;
+    const navigate = useNavigate();
 
     // This method fetches the records from the database.
     useEffect(() => {
