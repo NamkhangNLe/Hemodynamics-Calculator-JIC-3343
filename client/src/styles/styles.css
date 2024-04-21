@@ -40,7 +40,21 @@
 .card.calculation-card {
   background-color: rgba(164, 164, 164, 0.37);
   border-width: 0px;
-  height: 340px;
+  min-height: 340px;
+  margin-bottom: 1%;
+  width: 482px;
+}
+
+@media (max-width: 1200px) {
+  .card.calculation-card {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card.calculation-card {
+    width: 100%;
+  }
 }
 
 .calculation-grid {
@@ -190,4 +204,23 @@ form {
 
 .right-aligned-input {
   text-align: right;
+}
+
+.patient-history-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.patient-info-card {
+  background-color: rgba(164, 164, 164, 0.37) !important;
+  border-width: 0px !important;
+  margin-bottom: 1% !important;
+}
+
+.confirmation {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
 }

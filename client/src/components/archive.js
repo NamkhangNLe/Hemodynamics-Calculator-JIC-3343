@@ -10,7 +10,7 @@ const ArchiveRecord = (props) => (
         <td>{props.record.dob}</td>
         <td>{props.record.sex}</td>
         <td>
-            <NotesModal id ={props.record._id} /> |
+            <NotesModal id ={props.record._id} title="View Patient Notes"/> |
             <button className="btn btn-link"
                 title = "Restore Patient From Archive"
                 onClick={() => {
@@ -22,7 +22,8 @@ const ArchiveRecord = (props) => (
                 <FontAwesomeIcon icon={faTrashRestore} />
             </button> |
             <DeleteModal
-                id={props.record._id} />
+                id={props.record._id}
+                title="Delete Patient"/>
         </td>
     </tr>
 );
