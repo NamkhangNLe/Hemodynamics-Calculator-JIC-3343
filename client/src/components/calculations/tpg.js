@@ -26,14 +26,17 @@ export default function Tpg({ updateCalculatedValue, map, pcwp, setMap, setPcwp 
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div>
-                    Mean Arterial Pressure (mmHg): <input name="MPA" placeholder="Ex: 72" type="number" value={map} onChange={e => setMap(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Mean Arterial Pressure (mmHg):</span>
+                    <input name="MPA" placeholder="Ex: 72" type="number" value={map} onChange={e => setMap(e.target.value)} />
                 </div>
-                <div>
-                    Pulmonary Capillary Wedge Pressure (mmHg): <input name="CVP" placeholder="Ex: 8" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Pulmonary Capillary Wedge Pressure (mmHg):</span>
+                    <input name="CVP" placeholder="Ex: 8" type="number" value={pcwp} onChange={e => setPcwp(e.target.value)} />
                 </div>
-                <div>
-                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Output:</span>
+                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
                 </div>
             </form>
         </div>

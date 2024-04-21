@@ -26,11 +26,13 @@ export default function Weight({ updateCalculatedValue, weight, setWeight }) {
         <div>
             <form>
                 <h2>{valueType}</h2>
-                <div>
-                    Weight (kg): <input name="weight" placeholder="Ex: 120" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Weight (kg):</span>
+                    <input name="weight" placeholder="Ex: 120" type="number" value={weight} onChange={e => setWeight(e.target.value)} />
                 </div>
-                <div>
-                    Output: <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Output:</span>
+                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
                 </div>
             </form>
         </div>
