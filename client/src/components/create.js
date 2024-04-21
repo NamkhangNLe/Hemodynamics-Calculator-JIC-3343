@@ -17,7 +17,7 @@ export default function Create() {
         medications: "",
         notes: "",
         archived: false,
-        hardware: [[]]
+        hardware: []
     });
 
 
