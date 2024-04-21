@@ -49,8 +49,7 @@ export async function submitAll(event, patientObj, calculations) {
     event.preventDefault();
 
     if (patientObj === undefined) {
-        messageAnimation("Patient was not selected.\nCalculation not saved.", "lightpink");
-        return;
+        return null;
     }
 
     const missingInputs = [];
@@ -87,20 +86,16 @@ export async function submitAll(event, patientObj, calculations) {
     const numInvalidCalculations = missingInputs.length + badOutputs.length;
     const numValidCalculations = numTotalCalculations - (numInvalidCalculations);
 
-    if (numInvalidCalculations !== 0) {
-        messageAnimation(
-            `${arrString("Missing input", missingInputs)}`
-            + `${arrString("Bad output", badOutputs)}`
-            + `${numInvalidCalculations} calculation${numInvalidCalculations !== 1 ? "s" : ""} not saved.\n`
-            + `${numValidCalculations} calculation${numValidCalculations !== 1 ? "s" : ""} saved.`,
-            (numValidCalculations === numTotalCalculations) ? "lightpink" : "bisque"
-        );
-    } else {
-        messageAnimation("All calculations saved!");
+    return {
+        numTotalCalculations: numTotalCalculations,
+        numInvalidCalculations: numInvalidCalculations,
+        numValidCalculations: numValidCalculations,
+        missingInputs: missingInputs,
+        badOutputs: badOutputs
     }
 }
 
-function arrString(label, arr) {
+export function arrString(label, arr) {
     if (arr.length === 0) {
         return "";
     }
