@@ -7,7 +7,7 @@
 .content-container {
   display: flex;
   flex: 1;
-  overflow: auto; /* Allow content to scroll if it's taller than the viewport */
+  overflow: visible; /* Allow content to scroll if it's taller than the viewport */
 }
 
 .menu {
