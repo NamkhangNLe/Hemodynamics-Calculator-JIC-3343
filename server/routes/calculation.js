@@ -40,6 +40,8 @@ calcuationRoutes.post("/calculation/add", async (req, res) => {
         date: currentDate,
         valueType: req.body.valueType,
         calculatedValue: req.body.calculatedValue,
+        medications: req.body.medications,
+        hardware: req.body.hardware
     };
 
     try {
