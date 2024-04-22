@@ -4,6 +4,54 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 # Release Notes
 
+## Version 1.0.0
+
+### Features
+* Added a Patient Record List:
+   * Displays each patient's Initials, DOB, Sex, Height, Weight, and current Medications
+   * Allows new patients to be created
+   * Allows exisitng patients to be edited
+   * Allows patient notes to be viewed at a glance
+   * Allows patients to be archived
+* Added an individual patient page for each patient, accessible from the patient record list
+   * Allows the user to quickly view more detailed patient information
+   * Allows the user to view a patients saved calculations
+   * Allows the user to quickly navigate to a patients trends page
+* Added a calculate page to calculate hemodynamic values
+   * Added calculations:
+     * VO2 by LaFarge Equation
+     * VO2 by Body Surface Area
+     * VO2 by Weight
+     * FICK Cardiac Output
+     * Cardiac Index
+     * Systemic Vascular Resistance
+     * Pulmonary Vascular Resistance
+     * Transpulmonary gradient
+     * Diastolic Pulmonary Gradient
+     * Pulmonary Artery Pulsatility Index
+   * Calculator components update the calculated value in real time with proper error handling
+* Added functionality to save particular calculations to a selected patient
+* Added a trends page to provide data visualization for patient profiles and calculations
+* Added an archive page to view archived patients and restore or delete archived patients
+
+### Bug Fixes
+* Fixed an issue where sidebar and navbar were not rendering on every page
+* Fixed an issue where sidebar and navbar were doubling on every page
+* Added refresh on editing patient's past calculations
+* Moved create patient out of navbar
+* Fixed issue with sidebar color where the highlighted element does not properly highlight
+* Fixed edit patient screen bug where fields would not populate
+* Fixed bug where getting patient records by patient id did not return any records
+* DateTime for patient calculation is now a correctly formatted object
+* Fixed month indexing in edit calculations page
+* Fixed an issue where graphs weren't appearing correctly on the trends page
+* Fixed an issue where page wouldn't adjust to fit all new trend graphs
+* Removed the Emory logo from the navbar and moved it into the sidebar
+* Removed the navbar.
+
+### Known Issues
+* TODO
+
 ## Version 0.4.0
 
 ### Features
@@ -14,7 +62,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Updated the calculation page to display and save all calculations at once
 
 ### Bug Fixes
-* Removed the Emory logo from the navbar and moved it into the sidebar.
+* Removed the Emory logo from the navbar and moved it into the sidebar
 * Removed the navigation bar to decrease white space on pages
 
 ### Known Issues
@@ -61,19 +109,19 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
    * Transpulmonary gradient
    * Diastolic Pulmonary Gradient
    * Pulmonary Artery Pulsatility Index
-* Fleshed out calculator page with dropdown menu for patient and calculator values.
-* Calculator components update the calculated value in real time with proper error handling.
-* Added functionality to save particular calculations to a selected patient.
+* Fleshed out calculator page with dropdown menu for patient and calculator values
+* Calculator components update the calculated value in real time with proper error handling
+* Added functionality to save particular calculations to a selected patient
 
 ### Bug Fixes
-* Added refresh on editing patient's past calculations.
-* Moved create patient out of navbar.
-* Fixed issue with sidebar color where the highlighted element does not properly highlight.
-* Fixed edit patient screen bug where fields would not populate.
-* Fixed bug where getting patient records by patient id did not return any records.
-* DateTime for patient calculation is now a correctly formatted object.
-* Fixed month indexing in edit calculations page.
-* Removed Herobrine.
+* Added refresh on editing patient's past calculations
+* Moved create patient out of navbar
+* Fixed issue with sidebar color where the highlighted element does not properly highlight
+* Fixed edit patient screen bug where fields would not populate
+* Fixed bug where getting patient records by patient id did not return any records
+* DateTime for patient calculation is now a correctly formatted object
+* Fixed month indexing in edit calculations page
+* Removed Herobrine
 
 ### Known Issues
 * Emory logo still disappears unpredictably
@@ -83,30 +131,30 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 ### Features
 
-* Edit patient screen updated to match create patient screen.
-* Calculator page added.
-* Added "selected patient" functionality using dropdown on Calculator page.
-* Added functionality for saving calculated values to database with unique patient id.
-* Sidebar color changed to blue.
-* Patient history page added.
-* Added functionality for editing calculated values and associated fields on patient history screen.
-* Added functionality to view calculated values of a specific patient.
+* Edit patient screen updated to match create patient screen
+* Calculator page added
+* Added "selected patient" functionality using dropdown on Calculator page
+* Added functionality for saving calculated values to database with unique patient id
+* Sidebar color changed to blue
+* Patient history page added
+* Added functionality for editing calculated values and associated fields on patient history screen
+* Added functionality to view calculated values of a specific patient
 
 ### Bug Fixes
 
-* Fixed an issue where sidebar and navbar were not rendering on every page.
-* Fixed an issue where sidebar and navbar were doubling on every page.
+* Fixed an issue where sidebar and navbar were not rendering on every page
+* Fixed an issue where sidebar and navbar were doubling on every page
 * Removed Herobrine.
 
 ### Known Issues
 
-* Getting patient records by record/:id endpoint does not return any records.
-* DateTime for patient calculations is an unparsed string when editing.
-* Saving a calculated value does not refresh the page, thus the form does not update.
-* Month on patient history table is indexed (January shows as 0).
-* Sidebar text shows as black when hovering over any part.
-* Edit patient screen does not auto-fill values.
-* Sometimes, when saving an edited value, the Emory logo will disappear.
+* Getting patient records by record/:id endpoint does not return any records
+* DateTime for patient calculations is an unparsed string when editing
+* Saving a calculated value does not refresh the page, thus the form does not update
+* Month on patient history table is indexed (January shows as 0)
+* Sidebar text shows as black when hovering over any part
+* Edit patient screen does not auto-fill values
+* Sometimes, when saving an edited value, the Emory logo will disappear
 
 ## Version 0.0.0 - Basic Patient Profile System
 
@@ -121,7 +169,7 @@ For our current artifact implementation of this application, version 0.1.0, we h
 
 This basic patient system is the backbone of the application, as users must be able to save calculations and view trends for these patients. While specific data fields will be included in future updates, this version of our product provides the necessary foundation for us to expand further.
 
-## Platform Description and Tech Stack
+### Platform Description and Tech Stack
 
 This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node).
 
@@ -132,8 +180,21 @@ This application uses the MERN Tech Stack (MongoDB, ExpressJS, React, Node).
 
 This application is designed to be accessed from web browsers on MacOS, Windows, and Linux desktops and laptops. The application is primarily written in JavaScript due to its simplicity and ease of integration with Node.js. CSS, HTML, as well as React-specific components are also used to provide a visually appealing and easy-to-use front-end for users.
 
-## Setup Instructions (Run Locally)
+# Install Guide (To Run Locally)
 
+## Pre-requisites
+In order to use our software, you must have the required software:
+* Git
+* Node.js
+* npm
+
+## Download Instructions
+To download our software, simply clone the github repository into your desired destination. This can be achieved by opening a git bash terminal in your desired location and running
+```bash
+git clone https://github.com/NamkhangNLe/Hemodynamics-Calculator-JIC-3343.git
+```
+
+## Setup Instructions
 To get started with the Hemodynamics Calculator, follow these steps:
 1. First, make sure you have node and npm installed. You can do this by downloading node.js (https://nodejs.org/en/download), or using nvm to install node and npm. To check if you have node/npm installed, you can run the following command, which will output the version of node/npm you currently have.
 ```bash
@@ -159,6 +220,13 @@ node server.js
 npm start
 ```
 
-## License
+## Troubleshooting
+
+All necesarry modules should come with the download, but if for some reason something is missing, simply run 
+```bash
+npm install <module>
+```
+
+# License
 
 This Hemodynamics Calculator is distributed under the [MIT License](https://example.com/hemodynamics-calculator-license), which allows for both personal and commercial use. Please review the attached license for more details.
