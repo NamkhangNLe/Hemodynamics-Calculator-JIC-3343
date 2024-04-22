@@ -29,7 +29,7 @@ export default function View() {
             const id = params.id;
 
             // Check if a patient with the specified id is found; alerts if query returned null.
-            const patientResponse = await fetch(`http://localhost:5000/record/${id}`);
+            const patientResponse = await fetch(`https://hemodynamic-calculator-jic-3343-server.vercel.app/record/${id}`);
             const patient = await patientResponse.json();
             if (patient == null) {
                 window.alert(`Record with id ${id} not found`);
@@ -39,7 +39,7 @@ export default function View() {
 
             setPatientRecord(patient);
 
-            const response = await fetch(`http://localhost:5000/calculation/${id}`);
+            const response = await fetch(`https://hemodynamic-calculator-jic-3343-server.vercel.app//calculation/${id}`);
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`;
                 window.alert(message);
@@ -208,7 +208,7 @@ export default function View() {
             calculatedValue: editedCalculatedValue
         };
 
-        fetch(`http://localhost:5000/updatecalc/${editingID}`, {
+        fetch(`https://hemodynamic-calculator-jic-3343-server.vercel.app/updatecalc/${editingID}`, {
             method: "PATCH",
             body: JSON.stringify(editedCalculation),
             headers: {

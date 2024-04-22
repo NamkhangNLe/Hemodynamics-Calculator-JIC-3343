@@ -16,7 +16,7 @@ function DeleteModal({ id }) {
            * @returns {Promise<void>} A promise that resolves when the record is deleted.
            */
     async function deleteRecord(id) {
-        fetch(`http://localhost:5000/${id}`, {
+        fetch(`https://hemodynamic-calculator-jic-3343-server.vercel.app/${id}`, {
             method: "DELETE"
         });
     }

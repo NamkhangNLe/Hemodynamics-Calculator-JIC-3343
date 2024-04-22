@@ -29,7 +29,7 @@ export async function submitOne(event, patientObj, form) {
     const newCalculation = { selectedPatientID: patientObj._id.toString(), ...form };
 
     // Send a POST request to the server to create a new calculation record.
-    fetch("http://localhost:5000/calculation/add", {
+    fetch("https://hemodynamic-calculator-jic-3343-server.vercel.app/calculation/add", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export async function submitAll(event, patientObj, calculations) {
         };
 
         // Send a POST request to the server to create a new calculation record.
-        fetch("http://localhost:5000/calculation/add", {
+        fetch("https://hemodynamic-calculator-jic-3343-server.vercel.app/calculation/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

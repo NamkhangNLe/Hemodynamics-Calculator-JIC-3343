@@ -77,7 +77,7 @@ export default function Create() {
 
         try {
             // Send a POST request to the server to create a new record.
-            const response = await fetch("http://localhost:5000/record/add", {
+            const response = await fetch("https://hemodynamic-calculator-jic-3343-server.vercel.app/record/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
