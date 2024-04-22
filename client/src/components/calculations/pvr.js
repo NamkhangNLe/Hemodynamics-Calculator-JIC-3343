@@ -40,7 +40,10 @@ export default function Pvr({ updateCalculatedValue, pap, wedge, co, setPap, set
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> dynes/seconds/cm<sup>-5</sup>
+                    <div>
+                        <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
+                        <span> dynes/seconds/cm<sup>-5</sup></span>
+                    </div>
                 </div>
             </form>
         </div>
