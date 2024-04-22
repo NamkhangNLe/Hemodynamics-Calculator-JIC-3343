@@ -45,7 +45,10 @@ export default function LaFarge({ updateCalculatedValue, sex, age, hr, setAge, s
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> ml/min/m<sup>2</sup>
+                    <div>
+                        <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
+                        <span> ml/min/m<sup>2</sup></span>
+                    </div>
                 </div>
             </form>
         </div>

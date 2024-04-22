@@ -36,7 +36,10 @@ export default function Tpg({ updateCalculatedValue, map, pcwp, setMap, setPcwp 
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> mmHg
+                    <div>
+                        <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
+                        <span> mmHg</span>
+                    </div>
                 </div>
             </form>
         </div>
