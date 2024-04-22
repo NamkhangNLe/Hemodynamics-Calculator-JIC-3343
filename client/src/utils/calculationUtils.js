@@ -70,7 +70,12 @@ export async function submitAll(event, patientObj, calculations) {
         }
 
         // Create a new object with patient_id and the values from the form state using the spread operator.
-        const newCalculation = { selectedPatientID: patientObj._id.toString(), ...calculation };
+        const newCalculation = {
+            selectedPatientID: patientObj._id.toString(),
+            medications: patientObj.medications,
+            hardware: patientObj.hardware,
+            ...calculation
+        };
 
         // Send a POST request to the server to create a new calculation record.
         fetch("http://localhost:5000/calculation/add", {

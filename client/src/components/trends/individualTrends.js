@@ -36,11 +36,11 @@ const IndividualTrends = () => {
     const [endDate, setEndDate] = useState(defaultEndDate);
 
     function getCurrentDate() {
-        let now = new Date();
-        let year = now.getFullYear();
+        const now = new Date();
+        const year = now.getFullYear();
         let month = now.getMonth() + 1;
         month = (month < 10) ? '0' + (month) : month;
-        let date = now.getDate();
+        const date = now.getDate();
         return `${year}-${month}-${date}`;
     }
 
@@ -110,7 +110,7 @@ const IndividualTrends = () => {
                             name="trends"
                             onChange={(e) => setSvr(!svr)}
                         />
-                        <label htmlFor="svr"> Systemic Vasuclar Resistance </label>
+                        <label htmlFor="svr"> Systemic Vascular Resistance </label>
                     </div>
                     <div>
                         <input
@@ -212,6 +212,11 @@ const IndividualTrends = () => {
         window.print();
     }
 
+
+    /**
+     * Retrieves all calculations associated with selectedPatientID from the database.
+     * @returns array of calculations
+     */
     async function getCalculations() {
         const response = await fetch(`http://localhost:5000/calculation/${selectedPatientID}`);
 
@@ -224,10 +229,15 @@ const IndividualTrends = () => {
         return response.json();
     }
 
+    /**
+     * Retrieves an array of unique dates of calculations (accurate to the second).
+     * @param calculations array of calculations
+     * @returns array of dates
+     */
     function getUniqueDates(calculations) {
         const dates = [];
 
-        for (let calc of calculations) {
+        for (const calc of calculations) {
             const date = new Date(calc.date);
 
             if (!dates.includes(date.getTime())) {
@@ -238,30 +248,42 @@ const IndividualTrends = () => {
         return dates;
     }
 
+    /**
+     * Creates an object mapping from time to object which contains
+     * fields for each calculation as well as medication and hardware.
+     * @returns object that maps time to object containing calculations, medications, and hardware
+     */
     async function mapTimeToCalculations() {
-        let calcsFromDb = await getCalculations();
+        const calcsFromDb = await getCalculations();
 
-        let calculations = {};
+        const calculations = {};
 
         const uniqueDates = getUniqueDates(calcsFromDb);
-        for (let date of uniqueDates) {
+        for (const date of uniqueDates) {
             calculations[date] = {};
         }
 
-        for (let calc of calcsFromDb) {
-            let time = new Date(calc.date).getTime();
+        for (const calc of calcsFromDb) {
+            const time = new Date(calc.date).getTime();
             calculations[time][calc.valueType] = calc.calculatedValue;
+            calculations[time]["medications"] = calc.medications;
+            calculations[time]["hardware"] = calc.hardware;
         }
 
         return calculations;
     }
 
+    /**
+     * Converts the mapping from time to calculations,
+     * medications, and hardware to a string in CSV format.
+     * @returns CSV format String of patient calculation history
+     */
     async function convertCalculationsToCSV() {
         const mapping = await mapTimeToCalculations();
         const csvRows = [];
 
         const codeToName = {
-            SVR: "Systemic Vasuclar Resistance",
+            SVR: "Systemic Vascular Resistance",
             PVR: "Pulmonary Vascular Resistance",
             TPG: "Transpulmonary Gradient",
             DPG: "Diastolic Pulmonary Gradient",
@@ -273,10 +295,9 @@ const IndividualTrends = () => {
             VO2L: "VO2 by LaFarge Equation"
         };
 
-        // const headers = ["Date", "Time", "SVR", "PVR", "TPG", "DPG", "PAPI", "CI", "CI", "VO2W", "BSA", "VO2L"];
-        csvRows.push("Date,Time," + Object.keys(codeToName).join(", "));
+        csvRows.push("Date,Time," + Object.keys(codeToName).join(", ") + ", Medications, Hardware");
 
-        for (let time of Object.keys(mapping)) {
+        for (const time of Object.keys(mapping)) {
             const calculations = mapping[time];
 
             const date = new Date(+time);
@@ -296,15 +317,42 @@ const IndividualTrends = () => {
 
             values.push(`${year}-${month}-${day}`); // YYYY-MM-DD
             values.push(`${hours}:${minutes}:${seconds}`); // HH:MM:SS
-            for (let code of Object.keys(codeToName)) {
-                let value = calculations[codeToName[code]];
+            for (const code of Object.keys(codeToName)) {
+                const value = calculations[codeToName[code]];
                 values.push(code + " " + (value === undefined ? "---" : value));
             }
+
+            values.push(calculations["medications"].join(" | "));
+            values.push(hardwareString(calculations["hardware"]));
 
             csvRows.push(values.join(", "));
         }
 
         return csvRows.join("\n");
+    }
+
+    /**
+     * Formats the hardware array as a String
+     * @param hardware the array of hardware
+     * @returns a String representing the hardware array
+     */
+    function hardwareString(hardware) {
+        const allValues = [];
+
+        for (const item of hardware) {
+            const deviceValues = [];
+            const keys = Object.keys(item);
+            for (const key of keys) {
+                if (key === "deviceName") {
+                    continue;
+                }
+
+                deviceValues.push(`${key}:${item[key]}`);
+            }
+            allValues.push(`${item.deviceName}-${deviceValues.join(" ")}`);
+        }
+
+        return allValues.join(" | ");
     }
 
     async function exportToCSV() {
@@ -364,7 +412,7 @@ const IndividualTrends = () => {
                 </div>
                 {trendOptions()}
                 <hr />
-                {svr && <TrendTableEntry id={selectedPatientID} calculation={"Systemic Vasuclar Resistance"} startDate={startDate} endDate={endDate} />}
+                {svr && <TrendTableEntry id={selectedPatientID} calculation={"Systemic Vascular Resistance"} startDate={startDate} endDate={endDate} />}
                 {pvr && <TrendTableEntry id={selectedPatientID} calculation={"Pulmonary Vascular Resistance"} startDate={startDate} endDate={endDate} />}
                 {transpulGradient && <TrendTableEntry id={selectedPatientID} calculation={"Transpulmonary Gradient"} startDate={startDate} endDate={endDate} />}
                 {dpg && <TrendTableEntry id={selectedPatientID} calculation={"Diastolic Pulmonary Gradient"} startDate={startDate} endDate={endDate} />}
