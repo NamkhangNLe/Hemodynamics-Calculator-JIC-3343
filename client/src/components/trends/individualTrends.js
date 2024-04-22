@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import { faEye, faFileCsv, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 const IndividualTrends = () => {
     const state = useLocation().state;
-
+    const navigate = useNavigate();
 
     //Dropdown
     const [selectedPatientID, setSelectedPatientID] = useState();
@@ -63,6 +63,7 @@ const IndividualTrends = () => {
     useEffect(() => {
         if (state && state.id) {
             setSelectedPatientID(state.id);
+            window.history.replaceState({}, '')
         }
         async function getPatientObj() {
             const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
@@ -370,6 +371,7 @@ const IndividualTrends = () => {
             setSelectedPatient(props.record.initials);
             setSelectedPatientID(props.record._id);
             setSelectedPatientRecord(props.record);
+            navigate(`/trends`, { state: { id: props.record._id } });
         }
 
         }>{props.record.initials}</Dropdown.Item>
@@ -392,7 +394,7 @@ const IndividualTrends = () => {
                 <PatientInfoCards patientRecord={selectedPatientRecord} patientCalculations={getCalculations()}/>
                 <div style={{display: "flex", gap: "1%"}}>
                     <Link to={`/view/${selectedPatientID}`} className="btn btn-primary">
-                        <div className="button-icon" style={{width: "150px"}}>
+                        <div className="button-icon" style={{width: "155px"}}>
                             <FontAwesomeIcon icon={faEye} />
                             View {selectedPatient}'s Profile
                         </div>
