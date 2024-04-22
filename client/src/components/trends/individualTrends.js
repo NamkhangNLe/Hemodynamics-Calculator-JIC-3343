@@ -1,18 +1,17 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 
 const IndividualTrends = () => {
-    const { id } = useParams();
+    const state = useLocation().state;
+
 
     //Dropdown
-    const navigate = useNavigate();
-    const [selectedPatient, setSelectedPatient] = useState();
     const [selectedPatientID, setSelectedPatientID] = useState();
     const [records, setRecords] = useState([]);
     const [patientObj, setPatientObj] = useState();
+    const [selectedPatient, setSelectedPatient] = useState("Select Patient");
     const [selectedPatientRecord, setSelectedPatientRecord] = useState();
 
     const [svr, setSvr] = useState(false);
@@ -59,6 +58,9 @@ const IndividualTrends = () => {
     }, [records.length]);
 
     useEffect(() => {
+        if (state && state.id) {
+            setSelectedPatientID(state.id);
+        }
         async function getPatientObj() {
             const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
             if (!response.ok) {
@@ -67,7 +69,9 @@ const IndividualTrends = () => {
                 return;
             }
             const patient = await response.json();
-            setPatientObj(patient);
+            setSelectedPatientRecord(patient);
+            setSelectedPatient(patient.initials);
+            setSelectedPatientID(patient._id);
         }
 
         if (selectedPatientID !== undefined) {
@@ -200,14 +204,13 @@ const IndividualTrends = () => {
         );
     }
 
-    const viewLink = `/view/${id}`;
 
     const handlePrint = () => {
         window.print();
     }
 
     async function getRecords() {
-        const response = await fetch(`http://localhost:5000/calculation/${id}`);
+        const response = await fetch(`http://localhost:5000/calculation/${selectedPatientID}`);
 
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`;
@@ -305,7 +308,7 @@ const IndividualTrends = () => {
         const blob = new Blob([await convertCalculationsToCSV()], { type: 'text/csv' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = `calculations_${id}.csv`;
+        link.download = `calculations_${selectedPatientID}.csv`;
         link.click();
     }
 
@@ -316,8 +319,6 @@ const IndividualTrends = () => {
             setSelectedPatient(props.record.initials);
             setSelectedPatientID(props.record._id);
             setSelectedPatientRecord(props.record);
-            navigate(`/trends/${props.record._id}`);
-
         }
 
         }>{props.record.initials}</Dropdown.Item>
@@ -331,6 +332,33 @@ const IndividualTrends = () => {
     }
 
 
+    function getTrendsBody() {
+        if (!selectedPatientRecord) {
+            return;
+        }
+        return (
+            <div>
+                <div>
+                    <Link to={`/view/${selectedPatientID}`}> <button> View Patient Profile</button></Link>
+                    <button onClick={handlePrint}>Save as PDF</button>
+                    <button onClick={exportToCSV}>Export to CSV</button>
+                </div>
+                {trendOptions()}
+                <hr />
+                {svr && <TrendTableEntry id={selectedPatientID} calculation={"Systemic Vasuclar Resistance"} startDate={startDate} endDate={endDate} />}
+                {pvr && <TrendTableEntry id={selectedPatientID} calculation={"Pulmonary Vascular Resistance"} startDate={startDate} endDate={endDate} />}
+                {transpulGradient && <TrendTableEntry id={selectedPatientID} calculation={"Transpulmonary Gradient"} startDate={startDate} endDate={endDate} />}
+                {dpg && <TrendTableEntry id={selectedPatientID} calculation={"Diastolic Pulmonary Gradient"} startDate={startDate} endDate={endDate} />}
+                {papi && <TrendTableEntry id={selectedPatientID} calculation={"Pulmonary Artery Pulsatility Index"} startDate={startDate} endDate={endDate} />}
+                {ci && <TrendTableEntry id={selectedPatientID} calculation={"Cardiac Index"} startDate={startDate} endDate={endDate} />}
+                {fick && <TrendTableEntry id={selectedPatientID} calculation={"Fick Cardiac Output"} startDate={startDate} endDate={endDate} />}
+                {weight && <TrendTableEntry id={selectedPatientID} calculation={"VO2 by Weight"} startDate={startDate} endDate={endDate} />}
+                {bsa && <TrendTableEntry id={selectedPatientID} calculation={"VO2 by BSA"} startDate={startDate} endDate={endDate} />}
+                {lafarge && <TrendTableEntry id={selectedPatientID} calculation={"VO2 by LaFarge Equation"} startDate={startDate} endDate={endDate} />}
+            </div>
+        );
+    }
+
     return (
         <div>
             <h3>Patient Trends</h3>
@@ -338,24 +366,7 @@ const IndividualTrends = () => {
             <div style={{ marginBottom: '10px' }}>
                 <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
             </div>
-            <div>
-                <Link to={viewLink}> <button> View Patient Profile</button></Link>
-                <button onClick={handlePrint}>Save as PDF</button>
-                <button onClick={exportToCSV}>Export to CSV</button>
-            </div>
-
-            {trendOptions()}
-            <hr />
-            {svr && <TrendTableEntry id={id} calculation={"Systemic Vasuclar Resistance"} startDate={startDate} endDate={endDate} />}
-            {pvr && <TrendTableEntry id={id} calculation={"Pulmonary Vascular Resistance"} startDate={startDate} endDate={endDate} />}
-            {transpulGradient && <TrendTableEntry id={id} calculation={"Transpulmonary Gradient"} startDate={startDate} endDate={endDate} />}
-            {dpg && <TrendTableEntry id={id} calculation={"Diastolic Pulmonary Gradient"} startDate={startDate} endDate={endDate} />}
-            {papi && <TrendTableEntry id={id} calculation={"Pulmonary Artery Pulsatility Index"} startDate={startDate} endDate={endDate} />}
-            {ci && <TrendTableEntry id={id} calculation={"Cardiac Index"} startDate={startDate} endDate={endDate} />}
-            {fick && <TrendTableEntry id={id} calculation={"Fick Cardiac Output"} startDate={startDate} endDate={endDate} />}
-            {weight && <TrendTableEntry id={id} calculation={"VO2 by Weight"} startDate={startDate} endDate={endDate} />}
-            {bsa && <TrendTableEntry id={id} calculation={"VO2 by BSA"} startDate={startDate} endDate={endDate} />}
-            {lafarge && <TrendTableEntry id={id} calculation={"VO2 by LaFarge Equation"} startDate={startDate} endDate={endDate} />}
+            {getTrendsBody()}
         </div>
     )
 }

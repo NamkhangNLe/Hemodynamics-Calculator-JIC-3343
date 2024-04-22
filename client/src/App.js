@@ -9,7 +9,6 @@ import Create from "./components/create";
 import PageFramework from "./pages/framework";
 import RecordList from "./components/recordList";
 import View from "./components/view";
-import Trends from "./pages/trends"
 import IndividualTrends from "./components/trends/individualTrends"
 import Archive from "./components/archive";
 
@@ -33,8 +32,7 @@ const App = () => {
             <Route path="/create" element={<PageFramework component={<Create />} />} />
             <Route path="/edit/:id" element={<PageFramework component={<Edit />} />} />
             <Route path="/view/:id" element={<PageFramework component={<View />} />} />
-            <Route path="/trends" element={<PageFramework component={<Trends />} />} />
-            <Route path="/trends/:id" element={<PageFramework component={<IndividualTrends />} />} />
+            <Route path="/trends" element={<PageFramework component={<IndividualTrends />} />} />
         </Routes>
     );
 

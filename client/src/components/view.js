@@ -226,7 +226,6 @@ export default function View() {
     };
 
     // Used to set the link to the trends page using the params.id
-    const trendsLink = `/trends/${params.id}`;
 
     return (
         <div>
@@ -235,7 +234,7 @@ export default function View() {
             <p className="subheading">History of all calculations saved on the patient's profile.</p>
             <div style={{paddingBottom: "2%"}}>
                 <PatientInfoCards patientRecord={patientRecord} patientCalculations={patientCalculations}/>
-                <Link to={trendsLink}>
+                <Link to={`/trends`} state={{id: params.id}}>
                     <button className="btn btn-primary" style={{width: "175px"}}>
                         <div className="button-icon">
                             <FontAwesomeIcon icon={faChartSimple} />
