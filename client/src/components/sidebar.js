@@ -44,12 +44,6 @@ export default function SidebarComp() {
                 </MenuItem>
                 <MenuItem className="menu-item">
                     <div className="sidebar-content">
-                        <FontAwesomeIcon icon={faGear}/>
-                        Settings
-                    </div>
-                </MenuItem>
-                <MenuItem className="menu-item">
-                    <div className="sidebar-content">
                         <FontAwesomeIcon icon={faSignOut}/>
                         Log Out
                     </div>
