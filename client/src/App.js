@@ -11,6 +11,8 @@ import RecordList from "./components/recordList";
 import View from "./components/view";
 import IndividualTrends from "./components/trends/individualTrends"
 import Archive from "./components/archive";
+import Login from "./pages/login";
+import Auth0ProviderWithHistory from "./auth0Provider";
 
 import './styles/styles.css';
 
@@ -25,15 +27,18 @@ import './styles/styles.css';
 const App = () => {
 
     return (
-        <Routes>
-            <Route exact path="/" element={<PageFramework component={<RecordList />} />} />
-            <Route exact path="/archive" element={<PageFramework component={<Archive />} />} />
-            <Route path="/calculator" element={<PageFramework component={<CalculatorFramework />} />} />
-            <Route path="/create" element={<PageFramework component={<Create />} />} />
-            <Route path="/edit/:id" element={<PageFramework component={<Edit />} />} />
-            <Route path="/view/:id" element={<PageFramework component={<View />} />} />
-            <Route path="/trends" element={<PageFramework component={<IndividualTrends />} />} />
-        </Routes>
+        <Auth0ProviderWithHistory>
+            <Routes>
+                <Route exact path="/login" element={<PageFramework component={<Login />} />} />
+                <Route exact path="/" element={<PageFramework component={<RecordList />} />} />
+                <Route exact path="/archive" element={<PageFramework component={<Archive />} />} />
+                <Route path="/calculator" element={<PageFramework component={<CalculatorFramework />} />} />
+                <Route path="/create" element={<PageFramework component={<Create />} />} />
+                <Route path="/edit/:id" element={<PageFramework component={<Edit />} />} />
+                <Route path="/view/:id" element={<PageFramework component={<View />} />} />
+                <Route path="/trends" element={<PageFramework component={<IndividualTrends />} />} />
+            </Routes>
+        </Auth0ProviderWithHistory>
     );
 
 };
