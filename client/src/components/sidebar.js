@@ -3,6 +3,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faArchive, faCalculator, faChartSimple, faGear, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import emoryLogo from '../images/emory.png';
 
 import "bootstrap/dist/css/bootstrap.css";
 import '../styles/styles.css';
@@ -10,13 +11,13 @@ import '../styles/styles.css';
 
 /**
  * Renders the Sidebar component.
- * @returns {JSX.Element} The Navbar component.
+ * @returns {JSX.Element} The Sidebar component.
  */
 
 export default function SidebarComp() {
     return (
         <Sidebar className="sidebar noPrint">
-            <img style={{ "width": 250 + 'px', "height": 250 + "px" }} src="emory.png"></img>
+            <img style={{ "width": 250 + 'px', "height": 250 + "px" }} src={emoryLogo}></img>
             <Menu className="menu">
                 <MenuItem className="menu-item" component={<Link to="/" />}>
                     <div className="sidebar-content">
