@@ -102,6 +102,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
 
     function medicationsCard() {
         if (!showMedications) return null;
+        if (!patientRecord.medications) return null;
         return (
             <Card className="patient-info-card">
                 <Card.Body>
@@ -141,6 +142,18 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
         )
     }
 
+    function patientNotesCard() {
+        if (!patientRecord.notes) return null;
+        return (
+            <Card className="patient-info-card">
+                <Card.Body>
+                    <Card.Title>Patient Notes</Card.Title>
+                    <Card.Text>{patientRecord.notes}</Card.Text>
+                </Card.Body>
+            </Card>
+        )
+    }
+
     return (
         <div style={{paddingBottom: "1%"}}>
             <div style={{display: "flex", flexDirection: "row"}}>
@@ -155,6 +168,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
                 {hardwareCard()}
                 {calculationCard("Cardiac Index")}
                 {calculationCard("Fick Cardiac Output", "L/min")}
+                {patientNotesCard()}
             </div>
         </div>
     )
