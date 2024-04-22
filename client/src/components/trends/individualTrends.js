@@ -2,6 +2,9 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import PatientInfoCards from '../patientInfoCards';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faFileCsv, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 const IndividualTrends = () => {
     const state = useLocation().state;
@@ -209,7 +212,7 @@ const IndividualTrends = () => {
         window.print();
     }
 
-    async function getRecords() {
+    async function getCalculations() {
         const response = await fetch(`http://localhost:5000/calculation/${selectedPatientID}`);
 
         if (!response.ok) {
@@ -236,7 +239,7 @@ const IndividualTrends = () => {
     }
 
     async function mapTimeToCalculations() {
-        let calcsFromDb = await getRecords();
+        let calcsFromDb = await getCalculations();
 
         let calculations = {};
 
@@ -338,10 +341,26 @@ const IndividualTrends = () => {
         }
         return (
             <div>
-                <div>
-                    <Link to={`/view/${selectedPatientID}`}> <button> View Patient Profile</button></Link>
-                    <button onClick={handlePrint}>Save as PDF</button>
-                    <button onClick={exportToCSV}>Export to CSV</button>
+                <PatientInfoCards patientRecord={selectedPatientRecord} patientCalculations={getCalculations()}/>
+                <div style={{display: "flex", gap: "1%"}}>
+                    <Link to={`/view/${selectedPatientID}`} className="btn btn-primary">
+                        <div className="button-icon" style={{width: "150px"}}>
+                            <FontAwesomeIcon icon={faEye} />
+                            View {selectedPatient}'s Profile
+                        </div>
+                    </Link>
+                    <button className="btn btn-primary" onClick={handlePrint}>
+                        <div className="button-icon" style={{width: "115px"}}>
+                            <FontAwesomeIcon icon={faFilePdf} />
+                            Save As PDF
+                        </div>
+                    </button>
+                    <button className="btn btn-primary" onClick={exportToCSV}>
+                        <div className="button-icon" style={{width: "125px"}}>
+                            <FontAwesomeIcon icon={faFileCsv} />
+                            Export to CSV
+                        </div>
+                    </button>
                 </div>
                 {trendOptions()}
                 <hr />
@@ -363,7 +382,7 @@ const IndividualTrends = () => {
         <div>
             <h3>Patient Trends</h3>
                 <p className="subheading">View patient trends for selected calculations.</p>
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: '1%' }}>
                 <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
             </div>
             {getTrendsBody()}

@@ -225,3 +225,8 @@ form {
   padding: 20px;
   z-index: 999;
 }
+
+.form {
+  padding: 0px;
+  padding-top: 2%;
+}
