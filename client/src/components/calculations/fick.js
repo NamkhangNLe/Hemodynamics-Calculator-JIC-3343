@@ -44,7 +44,10 @@ export default function Fick({ updateCalculatedValue, vo2, hb, satA, satMV, setV
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span>Output:</span>
-                    <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly /> L/min
+                    <div>
+                        <input type="text" placeholder={placeholderText} value={calculatedValue} readOnly />
+                        <span> L/min</span>
+                    </div>
                 </div>
             </form>
         </div>
