@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import { faEye, faFileCsv, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 const IndividualTrends = () => {
     const state = useLocation().state;
-
+    const navigate = useNavigate();
 
     //Dropdown
     const [selectedPatientID, setSelectedPatientID] = useState();
@@ -371,6 +371,7 @@ const IndividualTrends = () => {
             setSelectedPatient(props.record.initials);
             setSelectedPatientID(props.record._id);
             setSelectedPatientRecord(props.record);
+            navigate(`/trends`, { state: { id: props.record._id } });
         }
 
         }>{props.record.initials}</Dropdown.Item>
