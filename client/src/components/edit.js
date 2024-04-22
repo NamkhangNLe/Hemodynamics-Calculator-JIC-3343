@@ -12,7 +12,6 @@ export default function Edit() {
     const navigate = useNavigate();
     const state = useLocation().state;
     const sourcePath = state ? state.sourcePath : "/";
-    console.log(sourcePath)
 
     const [form, setForm] = useState({
         initials: "",
