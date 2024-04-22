@@ -45,7 +45,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
     function parseHardware() {
         let hardware = [];
         if (patientRecord.hardware !== undefined && patientRecord.hardware.length > 0) {
-            for (let i = 1; i < patientRecord.hardware.length; i++) {
+            for (let i = 0; i < patientRecord.hardware.length; i++) {
                 let device = patientRecord.hardware[i];
                 hardware.push(<ListGroup.Item>{parseDeviceInfo(device)}</ListGroup.Item>);
             }
@@ -115,6 +115,7 @@ function PatientInfoCards({ patientRecord, patientCalculations, showInitials=tru
 
     function hardwareCard() {
         if (!showHardware) return null;
+        if (!patientRecord.hardware || patientRecord.hardware.length === 0) return null;
         return (
             <Card className="patient-info-card">
                 <Card.Body>
