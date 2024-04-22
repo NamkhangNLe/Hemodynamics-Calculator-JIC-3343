@@ -1,9 +1,19 @@
 import { Link, useParams } from 'react-router-dom';
 import TrendTableEntry from "./trendTableEntry"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const IndividualTrends = () => {
     const { id } = useParams();
+
+    //Dropdown
+    const navigate = useNavigate();
+    const [selectedPatient, setSelectedPatient] = useState();
+    const [selectedPatientID, setSelectedPatientID] = useState();
+    const [records, setRecords] = useState([]);
+    const [patientObj, setPatientObj] = useState();
+    const [selectedPatientRecord, setSelectedPatientRecord] = useState();
 
     const [svr, setSvr] = useState(false);
     const [pvr, setPvr] = useState(false);
@@ -31,6 +41,39 @@ const IndividualTrends = () => {
         let date = now.getDate();
         return `${year}-${month}-${date}`;
     }
+
+    useEffect(() => {
+        async function getRecords() {
+            const response = await fetch(`http://localhost:5000/record/`);
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const records = await response.json();
+            const active_records = records.filter((record) => record.archived === false);
+            setRecords(active_records);
+        }
+
+        getRecords();
+    }, [records.length]);
+
+    useEffect(() => {
+        async function getPatientObj() {
+            const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const patient = await response.json();
+            setPatientObj(patient);
+        }
+
+        if (selectedPatientID !== undefined) {
+            getPatientObj();
+        }
+    }, [selectedPatientID]);
 
     /**
      * Renders a list of checkboxes so that the user can select which trends to display.
@@ -266,14 +309,37 @@ const IndividualTrends = () => {
         link.click();
     }
 
+    // DropdownOption object; updates selected patient using initials when clicked
+    const PatientDropdownOption = (props) => (
+
+        <Dropdown.Item onClick={() => {
+            setSelectedPatient(props.record.initials);
+            setSelectedPatientID(props.record._id);
+            setSelectedPatientRecord(props.record);
+            navigate(`/trends/${props.record._id}`);
+
+        }
+
+        }>{props.record.initials}</Dropdown.Item>
+    )
+
+    function patientList() {
+        return records.map((record) => {
+            return <PatientDropdownOption record={record} />
+        }
+        );
+    }
+
 
     return (
         <div>
             <h3>Patient Trends</h3>
                 <p className="subheading">View patient trends for selected calculations.</p>
+            <div style={{ marginBottom: '10px' }}>
+                <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
+            </div>
             <div>
                 <Link to={viewLink}> <button> View Patient Profile</button></Link>
-                <Link to="/trends"> <button> View Other Patient Trends </button></Link>
                 <button onClick={handlePrint}>Save as PDF</button>
                 <button onClick={exportToCSV}>Export to CSV</button>
             </div>
