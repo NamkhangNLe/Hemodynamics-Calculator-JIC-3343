@@ -63,6 +63,7 @@ const IndividualTrends = () => {
     useEffect(() => {
         if (state && state.id) {
             setSelectedPatientID(state.id);
+            window.history.replaceState({}, '')
         }
         async function getPatientObj() {
             const response = await fetch(`http://localhost:5000/record/${selectedPatientID}`);
@@ -392,7 +393,7 @@ const IndividualTrends = () => {
                 <PatientInfoCards patientRecord={selectedPatientRecord} patientCalculations={getCalculations()}/>
                 <div style={{display: "flex", gap: "1%"}}>
                     <Link to={`/view/${selectedPatientID}`} className="btn btn-primary">
-                        <div className="button-icon" style={{width: "150px"}}>
+                        <div className="button-icon" style={{width: "155px"}}>
                             <FontAwesomeIcon icon={faEye} />
                             View {selectedPatient}'s Profile
                         </div>
