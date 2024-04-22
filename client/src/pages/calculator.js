@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, DropdownButton} from 'react-bootstrap';
-import { submitAll } from "../utils/calculationUtils.js";
+import { submitAll, arrString} from "../utils/calculationUtils.js";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -15,6 +15,8 @@ import Weight from "../components/calculations/weight";
 import Bsa from "../components/calculations/bsa";
 import LaFarge from "../components/calculations/lafarge";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Alert } from "react-bootstrap";
+
 
 import "../styles/styles.css"
 import PatientMedicationsDisplay from "../components/patientMedicationsDisplay.js";
@@ -59,6 +61,10 @@ const CalculatorFramework = () => {
     const [vo2, setVo2] = useState("");
     const [wedge, setWedge] = useState("");
     const [weight, setWeight] = useState("");
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertVariant, setAlertVariant] = useState("danger");
+    const [alertMessage, setAlertMessage] = useState("Error");
 
     // Fetches all patient records from the database.
     useEffect(() => {
@@ -179,13 +185,52 @@ const CalculatorFramework = () => {
         );
     }
 
+    async function saveAllCalculations(e) {
+        let outcome = await submitAll(e, patientObj, calculations);
+        if (!outcome) {
+            setAlertVariant("danger");
+            setAlertMessage("Patient was not selected.\nCalculation not saved.");
+        } else {
+            const {
+                numTotalCalculations,
+                numInvalidCalculations,
+                numValidCalculations,
+                missingInputs,
+                badOutputs
+            } = outcome;
+
+            setAlertVariant("success");
+            if (numInvalidCalculations !== 0) {
+                setAlertMessage(numValidCalculations + " calculations saved!");
+            } else {
+                setAlertMessage("All calculations saved!");
+            }
+        }
+
+        setShowAlert(true);
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 2000);
+    }
+
+    function getAlerts() {
+        return (
+            <div className="confirmation">
+                <Alert variant={alertVariant}>
+                    {alertMessage}
+                </Alert>
+            </div>
+        );
+    }
+
     return (
         <div>
+            {showAlert && getAlerts()}
             <h3>Calculate</h3>
             <p className="subheading">Calculate hemodynamic values and save them to patient profiles.</p>
             <div className="d-flex justify-content-between">
                 <DropdownButton id="dropdown-basic-button" title={selectedPatient}>{patientList()}</DropdownButton>
-                <button className="btn btn-primary" onClick={e => submitAll(e, patientObj, calculations)}>
+                <button className="btn btn-primary" onClick={e => saveAllCalculations(e)}>
                     <div className="button-icon">
                         <FontAwesomeIcon icon={faSave} />
                         Save All Calculations
