@@ -6,8 +6,9 @@
 
 .content-container {
   display: flex;
+  min-height: 100vh; /* vh stands for viewport height */
   flex: 1;
-  overflow: visible; /* Allow content to scroll if it's taller than the viewport */
+  overflow: auto; /* Allow content to scroll if it's taller than the viewport */
 }
 
 .menu {
@@ -74,7 +75,9 @@
 
 .main-content {
   flex: 1;
-  padding: 2%;
+  padding-left: 2%; /* Adjust padding to make room for the fixed sidebar */
+  padding-right: 2%;
+  padding-top:2%;
   overflow-y: auto; /* Allow main content to scroll if taller than viewport */
 }
 
