@@ -62,6 +62,7 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Removed the navbar.
 
 ### Known Issues
+* Application is missing the functionality for login and logout
 * Future DOBs are allowed
 * Any range of numerical values for height and weight are allowed
 * Selecting from patients with the same initials may be difficult to do on the calculate and trends pages
