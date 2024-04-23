@@ -8,35 +8,47 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 
 ### Features
 * Added a Patient Record List:
-   * Displays each patient's Initials, DOB, Sex, Height, Weight, and current Medications
+   * Displays each patient's initials, DOB, sex, height, weight, and current medications
    * Allows new patients to be created
    * Allows exisitng patients to be edited
    * Allows patient notes to be viewed at a glance
    * Allows patients to be archived
+   * Allows the user to quickly navigate to an individual patient page for each page
 * Added an individual patient page for each patient, accessible from the patient record list
-   * Allows the user to quickly view more detailed patient information
+   * Allows the user to quickly view more detailed patient information such as hardware devices
    * Allows the user to view a patients saved calculations
+   * Allows the user to edit the date, time, formula, and value of a saved calculation
    * Allows the user to quickly navigate to a patients trends page
 * Added a calculate page to calculate hemodynamic values
    * Added calculations:
-     * VO2 by LaFarge Equation
-     * VO2 by Body Surface Area
-     * VO2 by Weight
-     * FICK Cardiac Output
-     * Cardiac Index
      * Systemic Vascular Resistance
      * Pulmonary Vascular Resistance
      * Transpulmonary gradient
      * Diastolic Pulmonary Gradient
      * Pulmonary Artery Pulsatility Index
+     * Cardiac Index
+     * FICK Cardiac Output
+     * VO2 by Weight
+     * VO2 by Body Surface Area
+     * VO2 by LaFarge Equation
+   * Inputs that are shared across calculator components are updated across all components
+   * Inputs that can be calculated based on patient profile data are automatically filled in when the patient is selected
    * Calculator components update the calculated value in real time with proper error handling
+   * All valid calculations can be saved at once
 * Added functionality to save particular calculations to a selected patient
-* Added a trends page to provide data visualization for patient profiles and calculations
-* Added an archive page to view archived patients and restore or delete archived patients
+* Added a trends page to provide data visualization for patient profiles
+  * Allows the user to select the calculations that they wish to view trends for
+  * Allows the user to save the current view to a PDF
+  * Allows the user to export calculation, medication, and hardware history to CSV
+  * Allows the user to quickly navigate to the patient profile page
+* Added an archive page to view archived patients
+  * Allows the user to restore archived patients
+  * Allows the user to permanently delete archived patients from the database
 
 ### Bug Fixes
 * Fixed an issue where sidebar and navbar were not rendering on every page
 * Fixed an issue where sidebar and navbar were doubling on every page
+* Fixed an issue where the Emory logo disappears when reloading on particular pages
 * Added refresh on editing patient's past calculations
 * Moved create patient out of navbar
 * Fixed issue with sidebar color where the highlighted element does not properly highlight
@@ -50,7 +62,9 @@ Welcome to the Hemodynamics Calculator! Built for the Emory School of Medicine's
 * Removed the navbar.
 
 ### Known Issues
-* TODO
+* Future DOBs are allowed
+* Any range of numerical values for height and weight are allowed
+* Selecting from patients with the same initials may be difficult to do on the calculate and trends pages
 
 ## Version 0.4.0
 
@@ -222,7 +236,7 @@ npm start
 
 ## Troubleshooting
 
-All necesarry modules should come with the download, but if for some reason something is missing, simply run 
+All necesarry modules should come with the download, but if for some reason something is missing, simply run
 ```bash
 npm install <module>
 ```
