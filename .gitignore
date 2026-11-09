@@ -1,0 +1,13 @@
+# Secrets — never commit credentials. Use config.env / .env locally (gitignored).
+config.env
+.env
+.env.*
+!.env.example
+
+# Dependencies (node_modules is currently tracked; do not add more)
+node_modules/
+
+# Logs and OS files
+logs
+*.log
+.DS_Store
